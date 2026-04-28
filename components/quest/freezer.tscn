@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://d0py0gnep01v2"]
+
+[ext_resource type="Script" uid="uid://dt27w5ok14nvr" path="res://components/quest/freezer.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://g4ec22dn8va6" path="res://assets/textures/256x256/Wall/Horror_Wall_01-256x256.png" id="2_i8gfy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tl4a"]
+albedo_texture = ExtResource("2_i8gfy")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_checkout"]
+albedo_color = Color(0.512, 0.354, 0.181, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1us0w"]
+material = SubResource("StandardMaterial3D_checkout")
+size = Vector3(2.5, 0.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i8gfy"]
+size = Vector3(2.5, 0.5, 1.5)
+
+[node name="Freezer" type="Node3D" unique_id=1074071216]
+script = ExtResource("1")
+
+[node name="IceCreamSpawn1" type="Marker3D" parent="." unique_id=878247998]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.31819806, 0.58, 0.03535533)
+
+[node name="IceCreamSpawn2" type="Marker3D" parent="." unique_id=1244550470]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0.58, 0)
+
+[node name="IceCreamSpawn3" type="Marker3D" parent="." unique_id=456282668]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0.31819806, 0.58, -0.03535533)
+
+[node name="FRYSERLabel" type="Label3D" parent="." unique_id=1321136094]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+billboard = 1
+text = "FRYSER"
+
+[node name="FreezerTable" type="StaticBody3D" parent="." unique_id=785325294]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FreezerTable" unique_id=923080058]
+material_override = SubResource("StandardMaterial3D_5tl4a")
+mesh = SubResource("BoxMesh_1us0w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FreezerTable" unique_id=454459576]
+shape = SubResource("BoxShape3D_i8gfy")

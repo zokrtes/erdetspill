@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://d1b3qaq4wk8ib"]
+
+[ext_resource type="PackedScene" uid="uid://c8cashierbase01" path="res://scenes/npc/cashier_npc_base.tscn" id="1_cashr"]
+[ext_resource type="Script" uid="uid://yiijyg2gyitc" path="res://components/quest/checkout_zone.gd" id="2_checkout"]
+[ext_resource type="Script" uid="uid://bwdgf56n2pfuc" path="res://components/quest/shelf_section.gd" id="3_shelf"]
+[ext_resource type="PackedScene" path="res://scenes/props/shop/god_morgen_yoghurt_shop.tscn" id="4_god_morgen_yoghurt"]
+[ext_resource type="PackedScene" path="res://scenes/props/shop/painkillers_shop.tscn" id="5_paracet"]
+[ext_resource type="PackedScene" uid="uid://bpkodqo14t1th" path="res://scenes/props/shop/light_ammo_shop.tscn" id="6_lammo"]
+[ext_resource type="PackedScene" path="res://scenes/props/shop/medium_ammo_shop.tscn" id="7_mammo"]
+[ext_resource type="PackedScene" path="res://scenes/props/shop/shell_ammo_shop.tscn" id="8_sammo"]
+[ext_resource type="PackedScene" uid="uid://bq5x1xeywyog1" path="res://scenes/props/shop/heavy_ammo_shop.tscn" id="9_hammo"]
+[ext_resource type="PackedScene" uid="uid://d0py0gnep01v2" path="res://components/quest/freezer.tscn" id="10_freezer"]
+[ext_resource type="PackedScene" path="res://scenes/props/shop/rocket_ammo_shop.tscn" id="11_rockammo"]
+[ext_resource type="PackedScene" uid="uid://dv11e8ibq3w37" path="res://scenes/props/shop/grusskive_ammo_shop.tscn" id="12_grusammo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_store_bounds"]
+size = Vector3(16, 12, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gy5wl"]
+albedo_color = Color(0.20871013, 0.20871016, 0.20871013, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_checkout"]
+albedo_color = Color(0.512, 0.354, 0.181, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_checkout_counter"]
+material = SubResource("StandardMaterial3D_checkout")
+size = Vector3(3.4, 1.35, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_checkout_counter"]
+size = Vector3(3.4, 1.35, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_checkout_zone"]
+size = Vector3(2.7, 1.6, 1.25)
+
+[node name="Store" type="Node3D" unique_id=12828502]
+
+[node name="StoreBounds" type="Area3D" parent="." unique_id=1442917532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1716108, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoreBounds" unique_id=66147043]
+shape = SubResource("BoxShape3D_store_bounds")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1141392266]
+use_collision = true
+size = Vector3(14, 1, 14)
+
+[node name="Freezer" parent="." unique_id=1857849861 instance=ExtResource("10_freezer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.612628, 0.7251457, -1.2416725)
+
+[node name="Shelf" type="Node3D" parent="." unique_id=806504061]
+
+[node name="MedicineShelfBandage" type="Node3D" parent="Shelf" unique_id=1961976621]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.060234547, 1.55, -1.2336287)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("4_god_morgen_yoghurt")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "god_morgen_yoghurt"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/MedicineShelfBandage" unique_id=1216799839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/MedicineShelfBandage" unique_id=1957266059]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="MedicineShelfParacet" type="Node3D" parent="Shelf" unique_id=1714267736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.060234547, 1.55, -0.8836293)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("5_paracet")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "painkillers"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/MedicineShelfParacet" unique_id=357539617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/MedicineShelfParacet" unique_id=1150352408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="AmmoShelfLight" type="Node3D" parent="Shelf" unique_id=876810923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08507919, 1.55, 0.74401045)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("6_lammo")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "light_ammo"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/AmmoShelfLight" unique_id=1305491276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/AmmoShelfLight" unique_id=1938280598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="AmmoShelfMedium" type="Node3D" parent="Shelf" unique_id=1375654386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08507919, 1.55, 1.0940104)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("7_mammo")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "medium_ammo"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/AmmoShelfMedium" unique_id=937079696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/AmmoShelfMedium" unique_id=1429414827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="AmmoShelfShell" type="Node3D" parent="Shelf" unique_id=1134593317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08507919, 1.55, 1.4440098)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("8_sammo")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "shell_ammo"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/AmmoShelfShell" unique_id=1489104591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/AmmoShelfShell" unique_id=683374640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="AmmoShelfHeavy" type="Node3D" parent="Shelf" unique_id=94031355]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08507919, 1.55, 1.7940102)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("9_hammo")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "heavy_ammo"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/AmmoShelfHeavy" unique_id=1845099999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/AmmoShelfHeavy" unique_id=1980522493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="AmmoShelfRocket" type="Node3D" parent="Shelf" unique_id=1863358451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08507919, 1.55, 2.1440105)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("11_rockammo")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "rocket_ammo"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/AmmoShelfRocket" unique_id=2057457719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/AmmoShelfRocket" unique_id=786766907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="AmmoShelfGrusSkive" type="Node3D" parent="Shelf" unique_id=304947036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08507919, 1.55, 2.49401)
+script = ExtResource("3_shelf")
+item_scene = ExtResource("12_grusammo")
+spawn_points = Array[NodePath]([NodePath("Spawn1"), NodePath("Spawn2")])
+handled_item_id = "grusskive_ammo"
+
+[node name="Spawn1" type="Marker3D" parent="Shelf/AmmoShelfGrusSkive" unique_id=1309953821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, -0.1)
+
+[node name="Spawn2" type="Marker3D" parent="Shelf/AmmoShelfGrusSkive" unique_id=1661778789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, -0.1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Shelf" unique_id=1719290362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30772316, 0)
+use_collision = true
+size = Vector3(1, 1.6156924, 6.2)
+material = SubResource("StandardMaterial3D_gy5wl")
+
+[node name="Checkout" type="Node3D" parent="." unique_id=1769701614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2709417, 0.46179247, 1.3581581)
+
+[node name="Kassedama" parent="Checkout" unique_id=221343256 instance=ExtResource("1_cashr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41588497, 0, 1.442744)
+checkout_zone = NodePath("../CheckoutZone")
+
+[node name="CheckoutCounter" type="StaticBody3D" parent="Checkout" unique_id=651112811]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkout/CheckoutCounter" unique_id=1207999801]
+mesh = SubResource("BoxMesh_checkout_counter")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkout/CheckoutCounter" unique_id=2048247407]
+shape = SubResource("BoxShape3D_checkout_counter")
+
+[node name="CheckoutZone" type="Area3D" parent="Checkout" unique_id=1701419595]
+script = ExtResource("2_checkout")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkout/CheckoutZone" unique_id=1413903927]
+shape = SubResource("BoxShape3D_checkout_zone")
+
+[node name="PriceLabel3D" type="Label3D" parent="Checkout/CheckoutZone" unique_id=99560458]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 1.8, 0)
+visible = false
+billboard = 1
+text = "100 kr"
+
+[node name="KASSELabel" type="Label3D" parent="Checkout" unique_id=515151695]
+transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 3.24236, 0)
+billboard = 1
+text = "KASSE"

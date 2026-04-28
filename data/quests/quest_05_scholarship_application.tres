@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://d4f6efmbdmyil"]
+
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+
+[sub_resource type="Resource" id="Resource_4xtab"]
+script = ExtResource("1_obj")
+objective_id = "talk_to_chief_keef"
+description = "Snakk med Chief Keef i Lånekassa"
+type = 1
+target_id = "chief_keef"
+
+[sub_resource type="Resource" id="Resource_fdgti"]
+script = ExtResource("1_obj")
+objective_id = "complete_scholarship_form"
+description = "Fullfør stipendskjema-minigame"
+type = 9
+target_id = "scholarship_form"
+
+[resource]
+script = ExtResource("2_quest")
+quest_id = "SCHOLARSHIP_APPLICATION"
+name = "Skaff stipend"
+description = "Snakk med Chief Keef og fyll ut stipendskjema."
+brief_description = "Det finnes kanskje måter å skaffe mer penger på."
+required_quest_ids = Array[String](["GRANDPA_DISAPPOINTMENT"])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_4xtab"), SubResource("Resource_fdgti")])
+reward_items = Array[String](["approved_application"])
+unlock_quests = Array[String](["BANK_DEPOSIT"])
+offer_dialogue = Array[String](["Yo.", "Stipend?", "Ja, det fikser vi.", "Se den stasjonen til høyre for deg?", "Gå dit og fyll ut skjemaet.", "Send inn når du er ferdig.", "Enkelt."])
+completion_dialogue = Array[String](["Skjemaet er godkjent.", "Her er stipendet ditt. Bruk det klokt."])

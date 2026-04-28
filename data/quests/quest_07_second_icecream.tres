@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Quest" format=3]
+
+[ext_resource type="Script" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" path="res://components/quest/quest.gd" id="2_quest"]
+
+[sub_resource type="Resource" id="Resource_014mc"]
+script = ExtResource("1_obj")
+objective_id = "buy_second_icecream"
+description = "Kjøp enda en iskrem"
+type = 7
+target_id = "icecream"
+
+[resource]
+script = ExtResource("2_quest")
+quest_id = "SECOND_ICECREAM"
+name = "Fullfør ærendet"
+description = "Nå har du nok penger til den andre isen."
+brief_description = "Du vet hva du må gjøre."
+required_quest_ids = Array[String](["BANK_DEPOSIT"])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_014mc")])
+unlock_quests = Array[String](["FINAL_DELIVERY"])
+offer_dialogue = Array[String](["Du har fått et nytt oppdrag: Kjøp én is til."])
+completion_dialogue = Array[String](["Der ja. Nå har du begge isene."])

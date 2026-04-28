@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/props/shop/shop_item.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="mat"]
+albedo_color = Color(0.85, 0.3, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="mesh"]
+material = SubResource("mat")
+size = Vector3(0.2, 0.14, 0.14)
+
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(0.2, 0.14, 0.14)
+
+[node name="ShellAmmoShopItem" type="RigidBody3D"]
+mass = 0.3
+script = ExtResource("1")
+item_id = "shell_ammo"
+display_name = "Haglpatron"
+price = 45
+ammo_type = "ShellAmmo"
+ammo_amount = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("shape")

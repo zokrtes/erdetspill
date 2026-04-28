@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bu4u6oh72evs1"]
+
+[ext_resource type="Script" path="res://scenes/ui/intro_sequence.gd" id="1_script"]
+[ext_resource type="AudioStream" path="res://assets/sfx/erdetlyd/vox/russ/vox1.ogg" id="2_russvox1"]
+
+[node name="IntroSequence" type="CanvasLayer"]
+layer = 20
+process_mode = 3
+script = ExtResource("1_script")
+
+[node name="BlackScreen" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RussAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_russvox1")
+
+[node name="GlassAudio" type="AudioStreamPlayer" parent="."]
+
+[node name="BoomAudio" type="AudioStreamPlayer" parent="."]
+
+[node name="HintLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "TAB — Inventory     V — Plukk opp     E — Snakk"
+custom_minimum_size = Vector2(600, 40)
+modulate = Color(1, 1, 1, 0)

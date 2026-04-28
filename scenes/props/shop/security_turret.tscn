@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://buvkr41v54k7v"]
+
+[ext_resource type="Script" uid="uid://ckojuxd7mgb5f" path="res://scenes/props/shop/security_turret.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://do18t8fbreye" path="res://assets/sfx/hl1-master/sound/weapons/pl_gun3.wav" id="2_fire"]
+[ext_resource type="AudioStream" uid="uid://ekbgrsvew5if" path="res://assets/sfx/hl1-master/sound/fvox/beep.wav" id="2_pv1w8"]
+[ext_resource type="PackedScene" uid="uid://b37cl74jln0kj" path="res://assets/weapons/models/PSX_Colt1911.glb" id="4_7ucov"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grey"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_turret"]
+size = Vector3(0.18, 0.18, 0.385)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ucov"]
+albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pv1w8"]
+material = SubResource("StandardMaterial3D_7ucov")
+size = Vector3(0.14, 0.145, 0.09)
+
+[node name="SecurityTurret" type="Node3D" unique_id=432077486]
+script = ExtResource("1_script")
+alarm_sound = ExtResource("2_pv1w8")
+fire_sound = ExtResource("2_fire")
+aim_height_offset = 0.665
+
+[node name="Swivel" type="Node3D" parent="." unique_id=888001000]
+
+[node name="TurretMesh" type="MeshInstance3D" parent="Swivel" unique_id=1925277352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.030187845, -0.115094066)
+material_override = SubResource("StandardMaterial3D_grey")
+mesh = SubResource("BoxMesh_turret")
+
+[node name="PSX_Colt1911" parent="Swivel" unique_id=1680016752 instance=ExtResource("4_7ucov")]
+transform = Transform3D(-1.3113416e-07, -1, 1.1464113e-14, -1, 1.3113416e-07, 8.742278e-08, -8.742278e-08, 0, -1, 0.028522551, -0.07394081, -0.12913853)
+
+[node name="TurretMesh2" type="MeshInstance3D" parent="Swivel" unique_id=817620095]
+transform = Transform3D(0.695, 0, 0, 0, 0.695, 0, 0, 0, 0.695, 0, 0.030187845, -0.3079673)
+material_override = SubResource("StandardMaterial3D_7ucov")
+mesh = SubResource("BoxMesh_pv1w8")
+
+[node name="AlarmLight" type="OmniLight3D" parent="Swivel" unique_id=2128435226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06923038, -0.4401597)
+light_color = Color(1, 0, 0, 1)
+light_energy = 3.0
+omni_range = 5.924
+
+[node name="AlarmAudio" type="AudioStreamPlayer" parent="." unique_id=892866492]
+process_mode = 3
+
+[node name="FireAudio" type="AudioStreamPlayer" parent="." unique_id=406225804]
+process_mode = 3
+volume_db = -0.87
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1769675354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5463867, 0)
+radius = 0.021
+height = 0.90722656

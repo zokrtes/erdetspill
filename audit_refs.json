@@ -1,0 +1,1530 @@
+[
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\default_bus_layout.tres",
+        "ext":  ".tres",
+        "rel":  "res://default_bus_layout.tres",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\FollowTarget.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/3dEnemyToolkit/FollowTarget.gd",
+        "relCount":  2,
+        "baseCount":  3,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\RandomTarget3D.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/3dEnemyToolkit/RandomTarget3D.gd",
+        "relCount":  2,
+        "baseCount":  3,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\plugin.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/3dEnemyToolkit/plugin.gd",
+        "relCount":  0,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\SimpleVision3D.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/3dEnemyToolkit/SimpleVision3D.gd",
+        "relCount":  2,
+        "baseCount":  3,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\Example\\ExamplePlayer.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/3dEnemyToolkit/Example/ExamplePlayer.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\Example\\example_player.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/3dEnemyToolkit/Example/example_player.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\Example\\Example.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/3dEnemyToolkit/Example/Example.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\Example\\example_enemy.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/3dEnemyToolkit/Example/example_enemy.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\Example\\ExampleEnemy.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/3dEnemyToolkit/Example/ExampleEnemy.tscn",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Arts\\Fonts\\LabelFontTemplate.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Arts/Fonts/LabelFontTemplate.tres",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Arts\\Materials\\StructureMaterial1.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Arts/Materials/StructureMaterial1.tres",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Arts\\Materials\\StructureMaterial2.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Arts/Materials/StructureMaterial2.tres",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Maps\\Scenes\\SpawnerScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Maps/Scenes/SpawnerScene.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Maps\\Scenes\\TemplateMapScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Maps/Scenes/TemplateMapScene.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Maps\\Scripts\\SpawnerManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Maps/Scripts/SpawnerManagerScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Misc\\Scenes\\AudioManagerScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Misc/Scenes/AudioManagerScene.tscn",
+        "relCount":  0,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Misc\\Scenes\\ParticlesManagerScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Misc/Scenes/ParticlesManagerScene.tscn",
+        "relCount":  0,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Misc\\Scripts\\AudioManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Misc/Scripts/AudioManagerScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Misc\\Scripts\\ParticlesManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Misc/Scripts/ParticlesManagerScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Targets\\Scenes\\DamageNumberScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Targets/Scenes/DamageNumberScene.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Targets\\Scenes\\HitableBoxScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Targets/Scenes/HitableBoxScene.tscn",
+        "relCount":  3,
+        "baseCount":  3,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Targets\\Scenes\\ShootingRangeTargetScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Targets/Scenes/ShootingRangeTargetScene.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Targets\\Scripts\\ShootingRangeTargetHeadScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Targets/Scripts/ShootingRangeTargetHeadScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Targets\\Scripts\\ShootingRangeTargetManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Targets/Scripts/ShootingRangeTargetManagerScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Targets\\Scripts\\ShootingRangeTargetScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Targets/Scripts/ShootingRangeTargetScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Targets\\Scripts\\HitableBoxScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Targets/Scripts/HitableBoxScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Resources\\PistolWeaponResources.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Weapons/Resources/PistolWeaponResources.tres",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Resources\\AssaultRifleWeaponResources.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Weapons/Resources/AssaultRifleWeaponResources.tres",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Resources\\ShotgunWeaponResources.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Weapons/Resources/ShotgunWeaponResources.tres",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Resources\\SniperRifleWeaponResources.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Weapons/Resources/SniperRifleWeaponResources.tres",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Resources\\RocketLauncherWeaponResources.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Weapons/Resources/RocketLauncherWeaponResources.tres",
+        "relCount":  4,
+        "baseCount":  4,
+        "holderCount":  4
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Resources\\GrusSkiveWeaponResources.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/fpstemplate/Weapons/Resources/GrusSkiveWeaponResources.tres",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scenes\\AmmoRefillerScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Weapons/Scenes/AmmoRefillerScene.tscn",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scenes\\BulletDecalScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Weapons/Scenes/BulletDecalScene.tscn",
+        "relCount":  0,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scenes\\MuzzleFlashParticleScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Weapons/Scenes/MuzzleFlashParticleScene.tscn",
+        "relCount":  6,
+        "baseCount":  6,
+        "holderCount":  6
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scenes\\WeaponManagerScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Weapons/Scenes/WeaponManagerScene.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scenes\\RocketScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Weapons/Scenes/RocketScene.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scenes\\GrusScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/fpstemplate/Weapons/Scenes/GrusScene.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\AnimationManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/AnimationManagerScript.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\ReloadManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/ReloadManagerScript.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\WeaponManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/WeaponManagerScript.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\WeaponResourcesScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/WeaponResourcesScript.gd",
+        "relCount":  8,
+        "baseCount":  8,
+        "holderCount":  8
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\WeaponSlotScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/WeaponSlotScript.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\ShootManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/ShootManagerScript.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\ProjectileScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/ProjectileScript.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\Ammunition\\AmmoRefillerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/Ammunition/AmmoRefillerScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\Ammunition\\AmmunitionManagerScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/Ammunition/AmmunitionManagerScript.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\Camera\\CameraRecoilHolderScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/Camera/CameraRecoilHolderScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\Camera\\WeaponSubViewportScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/Camera/WeaponSubViewportScript.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\fpstemplate\\Weapons\\Scripts\\Camera\\WeaponViewportCameraScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/fpstemplate/Weapons/Scripts/Camera/WeaponViewportCameraScript.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\extras\\3rd_party\\import_sgt.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/extras/3rd_party/import_sgt.gd",
+        "relCount":  0,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\extras\\3rd_party\\project_on_terrain3d.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/extras/3rd_party/project_on_terrain3d.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\extras\\particle_example\\Terrain3DParticles.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/terrain_3d/extras/particle_example/Terrain3DParticles.tscn",
+        "relCount":  0,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\extras\\particle_example\\grass_material.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/terrain_3d/extras/particle_example/grass_material.tres",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\extras\\particle_example\\process_material.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/terrain_3d/extras/particle_example/process_material.tres",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\extras\\particle_example\\terrain_3D_particles.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/extras/particle_example/terrain_3D_particles.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\bake_lod_dialog.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/menu/bake_lod_dialog.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\bake_lod_dialog.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/terrain_3d/menu/bake_lod_dialog.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\baker.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/menu/baker.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\channel_packer.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/menu/channel_packer.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\channel_packer.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/terrain_3d/menu/channel_packer.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\channel_packer_dragdrop.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/menu/channel_packer_dragdrop.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\directory_setup.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/menu/directory_setup.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\directory_setup.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/terrain_3d/menu/directory_setup.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\menu\\terrain_menu.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/menu/terrain_menu.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\asset_dock.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/asset_dock.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\asset_dock.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/terrain_3d/src/asset_dock.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\double_slider.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/double_slider.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\editor_plugin.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/editor_plugin.gd",
+        "relCount":  0,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\gradient_operation_builder.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/gradient_operation_builder.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\multi_picker.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/multi_picker.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\operation_builder.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/operation_builder.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\region_gizmo.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/region_gizmo.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\tool_settings.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/tool_settings.gd",
+        "relCount":  2,
+        "baseCount":  3,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\toolbar.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/toolbar.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\src\\ui.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/src/ui.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\tools\\importer.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/tools/importer.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\tools\\importer.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/terrain_3d/tools/importer.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\tools\\region_mover.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/tools/region_mover.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\utils\\terrain_3d_objects.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/utils/terrain_3d_objects.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\terrain_3d\\utils\\transform_changed_notifier.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/terrain_3d/utils/transform_changed_notifier.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\plugin.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/plugin.gd",
+        "relCount":  0,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\connectors\\terrain3d_road_connector.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/connectors/terrain3d_road_connector.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\custom_containers\\3way_2x2.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/custom_containers/3way_2x2.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\custom_containers\\4way_1x1.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/custom_containers/4way_1x1.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\custom_containers\\4way_2x2.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/custom_containers/4way_2x2.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\custom_containers\\highway_offramp.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/custom_containers/highway_offramp.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\custom_containers\\highway_onramp.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/custom_containers/highway_onramp.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\custom_containers\\splitter_2x2.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/custom_containers/splitter_2x2.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_container.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_container.gd",
+        "relCount":  6,
+        "baseCount":  8,
+        "holderCount":  8
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_graph_node.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_graph_node.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_intersection.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_intersection.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_lane.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_lane.gd",
+        "relCount":  3,
+        "baseCount":  3,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_lane_agent.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_lane_agent.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_manager.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_manager.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_point.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_point.gd",
+        "relCount":  6,
+        "baseCount":  8,
+        "holderCount":  8
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\nodes\\road_segment.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/nodes/road_segment.gd",
+        "relCount":  7,
+        "baseCount":  8,
+        "holderCount":  8
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\procgen\\intersection_ngon.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/procgen/intersection_ngon.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\procgen\\intersection_settings.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/procgen/intersection_settings.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\procgen\\segment_geo.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/procgen/segment_geo.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\scene\\GizmoLaneIndicator.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/scene/GizmoLaneIndicator.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\connection_tool.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/connection_tool.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\hidden_gizmo_mat.tres",
+        "ext":  ".tres",
+        "rel":  "res://addons/road-generator/ui/hidden_gizmo_mat.tres",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\rc_submenu.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/rc_submenu.gd",
+        "relCount":  0,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_container_edit.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_container_edit.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_container_panel.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_container_panel.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_container_panel.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/ui/road_container_panel.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_intersection_gizmo.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_intersection_gizmo.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_point_edit.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_point_edit.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_point_gizmo.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_point_gizmo.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_point_panel.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_point_panel.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_point_panel.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/ui/road_point_panel.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_toolbar.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_toolbar.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_toolbar.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://addons/road-generator/ui/road_toolbar.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_toolbar_create_menu.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_toolbar_create_menu.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\road-generator\\ui\\road_toolbar_settings_menu.gd",
+        "ext":  ".gd",
+        "rel":  "res://addons/road-generator/ui/road_toolbar_settings_menu.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\levels\\devroom.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://levels/devroom.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\levels\\trenchbroomproto.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://levels/trenchbroomproto.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\Enemies\\melee_enemy.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/Enemies/melee_enemy.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Materials\\PlayerCharacterMaterial.tres",
+        "ext":  ".tres",
+        "rel":  "res://scenes/PlayerCharacter/Materials/PlayerCharacterMaterial.tres",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scenes\\quest_display.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scenes/quest_display.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scenes\\PlayerCharacterScene.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/PlayerCharacter/Scenes/PlayerCharacterScene.tscn",
+        "relCount":  3,
+        "baseCount":  3,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\Camera\\ViewportCameraScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/Camera/ViewportCameraScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\Camera\\CameraScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/Camera/CameraScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\Misc\\LinkComponentScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/Misc/LinkComponentScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\CrouchStateScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/CrouchStateScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\IdleStateScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/IdleStateScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\InairStateScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/InairStateScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\JumpStateScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/JumpStateScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\RunStateScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/RunStateScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\StateMachineScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/StateMachineScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\StateScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/StateScript.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\WalkStateScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/WalkStateScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\StateMachine\\PlayerCharacterScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/StateMachine/PlayerCharacterScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\PlayerCharacter\\Scripts\\UI\\HUDScript.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/PlayerCharacter/Scripts/UI/HUDScript.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\shop_item.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/props/shop/shop_item.gd",
+        "relCount":  9,
+        "baseCount":  9,
+        "holderCount":  9
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\icecream_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/icecream_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\god_morgen_yoghurt_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/god_morgen_yoghurt_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\painkillers_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/painkillers_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\medium_ammo_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/medium_ammo_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\shell_ammo_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/shell_ammo_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\heavy_ammo_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/heavy_ammo_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\light_ammo_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/light_ammo_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\rocket_ammo_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/rocket_ammo_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\props\\shop\\grusskive_ammo_shop.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/props/shop/grusskive_ammo_shop.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\npc\\npc_mesh_look.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/npc/npc_mesh_look.gd",
+        "relCount":  2,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\minigames\\scholarship_form.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/minigames/scholarship_form.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\minigames\\scholarship_form.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/minigames/scholarship_form.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\ui\\inventory_panel.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/ui/inventory_panel.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\ui\\inventory_panel.gd",
+        "ext":  ".gd",
+        "rel":  "res://scenes/ui/inventory_panel.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scenes\\store\\store_3m.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://scenes/store/store_3m.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\health_component.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/health_component.gd",
+        "relCount":  3,
+        "baseCount":  3,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\postkasse.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/postkasse.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\UIStats.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/UIStats.gd",
+        "relCount":  1,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\game_manager.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/game_manager.gd",
+        "relCount":  0,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\GenerateQuests.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://components/quest/GenerateQuests.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\cashier_npc.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://components/quest/cashier_npc.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\freezer.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://components/quest/freezer.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest_manager.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/quest_manager.gd",
+        "relCount":  1,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest_objective.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/quest_objective.gd",
+        "relCount":  8,
+        "baseCount":  9,
+        "holderCount":  9
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/quest.gd",
+        "relCount":  9,
+        "baseCount":  10,
+        "holderCount":  10
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest_box.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/quest_box.gd",
+        "relCount":  1,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest_box.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://components/quest/quest_box.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest_npc.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/quest_npc.gd",
+        "relCount":  1,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest_interactable.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/quest_interactable.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\quest_interactable.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://components/quest/quest_interactable.tscn",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\story_debug_panel.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/story_debug_panel.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\story_debug_panel.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://components/quest/story_debug_panel.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\scholarship_terminal.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/scholarship_terminal.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\scholarship_terminal.tscn",
+        "ext":  ".tscn",
+        "rel":  "res://components/quest/scholarship_terminal.tscn",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\generatequests.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/generatequests.gd",
+        "relCount":  1,
+        "baseCount":  2,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\checkout_zone.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/checkout_zone.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\cashier_npc.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/cashier_npc.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\shelf_section.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/shelf_section.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\quest\\freezer.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/quest/freezer.gd",
+        "relCount":  1,
+        "baseCount":  1,
+        "holderCount":  1
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\components\\item\\item_resource.gd",
+        "ext":  ".gd",
+        "rel":  "res://components/item/item_resource.gd",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_05_scholarship_application.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_05_scholarship_application.tres",
+        "relCount":  2,
+        "baseCount":  5,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_06_bank_deposit.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_06_bank_deposit.tres",
+        "relCount":  2,
+        "baseCount":  5,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_01_grandpa_request.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_01_grandpa_request.tres",
+        "relCount":  2,
+        "baseCount":  5,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_04_disappointment.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_04_disappointment.tres",
+        "relCount":  2,
+        "baseCount":  5,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_08_final_delivery.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_08_final_delivery.tres",
+        "relCount":  2,
+        "baseCount":  5,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_02_bank_inheritance.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_02_bank_inheritance.tres",
+        "relCount":  2,
+        "baseCount":  5,
+        "holderCount":  3
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_03_economic_reality.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_03_economic_reality.tres",
+        "relCount":  1,
+        "baseCount":  4,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\quests\\quest_07_second_icecream.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/quests/quest_07_second_icecream.tres",
+        "relCount":  1,
+        "baseCount":  4,
+        "holderCount":  2
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\items\\icecream.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/items/icecream.tres",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\items\\inheritance_document.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/items/inheritance_document.tres",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\items\\approved_application.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/items/approved_application.tres",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\items\\god_morgen_yoghurt.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/items/god_morgen_yoghurt.tres",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\data\\items\\painkillers.tres",
+        "ext":  ".tres",
+        "rel":  "res://data/items/painkillers.tres",
+        "relCount":  0,
+        "baseCount":  0,
+        "holderCount":  0
+    },
+    {
+        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\scripts\\resources\\item_data.gd",
+        "ext":  ".gd",
+        "rel":  "res://scripts/resources/item_data.gd",
+        "relCount":  5,
+        "baseCount":  5,
+        "holderCount":  5
+    }
+]

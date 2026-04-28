@@ -1,0 +1,65 @@
+[gd_scene format=4 uid="uid://dfv5w0cbn7egq"]
+
+[ext_resource type="Script" uid="uid://coyv53xc2grb0" path="res://addons/fpstemplate/Targets/Scripts/HitableBoxScript.gd" id="1_hitable"]
+[ext_resource type="Texture2D" uid="uid://dtg5p1g0k6m2s" path="res://assets/props/barrel/barrel_barrel.png" id="2_mvosc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_py5x6"]
+resource_name = "BlueBarrel"
+cull_mode = 2
+albedo_texture = ExtResource("2_mvosc")
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("2_mvosc")
+texture_filter = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_47jg0"]
+_surfaces = [{
+"aabb": AABB(-0.25980765, 0, -0.3, 0.5196153, 0.85, 0.6),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIABQADAAAABQACAAYAAwAHAAQACAAFAAYAAwAFAAkACQAFAAgAAwAJAAcABwAKAAQABwAJAAoAAgAEAAsAAgALAAYACwAEAAoACAAGAAsACQALAAoACQAIAAsA"),
+"name": "BlueBarrel",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("/38AAAAAAAD//////z8AAP9///8AAAAA//8AAP8/AAD//////78AAAAAAAD/PwAAAAD///8/AAD//wAA/78AAAAAAAD/vwAA/38AAP//AAD/f/////8AAAAA////vwAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dw5a5"]
+resource_name = "barrel_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.25980765, 0, -0.3, 0.5196153, 0.85, 0.6),
+"attribute_data": PackedByteArray("//8d9Tj8/3////9/OPwd9Tj8HfVy+P9/OPz/f3L4HfVy+B31q/T/f3L4/3+r9B31q/Qd9eXw/3+r9P9/5fAd9feynHWmgL7cpoD9l0flvtxH5f2X97Ie/+XwHfUf7f9/5fD/fx/tHfUf7R31WOn/fx/t/39Y6R31YLL//4XkN5mF5LzdO4A3mTuAvN1gsvR2"),
+"format": 34896613399,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEQAQABMAEwAQABQAEQATABUAFgAXABgAFgAZABcAGgAbABwAGgAdABsAHgAfACAAHwAeACEAIQAeACIAHwAhACMA"),
+"material": SubResource("StandardMaterial3D_py5x6"),
+"name": "BlueBarrel",
+"primitive": 3,
+"uv_scale": Vector4(1.9838384, 2.1740253, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("/38AAAAAqer//////z+p6v9///8AAKnq//8AAP8/qer//wAA/z//v///////v/+///////8//7///wAA/7//v///AAD/v1SV/3//////VJX//////79Ulf9/AAD//1SV/38AAP//VJUAAP///79Ulf9//////1SVAAAAAP+/VJX//////7+M4v9///8AAIzi//////8/jOIAAP///7+M4v9//////4ziAAD///8/jOIAAAAA/7//vwAA////P/+/AAD///+//78AAAAA/z//vwAAAAD/P6nq/3///wAAqeoAAP///z+p6v9/AAAAAKnqAAAAAP8/Ssr//wAA/z9Kyv9/AAAAAErK/38AAP//SsoAAAAA/79Kyv//AAD/v0rK/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3////9/////f////3///6ucqbGrnKmxq5ypsaucqbGrnKmxq5ypsf9/////f////3////9/////f////3////9/////f///mESzXZhEs12YRLNdmESzXZhEs12YRLNd")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_47jg0")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_barrel"]
+height = 1.1
+radius = 0.32177734
+
+[node name="Barrel" type="RigidBody3D" unique_id=89342880 groups=["HitableObjects"]]
+mass = 0.5
+script = ExtResource("1_hitable")
+
+[node name="MeshRoot" type="Node3D" parent="." unique_id=226490173]
+
+[node name="BarrelModel" type="Node3D" parent="MeshRoot" unique_id=680272898]
+
+[node name="Cylinder" type="MeshInstance3D" parent="MeshRoot/BarrelModel" unique_id=99615942]
+transform = Transform3D(1.215, 0, 0, 0, 1.28, 0, 0, 0, 1.215, 0, 0, 0)
+mesh = SubResource("ArrayMesh_dw5a5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=401068008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("CylinderShape3D_barrel")

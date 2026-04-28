@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bq5x1xeywyog1"]
+
+[ext_resource type="Script" uid="uid://d4ng2bnd70tbl" path="res://scenes/props/shop/shop_item.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="mat"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="mesh"]
+material = SubResource("mat")
+size = Vector3(0.2, 0.14, 0.14)
+
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(0.2, 0.14, 0.14)
+
+[node name="HeavyAmmoShopItem" type="RigidBody3D" unique_id=1894904382]
+mass = 0.3
+script = ExtResource("1")
+item_id = "heavy_ammo"
+display_name = "Tung ammunisjon"
+price = 80
+ammo_type = "HeavyAmmo"
+ammo_amount = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=229636252]
+mesh = SubResource("mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=797712269]
+shape = SubResource("shape")

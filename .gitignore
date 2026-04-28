@@ -1,0 +1,13 @@
+.godot/
+.import/
+.export/
+
+# Import files (optional, can regenerate)
+*.import
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db

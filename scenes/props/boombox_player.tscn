@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dkwkcws1ujj7i"]
+
+[ext_resource type="Script" uid="uid://dmxgt65ijuweh" path="res://scenes/props/boombox_player.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_boombox"]
+albedo_color = Color(0.08, 0.08, 0.09, 1)
+metallic = 0.2
+roughness = 0.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_boombox"]
+size = Vector3(0.6, 0.28, 0.24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boombox"]
+size = Vector3(0.6, 0.28, 0.24)
+
+[node name="BoomboxPlayer" type="RigidBody3D" unique_id=703007063 groups=["Carriable"]]
+mass = 1.8
+script = ExtResource("1_script")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1393000618]
+material_override = SubResource("StandardMaterial3D_boombox")
+mesh = SubResource("BoxMesh_boombox")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1443211745]
+shape = SubResource("BoxShape3D_boombox")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=131516246]
+pitch_scale = 3.58
+max_distance = 75.0

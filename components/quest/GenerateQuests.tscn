@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://rjtsprhex27n"]
+
+[ext_resource type="Script" uid="uid://ulbdt2j7yb1f" path="res://components/quest/generatequests.gd" id="1_d4rwu"]
+
+[node name="GenerateQuests" type="Node" unique_id=1856388125]
+script = ExtResource("1_d4rwu")

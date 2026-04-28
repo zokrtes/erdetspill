@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b6eat0w03tha"]
+
+[ext_resource type="Script" uid="uid://dcexiw2ue8xoo" path="res://scenes/props/lemonade_stand.gd" id="1_stand_script"]
+[ext_resource type="PackedScene" uid="uid://dcdc0gcx8gfqc" path="res://assets/props/glb/falke/LemonadeStand.glb" id="2_lh3f1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sign_canvas"]
+size = Vector2(1.15, 0.615)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_interaction"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sign"]
+radius = 1.5
+
+[node name="lemonade_stand" type="Node3D" unique_id=1763911244]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_stand_script")
+
+[node name="LemonadeStand2" parent="." unique_id=434059166 instance=ExtResource("2_lh3f1")]
+transform = Transform3D(-0.2, 0, -3.019916e-08, 0, 0.2, 0, 3.019916e-08, 0, -0.2, 8.030467e-08, -1.1681143, 0.9185784)
+
+[node name="SignMesh" type="MeshInstance3D" parent="." unique_id=1379150926]
+transform = Transform3D(-0.9927225, 0, 0, 0, -5.753792e-08, 1, 0, -1.3163142, -4.371139e-08, 8.94207e-09, 2.6422534, -0.49947315)
+mesh = SubResource("PlaneMesh_sign_canvas")
+
+[node name="SitPoint" type="Marker3D" parent="." unique_id=1735403878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8003606e-08, 0, 1.1847105)
+
+[node name="CustomerPoint" type="Marker3D" parent="." unique_id=1946751731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1)
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=177179960]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1081881978]
+shape = SubResource("SphereShape3D_interaction")
+
+[node name="SignInteractionArea" type="Area3D" parent="." unique_id=132656456]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SignInteractionArea" unique_id=1843500927]
+shape = SubResource("SphereShape3D_sign")
+
+[node name="PromptLabel3D" type="Label3D" parent="." unique_id=302865410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+billboard = 1
+text = "E - Sett deg"
+font_size = 26

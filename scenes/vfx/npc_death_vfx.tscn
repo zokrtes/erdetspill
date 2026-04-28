@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/vfx/npc_death_vfx.gd" id="1_script"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_blood"]
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, -9.8, 0)
+color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blood"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_drop"]
+material = SubResource("StandardMaterial3D_blood")
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[node name="NpcDeathVfx" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="BloodParticles" type="GPUParticles3D" parent="."]
+amount = 60
+lifetime = 3.0
+explosiveness = 0.9
+one_shot = true
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_blood")
+draw_pass_1 = SubResource("SphereMesh_drop")
+
+[node name="MeatChunks" type="Node3D" parent="."]

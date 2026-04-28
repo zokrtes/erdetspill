@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://fbbirx0ldc4j"]
+
+[ext_resource type="Script" uid="uid://dmus6nnl2tyiu" path="res://components/quest/cashier_npc.gd" id="1_cashier"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_interact"]
+radius = 2.5
+
+[node name="CashierNpcBase" type="Node3D" unique_id=1394050748]
+script = ExtResource("1_cashier")
+
+[node name="Model" type="Node3D" parent="." unique_id=1777308643]
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=869934915]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1402632610]
+shape = SubResource("SphereShape3D_interact")
+
+[node name="NameLabel" type="Label3D" parent="." unique_id=328652413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+billboard = 1
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_area_3d_body_exited"]

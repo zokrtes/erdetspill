@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://u4tj3ey6tjg8"]
+
+[ext_resource type="Script" uid="uid://bysswu6cmi0t4" path="res://addons/fpstemplate/Weapons/Scripts/ProjectileScript.gd" id="1_8y6e4"]
+[ext_resource type="Texture2D" uid="uid://cm8240c4lqdpl" path="res://assets/weapons/models/rpg7_rocket_rockets rpg.jpg" id="2_jv2hh"]
+[ext_resource type="AudioStream" uid="uid://bw5s3ut8kc7o7" path="res://assets/sfx/hl1-master/sound/weapons/explode4.wav" id="2_r213f"]
+[ext_resource type="ArrayMesh" path="res://assets/weapons/models/rpg7_rocket_Cylinder_002.res" id="3_n1ch3"]
+[ext_resource type="Texture2D" uid="uid://cappn4er68jtu" path="res://assets/weapons/models/rpg7_metal2.jpg" id="4_t8c6y"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jevsj"]
+bounce = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oi5ds"]
+radius = 0.0624222
+height = 0.686962
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7g40"]
+albedo_texture = ExtResource("2_jv2hh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r213f"]
+scale_min = 0.07
+scale_max = 0.19999999
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umtsx"]
+albedo_texture = ExtResource("4_t8c6y")
+metallic_specular = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_6v41r"]
+material = SubResource("StandardMaterial3D_umtsx")
+
+[node name="Rocket" type="RigidBody3D" unique_id=1198534523]
+collision_layer = 8
+collision_mask = 53
+physics_material_override = SubResource("PhysicsMaterial_jevsj")
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_8y6e4")
+explosionSound = ExtResource("2_r213f")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=1794295809]
+transform = Transform3D(1, 0, 0, 0, 0.01994783, -0.99980104, 0, 0.99980104, 0.01994783, 0.0035816, -0.00200154, 0.0138129)
+shape = SubResource("CapsuleShape3D_oi5ds")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=488526414]
+transform = Transform3D(0.47, 3.4974238e-14, -1.5287725e-21, 0, -2.0544352e-08, -0.47, -3.4974238e-14, 0.47, -2.0544352e-08, -1.2650915e-14, 7.4313222e-09, -0.15202782)
+material_override = SubResource("StandardMaterial3D_k7g40")
+mesh = ExtResource("3_n1ch3")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1830829566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1899834)
+amount = 40
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_r213f")
+draw_pass_1 = SubResource("QuadMesh_6v41r")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

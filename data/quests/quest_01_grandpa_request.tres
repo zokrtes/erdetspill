@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://n3x4ufb3lpnx"]
+
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+
+[sub_resource type="Resource" id="Resource_6acys"]
+script = ExtResource("1_obj")
+objective_id = "listen_to_grandpa"
+description = "Snakk med bestefar"
+type = 1
+target_id = "grandpa"
+
+[resource]
+script = ExtResource("2_quest")
+quest_id = "GRANDPA_REQUEST"
+name = "Bestefars ønske"
+description = "Bestefar har en vikt beskjed om mormors arv."
+brief_description = "Bestefar vil ha noe. Finn ut hva du kan gjøre."
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_6acys")])
+reward_items = Array[String](["inheritance_document"])
+unlock_quests = Array[String](["BANK_INHERITANCE"])
+offer_dialogue = Array[String](["Sett deg ned.", "Jeg vil ha to is.", "Gå i butikken og kjøp to is til meg.", "...", "Mormor døde.", "Her er arven hennes.", "*Gir deg arvedokumentet*", "Løs det inn i banken.", "Bruk pengene på is."])
+completion_dialogue = Array[String](["Du har fått et arvedokument!", "Sjekk questloggen for å se bank-oppdraget."])

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://d10cdmnxuxp6q"]
+
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+
+[sub_resource type="Resource" id="Resource_162rf"]
+script = ExtResource("1_obj")
+objective_id = "talk_to_bank_teller"
+description = "Snakk med bankansatt"
+type = 1
+target_id = "bank_teller"
+
+[resource]
+script = ExtResource("2_quest")
+quest_id = "BANK_INHERITANCE"
+name = "Den Brå Arven"
+description = "Bestefar ga deg et arvedokument. Løs det inn i banken."
+brief_description = "Snakk med bankansatt"
+required_quest_ids = Array[String](["GRANDPA_REQUEST"])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_162rf")])
+unlock_quests = Array[String](["ECONOMIC_REALITY"])
+offer_dialogue = Array[String](["Hei, du ser ut som du har et arvedokument?", "La meg se... Mormors arv? 100 kr, gratulerer."])
+completion_dialogue = Array[String](["Her er pengene dine!", "Bruk dem klokt."])

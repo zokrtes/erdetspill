@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://balccipmn1hcn"]
+
+[ext_resource type="Script" uid="uid://cucpnteqf0mpr" path="res://components/shop/build_zone.gd" id="1_build_zone_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_build_zone"]
+size = Vector3(2.4433594, 1.2, 2.1572266)
+
+[node name="BuildZone" type="Area3D" unique_id=1690159181]
+script = ExtResource("1_build_zone_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289916669]
+shape = SubResource("BoxShape3D_build_zone")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=822206447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+billboard = 1
+text = "E - Bygg bod"
+font_size = 24

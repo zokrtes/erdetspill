@@ -1,0 +1,201 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/minigames/scholarship_form.gd" id="1_form"]
+
+[node name="ScholarshipFormMinigame" type="CanvasLayer"]
+layer = 25
+script = ExtResource("1_form")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.87, 0.87, 0.87, 0.95)
+
+[node name="FormPanel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -345.0
+offset_right = 430.0
+offset_bottom = 345.0
+custom_minimum_size = Vector2(860, 690)
+
+[node name="Margin" type="MarginContainer" parent="FormPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="RootVBox" type="VBoxContainer" parent="FormPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderHBox" type="HBoxContainer" parent="FormPanel/Margin/RootVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="FormPanel/Margin/RootVBox/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "Lånekassa Søknadsskjema"
+
+[node name="TimerLabel" type="Label" parent="FormPanel/Margin/RootVBox/HeaderHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Tid igjen: 1:30"
+horizontal_alignment = 2
+
+[node name="QuestionsVBox" type="VBoxContainer" parent="FormPanel/Margin/RootVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Q1Box" type="PanelContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q1Box"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="QuestionLabel" type="Label" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q1Box/VBox"]
+layout_mode = 2
+text = "Spørsmål 1"
+
+[node name="Input" type="LineEdit" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q1Box/VBox"]
+layout_mode = 2
+
+[node name="Q2Box" type="PanelContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q2Box"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="QuestionLabel" type="Label" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q2Box/VBox"]
+layout_mode = 2
+text = "Spørsmål 2"
+
+[node name="Input" type="LineEdit" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q2Box/VBox"]
+layout_mode = 2
+
+[node name="Q3Box" type="PanelContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q3Box"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="QuestionLabel" type="Label" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q3Box/VBox"]
+layout_mode = 2
+text = "Spørsmål 3"
+
+[node name="Input" type="LineEdit" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q3Box/VBox"]
+layout_mode = 2
+
+[node name="Q4Box" type="PanelContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q4Box"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="QuestionLabel" type="Label" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q4Box/VBox"]
+layout_mode = 2
+text = "Spørsmål 4"
+
+[node name="Input" type="LineEdit" parent="FormPanel/Margin/RootVBox/QuestionsVBox/Q4Box/VBox"]
+layout_mode = 2
+
+[node name="Separator" type="HSeparator" parent="FormPanel/Margin/RootVBox"]
+layout_mode = 2
+
+[node name="SignatureLabel" type="Label" parent="FormPanel/Margin/RootVBox"]
+layout_mode = 2
+text = "Signatur:"
+
+[node name="SignatureFrame" type="PanelContainer" parent="FormPanel/Margin/RootVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 170)
+
+[node name="SignatureBox" type="Control" parent="FormPanel/Margin/RootVBox/SignatureFrame"]
+layout_mode = 2
+mouse_filter = 1
+custom_minimum_size = Vector2(0, 170)
+
+[node name="FooterHBox" type="HBoxContainer" parent="FormPanel/Margin/RootVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SubmitButton" type="Button" parent="FormPanel/Margin/RootVBox/FooterHBox"]
+layout_mode = 2
+text = "Send inn"
+
+[node name="ClearButton" type="Button" parent="FormPanel/Margin/RootVBox/FooterHBox"]
+layout_mode = 2
+text = "Tøm"
+
+[node name="StatusLabel" type="Label" parent="FormPanel/Margin/RootVBox"]
+layout_mode = 2
+text = ""
+
+[node name="RejectionOverlay" type="ColorRect" parent="FormPanel"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.35)
+
+[node name="Dialog" type="PanelContainer" parent="FormPanel/RejectionOverlay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -120.0
+offset_right = 220.0
+offset_bottom = 120.0
+
+[node name="Margin" type="MarginContainer" parent="FormPanel/RejectionOverlay/Dialog"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="FormPanel/RejectionOverlay/Dialog/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="FormPanel/RejectionOverlay/Dialog/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "SØKNADEN ER AVVIST"
+horizontal_alignment = 1
+
+[node name="ReasonLabel" type="Label" parent="FormPanel/RejectionOverlay/Dialog/Margin/VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ExtraLabel" type="Label" parent="FormPanel/RejectionOverlay/Dialog/Margin/VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="OkButton" type="Button" parent="FormPanel/RejectionOverlay/Dialog/Margin/VBox"]
+layout_mode = 2
+text = "OK"
+
+[connection signal="draw" from="FormPanel/Margin/RootVBox/SignatureFrame/SignatureBox" to="." method="_on_signature_box_draw"]
+[connection signal="gui_input" from="FormPanel/Margin/RootVBox/SignatureFrame/SignatureBox" to="." method="_on_signature_box_gui_input"]
+[connection signal="mouse_exited" from="FormPanel/Margin/RootVBox/SignatureFrame/SignatureBox" to="." method="_on_signature_box_mouse_exited"]
+[connection signal="pressed" from="FormPanel/Margin/RootVBox/FooterHBox/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="FormPanel/Margin/RootVBox/FooterHBox/ClearButton" to="." method="_on_clear_button_pressed"]
+[connection signal="pressed" from="FormPanel/RejectionOverlay/Dialog/Margin/VBox/OkButton" to="." method="_on_rejection_ok_button_pressed"]

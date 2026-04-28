@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://crmjen01g6i3c"]
+
+[ext_resource type="Script" uid="uid://c2jv3goent02s" path="res://scenes/world/gate.gd" id="1_gate"]
+[ext_resource type="PackedScene" uid="uid://dkwkcws1ujj7i" path="res://scenes/props/boombox_player.tscn" id="1_nwexx"]
+[ext_resource type="PackedScene" path="res://scenes/world/russ_spawner.tscn" id="2_spawner"]
+[ext_resource type="PackedScene" path="res://scenes/props/peak_performance_lua.tscn" id="3_hat"]
+[ext_resource type="AudioStream" uid="uid://c676l13siq3dk" path="res://assets/sfx/erdetlyd/musikk/ikkemitt/Creem [5z2QjmNYttA].mp3" id="4_acjbt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark"]
+albedo_color = Color(0.19, 0.19, 0.2, 1)
+roughness = 0.95
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
+size = Vector3(6.19, 3, 0.085)
+
+[node name="RussHideout" type="Node3D" unique_id=1821180777]
+
+[node name="BoomboxPlayer" parent="." unique_id=521515115 instance=ExtResource("1_nwexx")]
+transform = Transform3D(-0.5028238, 0, 0.8643889, 0, 1, 0, -0.8643889, 0, -0.5028238, -0.47089005, 1.1307464, 4.418522)
+playlist = Array[AudioStream]([ExtResource("4_acjbt")])
+
+[node name="Ground" type="CSGBox3D" parent="." unique_id=389926215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+use_collision = true
+size = Vector3(20, 0.1, 20)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="Fence" type="Node3D" parent="." unique_id=250335319]
+
+[node name="FenceNorth" type="CSGBox3D" parent="Fence" unique_id=985121240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+use_collision = true
+size = Vector3(20, 4, 0.2)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="FenceSouth" type="CSGBox3D" parent="Fence" unique_id=1036877027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
+use_collision = true
+size = Vector3(20, 4, 0.2)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="FenceWest" type="CSGBox3D" parent="Fence" unique_id=1968955563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 0)
+use_collision = true
+size = Vector3(0.2, 4, 20)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="FenceEastNorth" type="CSGBox3D" parent="Fence" unique_id=2135413289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, -6.5)
+use_collision = true
+size = Vector3(0.2, 4, 7)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="FenceEastSouth" type="CSGBox3D" parent="Fence" unique_id=1827843133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 6.5)
+use_collision = true
+size = Vector3(0.2, 4, 7)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="Gate" type="StaticBody3D" parent="." unique_id=1216680580 groups=["HitableObjects"]]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10, 1.25, 0)
+script = ExtResource("1_gate")
+
+[node name="GateMesh" type="CSGBox3D" parent="Gate" unique_id=1025488165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5492711, 0)
+size = Vector3(6.19, 3, 0.085)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gate" unique_id=1528234197]
+shape = SubResource("BoxShape3D_gate")
+
+[node name="PrivateSign" type="Label3D" parent="Gate" unique_id=1696057702]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.04064548, 0.5860498, 0.48477745)
+modulate = Color(1, 0, 0, 1)
+text = "INGEN ADGANG!!
+VI DRIKKER HER!!!
+(DET GÅR IKKE ANN Å SPRENGE DENNE DØRA MED RPG)"
+
+[node name="Tower" type="Node3D" parent="." unique_id=707730723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
+
+[node name="TowerBase" type="CSGBox3D" parent="Tower" unique_id=683120878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+use_collision = true
+size = Vector3(2, 4, 2)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="TowerPlatform" type="CSGBox3D" parent="Tower" unique_id=940263341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1, 0)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="StairsStep1" type="CSGBox3D" parent="Tower" unique_id=1808046287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.4, -1.2)
+use_collision = true
+size = Vector3(1.2, 0.2, 0.8)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="StairsStep3" type="CSGBox3D" parent="Tower" unique_id=571772005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 1.6, 0)
+use_collision = true
+size = Vector3(1.2, 0.2, 0.8)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="StairsStep5" type="CSGBox3D" parent="Tower" unique_id=1177568309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 2.8, 1.2)
+use_collision = true
+size = Vector3(1.2, 0.2, 0.8)
+material = SubResource("StandardMaterial3D_dark")
+
+[node name="HatSpawn" type="Marker3D" parent="Tower" unique_id=1483510413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.45, 0)
+
+[node name="PeakPerformanceLua" parent="Tower/HatSpawn" unique_id=1428045238 instance=ExtResource("3_hat")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Tower" unique_id=218995587]
+transform = Transform3D(0.7071067, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.7071067, 3.762213, 1.499373, 9.785608)
+size = Vector3(7, 2.5672607, 2)
+
+[node name="RussSpawnPoints" type="Node3D" parent="." unique_id=2062522388]
+
+[node name="SpawnA" type="Marker3D" parent="RussSpawnPoints" unique_id=1377186748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.2, 2.5)
+
+[node name="SpawnB" type="Marker3D" parent="RussSpawnPoints" unique_id=54296782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 0.2, -2.8)
+
+[node name="SpawnC" type="Marker3D" parent="RussSpawnPoints" unique_id=1698726992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8, 0.2, -5.2)
+
+[node name="SpawnD" type="Marker3D" parent="RussSpawnPoints" unique_id=1321172742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0.2, 5.6)
+
+[node name="SpawnE" type="Marker3D" parent="RussSpawnPoints" unique_id=263254149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.2, 1.2)
+
+[node name="SpawnF" type="Marker3D" parent="RussSpawnPoints" unique_id=583975037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.2, -6.2)
+
+[node name="SpawnerHideout" parent="RussSpawnPoints" unique_id=1514694757 instance=ExtResource("2_spawner")]
+is_hideout_spawner = true
+spawn_count = 6
+patrol_radius = 10.0

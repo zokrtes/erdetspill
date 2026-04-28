@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bpkodqo14t1th"]
+
+[ext_resource type="Script" uid="uid://d4ng2bnd70tbl" path="res://scenes/props/shop/shop_item.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="mat"]
+albedo_color = Color(0.8, 0.7, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="mesh"]
+material = SubResource("mat")
+size = Vector3(0.2, 0.14, 0.14)
+
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(0.2, 0.14, 0.14)
+
+[node name="LightAmmoShopItem" type="RigidBody3D" unique_id=78618880]
+mass = 0.3
+script = ExtResource("1")
+item_id = "light_ammo"
+display_name = "Lett ammunisjon"
+price = 40
+ammo_type = "LightAmmo"
+ammo_amount = 30
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1162925869]
+mesh = SubResource("mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=654817600]
+shape = SubResource("shape")

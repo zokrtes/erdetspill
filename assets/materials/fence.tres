@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://crwdq24lw8ivv"]
+
+[ext_resource type="Texture2D" uid="uid://b6bmkd1d2l6vh" path="res://assets/textures/256x256/depositphotos_22686697-stock-photo-rusty-fence-seamless-texture-3406157164.png" id="1_aeajw"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_aeajw")
+uv1_scale = Vector3(0.315, 0.315, 0.315)
+uv1_triplanar = true
+texture_filter = 0

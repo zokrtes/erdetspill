@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "inheritance_document"
+display_name = "Arvedokument"
+description = "Papirer som gir deg rett til arv."
+category = 2
+stackable = false
+max_stack = 1

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://baks6qtvrw12m"]
+
+[ext_resource type="Script" uid="uid://5oiu0jx8x2lt" path="res://scenes/props/peak_performance_lua.gd" id="1_hat"]
+[ext_resource type="PackedScene" uid="uid://di7brmitmfqpc" path="res://assets/props/glb/falke/Caps.glb" id="2_icp35"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hat"]
+size = Vector3(0.25, 0.12, 0.25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 1.2
+
+[node name="PeakPerformanceLua" type="RigidBody3D" unique_id=1233323603]
+script = ExtResource("1_hat")
+
+[node name="Caps2" parent="." unique_id=1379006868 instance=ExtResource("2_icp35")]
+transform = Transform3D(0.165, 0, 0, 0, 0.165, 0, 0, 0, 0.165, 0, -0.039523188, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=591803426]
+shape = SubResource("BoxShape3D_hat")
+
+[node name="PickupArea" type="Area3D" parent="." unique_id=1527136124]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea" unique_id=1204483322]
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1415159043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+billboard = 1
+text = "Peak Performance-lua"
+font_size = 22

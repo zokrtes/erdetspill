@@ -1,0 +1,204 @@
+SPILLKONSEPT: "MAURJAKTEN" (DEMO)
+================================
+
+HOVEDKONSEPT
+------------
+Spilleren spiller som seg selv (navneskilt på huset)
+Dette er en DEMO for et større spill (ligner på My Summer Car, bare uten bilen)
+
+
+HOVEDMISSION: FINN MAUREN
+-------------------------
+Start: Sokrates (TikToker, ikke filosofen) ringer
+Sokrates: "Jeg har mistet mauren min! Ringer du meg når du har funnet han?"
+*KLIKK* (legger på)
+
+Twist: Onde åndelige vindkast prøver å forhindre deg
+
+
+🟢 Quest 1: En Enkel Forespørsel
+
+Oppdragsgiver: Bestefar
+Mål: Skaff 2 is
+
+Beskrivelse:
+Du møter bestefar i stua. Han ser alvorlig på deg.
+
+“Jeg vil ha to is.”
+
+Belønning:
+
+📜 Arvedokument (Quest Item)
+🟢 Quest 2: Den Brå Arven
+
+Oppdragsgiver: Bestefar
+Mål: Innløs arven i banken
+
+Beskrivelse:
+Bestefar legger til, uten emosjonell overgang:
+
+“Mormor døde. Her er arven hennes – bruk den på to is.”
+
+Du mottar et noe suspekt arvedokument.
+
+Belønning:
+
+💰 +100 kr
+🟡 Quest 3: Økonomisk Realitet
+
+Oppdragsgiver: Deg selv (indre krise)
+Mål: Kjøp 2 is
+
+Beskrivelse:
+Du ankommer butikken.
+💡 Plot twist: Is koster 100 kr stykket.
+
+Resultat:
+
+❌ Kan ikke fullføre målet
+✅ Kjøper 1 is
+
+Belønning:
+
+🍦 1 Is
+🔴 Quest 4: Skuffelsen
+
+Oppdragsgiver: Bestefar
+Mål: Forklar situasjonen
+
+Beskrivelse:
+Bestefar er ikke imponert.
+
+“Jeg ville ha TO is!”
+
+Etter en tung pause:
+
+“Du er jo ung… søk stipend.”
+
+Ny quest låses opp
+
+🟡 Quest 5: Lånekassens Vokter
+
+Oppdragsgiver: Chief Keef
+Lokasjon: Lånekassa
+
+Mål: Fyll ut og lever søknadsskjema
+
+Beskrivelse:
+Ingen stiller spørsmål ved hvorfor han er der.
+Skjemaet inneholder:
+
+Vanlige spørsmål
+Uvanlige spørsmål
+Eksistensielle spørsmål (valgfritt)
+
+Belønning:
+
+💰 +150 kr stipend
+🧾 Godkjent søknad
+🟢 Quest 6: Finansielt Gjennombrudd
+
+Oppdragsgiver: Banken
+Mål: Sett inn stipendet
+
+Beskrivelse:
+Du returnerer til banken. Den samme trøtte ansatte nikker anerkjennende.
+
+Belønning:
+
+💳 Konto oppdatert
+💰 Nok penger til 2 is totalt
+🟢 Quest 7: Den Andre Isen
+
+Oppdragsgiver: Deg selv (nå motivert)
+Mål: Kjøp 1 is til
+
+Beskrivelse:
+Du går tilbake til butikken. Denne gangen med selvtillit.
+
+Belønning:
+
+🍦 +1 Is
+🟣 Final Quest: Oppdrag Fullført
+
+Oppdragsgiver: Bestefar
+Mål: Lever 2 is
+
+Beskrivelse:
+Du rekker ham begge isene.
+
+Han ser på deg… og smiler.
+
+Belønning:
+
+🧓 Bestefars godkjenning
+🏆 Tittel: Isens Utvalgte
+✨ Oppdrag fullført
+
+
+SIDEQUESTS & FARER
+------------------
+
+HOVEDFARER:
+-----------
+* Elgfare boss - Gigantisk elg som tramper på deg
+* Kometkameratene ringer: "Zook har blitt gal!"
+  MÅ: Nøytralisere han (hopper inn i romskip)
+
+SIDEQUESTS:
+-----------
+* Spikre (oppdrag)
+
+MINISPILL:
+----------
+* Quiz
+* Dance-off med Hverdagskomikeren
+
+
+KARAKTERER
+----------
+- Spilleren (seg selv, navneskilt på huset)
+- Sokrates (TikToker, ikke filosof)
+- Bestefar (vil ha is, mormor er død)
+- Chief Keef (jobber i lånekassa)
+- Kometkameratene
+- Zook (har blitt gal)
+- Elgen (boss)
+- Hverdagskomikeren (dance-off)
+
+
+GAMEPLAY SYSTEMER
+----------------
+- Navneskilt på huset (personlig touch)
+- Onde vindkast (hindrer maur-jakten)
+- Banksystem (arv + stipend)
+- Butikksystem (kjøp is, økonomi-humor)
+- Elgfare (random encounter boss)
+- Romskip-sekvens (Zook nøytralisering)
+
+
+HUMOR-ELEMENTER
+---------------
+- "Mormor døde" som en bisetning
+- Is koster 100 kr (inflasjon/norgespriser?)
+- Chief Keef i lånekassa
+- "Ondsinnet vindkast"
+- Hverdagskomikeren dance-off
+- "Ringer du meg når du har funnet han" *klikk*
+
+
+SPILLFLYT
+---------
+Start → Sokrates ringer (maur savnet)
+	  ↓
+Bestefar oppdrag (is + arv)
+	  ↓
+Banken → Butikk (1 is)
+	  ↓
+Bestefar → Lånekassa (stipend)
+	  ↓
+Butikk (2. is) → Bestefar fornøyd
+	  ↓
+Finn mauren → SPILLET SLUTT
+
+UNDERVEIS: Elgfare, Kometkameratene, sidequests

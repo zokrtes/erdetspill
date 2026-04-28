@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://clid1430bou25"]
+
+[ext_resource type="Script" uid="uid://edikhjm0u3gs" path="res://addons/3dEnemyToolkit/Example/example_enemy.gd" id="1_6nmso"]
+[ext_resource type="Script" uid="uid://dqjjf8pcurpdl" path="res://addons/3dEnemyToolkit/FollowTarget.gd" id="2_w5i6f"]
+[ext_resource type="Script" uid="uid://bwxw5fxeqf38i" path="res://addons/3dEnemyToolkit/RandomTarget3D.gd" id="3_lsadq"]
+[ext_resource type="Script" uid="uid://bja5r88mp6lox" path="res://addons/3dEnemyToolkit/SimpleVision3D.gd" id="4_ivo35"]
+[ext_resource type="Script" uid="uid://cen74ogojn8ue" path="res://components/health_component.gd" id="5_umcef"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ck8vg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_j3xwy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_no7to"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hbteo"]
+
+[sub_resource type="Animation" id="Animation_umcef"]
+resource_name = "fall"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_63nje"]
+_data = {
+&"fall": SubResource("Animation_umcef")
+}
+
+[node name="ExampleEnemy" type="CharacterBody3D" unique_id=821871439]
+collision_layer = 32
+collision_mask = 31
+floor_stop_on_slope = true
+floor_max_angle = 1.309
+floor_snap_length = 0.0
+max_slides = 4
+motion_mode = 0
+script = ExtResource("1_6nmso")
+walkSpeed = 4.0
+runSpeed = 7.0
+ragdoll_lifetime = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1767349146]
+shape = SubResource("CapsuleShape3D_ck8vg")
+
+[node name="Geometry" type="MeshInstance3D" parent="." unique_id=1773284121]
+mesh = SubResource("CapsuleMesh_j3xwy")
+surface_material_override/0 = SubResource("StandardMaterial3D_no7to")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry" unique_id=1730671561]
+transform = Transform3D(0.778942, 0, 0, 0, -1.05042e-08, 0.550017, 0, -0.240309, -2.4042e-08, 0, 0.435177, -0.384868)
+mesh = SubResource("CylinderMesh_hbteo")
+surface_material_override/0 = SubResource("StandardMaterial3D_no7to")
+
+[node name="FollowTarget3D" type="NavigationAgent3D" parent="." unique_id=318326928]
+script = ExtResource("2_w5i6f")
+
+[node name="RandomTarget3D" type="Node3D" parent="." unique_id=1405963105]
+script = ExtResource("3_lsadq")
+
+[node name="SimpleVision3D" type="Node3D" parent="." unique_id=119749698]
+script = ExtResource("4_ivo35")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=664186912]
+script = ExtResource("5_umcef")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1741378988]
+libraries/ = SubResource("AnimationLibrary_63nje")
+
+[node name="WeaponSlot" type="Node3D" parent="." unique_id=1518480899]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.42037052, -1.0292735)
+
+[connection signal="navigation_finished" from="FollowTarget3D" to="." method="_on_follow_target_3d_navigation_finished"]
+[connection signal="GetSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_get_sight"]
+[connection signal="LostSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_lost_sight"]

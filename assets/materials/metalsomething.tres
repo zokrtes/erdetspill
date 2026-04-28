@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://45nn4xub4g4d"]
+
+[ext_resource type="Texture2D" uid="uid://msu1akrh050c" path="res://assets/props/Tacos/Tacos_Concrete.png" id="1_iiao5"]
+
+[resource]
+albedo_texture = ExtResource("1_iiao5")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+texture_filter = 0

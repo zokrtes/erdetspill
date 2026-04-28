@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://dympwldnhvdx5"]
+
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+
+[sub_resource type="Resource" id="Resource_hawpm"]
+script = ExtResource("1_obj")
+objective_id = "talk_to_bank_teller_again"
+description = "Snakk med bankansatt"
+type = 1
+target_id = "bank_teller"
+
+[resource]
+script = ExtResource("2_quest")
+quest_id = "BANK_DEPOSIT"
+name = "Sett inn penger"
+description = "Sett inn stipendet i banken."
+brief_description = "Gå til banken."
+required_quest_ids = Array[String](["SCHOLARSHIP_APPLICATION"])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_hawpm")])
+unlock_quests = Array[String](["SECOND_ICECREAM"])
+offer_dialogue = Array[String](["Tilbake igjen?", "Å, du har fått stipend? Flott.", "Kontoen din er oppdatert. Nå har du nok til to is."])
+completion_dialogue = Array[String](["Stipendet er innsatt!", "Nå har du nok penger til to is."])

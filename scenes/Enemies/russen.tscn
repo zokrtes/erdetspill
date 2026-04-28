@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bcp8x8t6qq45n"]
+
+[ext_resource type="Script" uid="uid://d3nmkpboom2t2" path="res://scenes/Enemies/russen_enemy.gd" id="1_5s50f"]
+[ext_resource type="PackedScene" uid="uid://xkt0fmvqfpv2" path="res://assets/props/Characters_psx/Models/Female/Character_Female_03.fbx" id="2_ok4wm"]
+[ext_resource type="Script" uid="uid://cen74ogojn8ue" path="res://components/health_component.gd" id="5_yfj13"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jf7vv"]
+radius = 0.3100586
+height = 2.0146484
+
+[node name="Russen" type="CharacterBody3D" unique_id=1573527597]
+collision_layer = 32
+collision_mask = 31
+floor_stop_on_slope = true
+floor_max_angle = 1.309
+floor_snap_length = 0.0
+max_slides = 4
+motion_mode = 0
+script = ExtResource("1_5s50f")
+character_model = ExtResource("2_ok4wm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=816518981]
+shape = SubResource("CapsuleShape3D_jf7vv")
+
+[node name="Model" type="Node3D" parent="." unique_id=1169113992]
+
+[node name="HealthComponent" type="Node" parent="." unique_id=566000700]
+script = ExtResource("5_yfj13")
+max_health = 40.0
+

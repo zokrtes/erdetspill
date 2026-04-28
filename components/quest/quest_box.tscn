@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d04i4oxsb0y56"]
+
+[ext_resource type="Script" uid="uid://d3ibu82wq203n" path="res://components/quest/quest_box.gd" id="1_6w764"]
+
+[node name="QuestBox" type="PanelContainer" unique_id=250783057]
+custom_minimum_size = Vector2(200, 75)
+offset_right = 386.0
+offset_bottom = 75.0
+script = ExtResource("1_6w764")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1970380110]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1621806543]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=206158539]
+layout_mode = 2
+text = "Title"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="BriefDescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1028126280]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Description"
+autowrap_mode = 2
+

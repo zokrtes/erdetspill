@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd7lc24wo0vlg"]
+
+[ext_resource type="Script" path="res://scenes/props/shop/wall_weapon.gd" id="1_script"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_weapon"]
+size = Vector3(0.6, 0.15, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(0.6, 0.15, 0.08)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_area"]
+radius = 1.5
+
+[node name="WallWeapon" type="RigidBody3D"]
+mass = 0.45
+freeze = true
+freeze_mode = 0
+script = ExtResource("1_script")
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_weapon")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_body")
+
+[node name="PriceLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+pixel_size = 0.005
+billboard = 1
+text = ""
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("SphereShape3D_area")

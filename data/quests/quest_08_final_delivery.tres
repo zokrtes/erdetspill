@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://b1cuielckfa6x"]
+
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+
+[sub_resource type="Resource" id="Resource_gsdap"]
+script = ExtResource("1_obj")
+objective_id = "deliver_icecreams"
+description = "Snakk med bestefar etter at fryseren har 2 is"
+type = 1
+target_id = "grandpa"
+progress_flavor = "Snakk med bestefar når fryseren er klar"
+
+[resource]
+script = ExtResource("2_quest")
+quest_id = "FINAL_DELIVERY"
+name = "Fullfør ærendet"
+description = "Lever to is til bestefar."
+brief_description = "Du vet hva du må gjøre."
+required_quest_ids = Array[String](["SECOND_ICECREAM"])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_gsdap")])
+reward_xp = 500
+reward_title = "Isens Utvalgte"
+offer_dialogue = Array[String](["...", "Har du isen?"])
+completion_dialogue = Array[String](["...", "To is.", "Endelig.", "*Han smiler.*", "Bra gjort.", "Jeg er stolt av deg."])

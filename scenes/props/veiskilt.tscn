@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ca6ah0k6mha6e"]
+
+[ext_resource type="PackedScene" uid="uid://use31ui2e36q" path="res://assets/props/glb/falke/GateSkilt.glb" id="1_6vc0l"]
+
+[node name="Veiskilt2" type="Node3D" unique_id=251995184]
+transform = Transform3D(1.3311836e-07, 0, -1.0000002, 0, 1, 0, 1.0000002, 0, 1.3311836e-07, 0, 0, 0)
+
+[node name="GateSkilt2" parent="." unique_id=43039352 instance=ExtResource("1_6vc0l")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=525084907]
+transform = Transform3D(0.9, 0, -1.4210855e-14, 0, 0.9, 0, 1.4210855e-14, 0, 0.9, 0.003479004, 3.6343331, 0.017288208)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "erdethovedgata"
+font_size = 44
+
+[node name="Label3D2" type="Label3D" parent="." unique_id=1635821336]
+transform = Transform3D(-0.9, 0, 7.868051e-08, 0, 0.9, 0, -7.868051e-08, 0, -0.9, 0.003479004, 3.6343331, -0.037704468)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "erdethovedgata"
+font_size = 44

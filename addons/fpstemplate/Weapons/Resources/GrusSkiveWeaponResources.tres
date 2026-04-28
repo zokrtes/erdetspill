@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://duhwv1dy2jet4"]
+
+[ext_resource type="PackedScene" uid="uid://x8oniabn746q" path="res://addons/fpstemplate/Weapons/Scenes/MuzzleFlashParticleScene.tscn" id="1_qed4l"]
+[ext_resource type="PackedScene" uid="uid://cc18e3sjw53cr" path="res://addons/fpstemplate/Weapons/Scenes/GrusScene.tscn" id="2_qed4l"]
+[ext_resource type="Script" uid="uid://bnhfyt5sl8jcd" path="res://addons/fpstemplate/Weapons/Scripts/WeaponResourcesScript.gd" id="3_u3lah"]
+[ext_resource type="AudioStream" uid="uid://3c7fl06crtly" path="res://assets/sfx/hl1-master/sound/weapons/cbar_miss1.wav" id="4_lakoe"]
+
+[sub_resource type="Curve" id="Curve_8j8ql"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.97266513, 0.028797984), 0.40115994, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("3_u3lah")
+weaponName = "GrusSkive"
+weaponId = 6
+type = 2
+animBlendTime = 0.2
+equipAnimName = "EquipAnimGrusSkive"
+unequipAnimName = "UnequipAnimGrusSkive"
+shootAnimName = "ShootAnimGrusSkive"
+reloadAnimName = "ReloadAnimGrusSkive"
+reloadAnimSpeed = 0.65
+shootSound = ExtResource("4_lakoe")
+totalAmmoInMag = 120
+totalAmmoInMagRef = 60
+ammoType = "GrusSkiveAmmo"
+equipTime = 0.2
+unequipTime = 0.2
+nbProjShotsAtSameTime = 1
+nbProjShots = 1
+damagePerProj = 4.0
+damageDropoff = SubResource("Curve_8j8ql")
+timeBetweenShots = 0.25
+reloadTimePerPart = 1.9
+baseRotSpeed = 3.0
+targetRotSpeed = 6.5
+recoilVal = Vector3(0.19, 0.03, 0)
+projRef = ExtResource("2_qed4l")
+projMoveSpeed = 25.0
+projTimeBeforeVanish = 10.0
+position = Array[Vector3]([Vector3(0.177288, -0.268151, -0.15469), Vector3(0, 3.14159, 0)])
+tiltRotSpeed = 7.0
+tiltRotAmount = 0.2
+minSwayVal = Vector2(-20, -20)
+maxSwayVal = Vector2(20, 20)
+swaySpeedPos = 0.1
+swaySpeedRot = 0.1
+swayAmountPos = 0.2
+swayAmountRot = 48.0
+bobFreq = 0.01
+bobAmount = 0.025
+bobSpeed = 10.0
+onIdleBobFreqDivider = 1.2
+muzzleFlashRef = ExtResource("1_qed4l")

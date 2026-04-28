@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dm71ium1hjxwj"]
+
+[ext_resource type="Script" uid="uid://bvp6w2vpcwguk" path="res://scenes/npc/lemonade_customer.gd" id="1_customer_script"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_customer"]
+radius = 0.3
+height = 1.9
+
+[node name="LemonadeCustomer" type="CharacterBody3D" unique_id=1733378134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99290526, 0)
+max_slides = 4
+floor_max_angle = 1.309
+floor_snap_length = 0.0
+script = ExtResource("1_customer_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1451077131]
+shape = SubResource("CapsuleShape3D_customer")

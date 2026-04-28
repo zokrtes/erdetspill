@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://8y5cus2y02aj"]
+
+[ext_resource type="Script" uid="uid://cq3gm0uie04a0" path="res://scenes/ui/death_screen.gd" id="1_a1a1a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0, 0, 0, 0.9)
+
+[node name="DeathScreen" type="CanvasLayer" unique_id=456892859]
+layer = 100
+script = ExtResource("1_a1a1a")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=1858082928]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.9)
+
+[node name="CenterPanel" type="Panel" parent="Overlay" unique_id=49336501]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -120.0
+offset_right = 220.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/CenterPanel" unique_id=1829015436]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="Overlay/CenterPanel/VBoxContainer" unique_id=1782439561]
+layout_mode = 2
+text = "Du døde."
+horizontal_alignment = 1
+
+[node name="PenaltyLabel" type="Label" parent="Overlay/CenterPanel/VBoxContainer" unique_id=401042060]
+layout_mode = 2
+text = "Du mister 0 kroner."
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="Overlay/CenterPanel/VBoxContainer" unique_id=182926845]
+layout_mode = 2
+text = "Prøv igjen"

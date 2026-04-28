@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/props/money_pickup.gd" id="1_money"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gold"]
+albedo_color = Color(1, 0.85, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_money"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 0.3
+
+[node name="MoneyPickup" type="Area3D" groups=["MoneyPickup"]]
+script = ExtResource("1_money")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_money")
+surface_material_override/0 = SubResource("StandardMaterial3D_gold")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+billboard = 1
+text = "50 NOK"
+pixel_size = 0.005

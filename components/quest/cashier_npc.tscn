@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://54t244jkvyck"]
+
+[ext_resource type="Script" uid="uid://dmus6nnl2tyiu" path="res://components/quest/cashier_npc.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dr3wedeulijp2" path="res://assets/props/Characters_psx/Models/Female/Character_Female_10.fbx" id="2_x1ty8"]
+[ext_resource type="Script" uid="uid://ct7ipwldxaut2" path="res://scenes/npc/npc_mesh_look.gd" id="3_odqta"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cashier"]
+size = Vector3(2, 2, 2)
+
+[node name="CashierNPC" type="Node3D" unique_id=1093231194]
+script = ExtResource("1")
+
+[node name="Character_Female_10" parent="." unique_id=116009229 instance=ExtResource("2_x1ty8")]
+transform = Transform3D(0.47, 0, 0, 0, 0.47, 0, 0, 0, 0.47, 0, 0, 0)
+script = ExtResource("3_odqta")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1772712490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2090911173]
+shape = SubResource("BoxShape3D_cashier")
+
+[node name="Label3D" type="Label3D" parent="Area3D" unique_id=428278710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6206143, 0)
+billboard = 1
+text = "E for å snakke med kassedama"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
