@@ -58,8 +58,8 @@ func _on_level_up(new_level: int) -> void:
 		"LEVEL 4\n+85% skade",
 		"LEVEL 5\nMAX SKADE - 2.5x"
 	]
-	var idx := clamp(new_level - 1, 0, messages.size() - 1)
-	var msg := messages[idx]
+	var idx = clamp(new_level - 1, 0, messages.size() - 1)
+	var msg = messages[idx]
 	if msg == "":
 		return
 	_show_notification(msg)
