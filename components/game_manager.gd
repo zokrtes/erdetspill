@@ -239,7 +239,7 @@ func _check_level_up():
 		print("💥 Damage multiplier: ", get_damage_multiplier(), "x")
 
 func get_damage_multiplier() -> float:
-	var idx := clamp(player_level - 1, 0, DAMAGE_MULTIPLIERS.size() - 1)
+	var idx: int = clampi(player_level - 1, 0, DAMAGE_MULTIPLIERS.size() - 1)
 	return DAMAGE_MULTIPLIERS[idx]
 
 func get_xp_progress() -> float:
