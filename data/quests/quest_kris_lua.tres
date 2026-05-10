@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://cbkn6nng685le"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://dpqs4d4iqvjre"]
 
 [ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="1_quest"]
 [ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="2_objective"]
@@ -6,16 +6,26 @@
 [sub_resource type="Resource" id="Resource_4txdu"]
 script = ExtResource("2_objective")
 objective_id = "find_hat"
-description = "Finn Peak Performance-lua"
+description = "Finn Peak Performance-caps"
+type = 0
 target_id = "peak_performance_lua"
+target_amount = 1
+
+[sub_resource type="Resource" id="Resource_talk"]
+script = ExtResource("2_objective")
+objective_id = "return_lua_to_kris"
+description = "Lever capsen til Kris"
+type = 1
+target_id = "kris"
+target_amount = 1
 
 [resource]
 script = ExtResource("1_quest")
 quest_id = "KRIS_LUA"
-name = "Peak Performance"
-description = "Kris har mistet lua si."
-brief_description = "Finn Kris sin lua."
-objectives = Array[ExtResource("2_objective")]([SubResource("Resource_4txdu")])
+name = "Capsen til Kris"
+description = "Kris savner capsene sine."
+brief_description = "Finn Kris sine caps."
+objectives = Array[ExtResource("2_objective")]([SubResource("Resource_4txdu"), SubResource("Resource_talk")])
 reward_money = 150
-offer_dialogue = Array[String](["Har du sett lua mi?", "Peak Performance-lua.", "Den betyr alt for meg.", "...", "Russegjengen tok den.", "De bor der nede.", "*Han peker nedover veien*", "Jeg tør ikke gå dit selv.", "Men du kanskje..."])
-completion_dialogue = Array[String](["...", "*Han ser på lua*", "Liker du rimming?", "*Han setter på lua*", "Takk.", "*Han snur seg og går*"])
+offer_dialogue = Array[String](["Har du sett capsene mine?", "Peak Performance-caps.", "Grusbrødrene tok den.", "De sitter i garasjen sin der nede."])
+completion_dialogue = Array[String](["Liker du rimming?", "Takk."])

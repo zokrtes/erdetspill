@@ -17,7 +17,9 @@ const QUEST_RESOURCE_PATHS: Array[String] = [
 	"res://data/quests/quest_06_bank_deposit.tres",
 	"res://data/quests/quest_07_second_icecream.tres",
 	"res://data/quests/quest_08_final_delivery.tres",
-	"res://data/quests/quest_kris_lua.tres"
+	"res://data/quests/quest_kris_lua.tres",
+	"res://data/quests/quest_09_iver_bevis.tres",
+	"res://data/quests/quest_10_steinar_grus.tres"
 ]
 
 func _ready():
@@ -88,6 +90,9 @@ func on_minigame_completed(minigame_id: String):
 	_update_matching_objectives(QuestObjective.ObjectiveType.CUSTOM_ACTION, minigame_id, 1, true)
 	_update_matching_objectives(QuestObjective.ObjectiveType.MINIGAME, minigame_id, 1, true)
 
+func on_custom_action(action_id: String):
+	_update_matching_objectives(QuestObjective.ObjectiveType.CUSTOM_ACTION, action_id, 1, true)
+
 func on_form_filled(form_id: String):
 	_update_matching_objectives(QuestObjective.ObjectiveType.FILL_FORM, form_id, 1, true)
 
@@ -152,6 +157,8 @@ func _on_game_manager_quest_progress_updated(quest_id: String, _progress: float)
 
 
 func _on_game_manager_item_added(item_id: String, amount: int) -> void:
+	if item_id == "fugleskinn" or item_id == "elgskinn" or item_id == "peak_performance_lua":
+		return
 	on_item_collected(item_id, amount)
 
 func _validate_loaded_quests():

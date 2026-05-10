@@ -21,10 +21,10 @@ var _spawn_timer: float = 0.0
 var _spawn_interval: float = 20.0
 
 const CUSTOMER_VARIANTS := [
-	{"name": "Nabo", "russ": false},
-	{"name": "Forbipasserende", "russ": false},
-	{"name": "Bankansatt", "russ": false},
-	{"name": "Jogger", "russ": false}
+	{"name": "Nabo"},
+	{"name": "Forbipasserende"},
+	{"name": "Bankansatt"},
+	{"name": "Jogger"}
 ]
 
 const CUSTOMER_MODELS := {
@@ -136,6 +136,12 @@ func _sit_player() -> void:
 		_player.set_sitting_at_stand(true)
 	elif _player.has_method("freeze_for_dialogue"):
 		_player.freeze_for_dialogue(true)
+	else:
+		_player.movement_frozen = true
+		_player.camera_frozen = true
+	if _player.has_method("set_weapon_active"):
+		_player.set_weapon_active(false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	is_open = true
 	player_sitting = true
 	_spawn_timer = 18.0
@@ -152,6 +158,15 @@ func _stand_up_player() -> void:
 		player.set_sitting_at_stand(false)
 	elif player and player.has_method("freeze_for_dialogue"):
 		player.freeze_for_dialogue(false)
+	else:
+		player.movement_frozen = false
+		player.camera_frozen = false
+	if player and player.has_method("set_weapon_active"):
+		player.set_weapon_active(true)
+	if player and player.has_method("should_use_fps_mouse_capture") and player.should_use_fps_mouse_capture():
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_player = player
 	is_open = false
 	player_sitting = false
@@ -160,8 +175,15 @@ func _stand_up_player() -> void:
 
 
 func _get_spawn_position() -> Vector3:
-	var base := global_position + (-global_transform.basis.z) * 7.0
-	base.y = _sample_floor_y(base)
+	var base := global_position + global_transform.basis.z * 7.0
+	# Sample floor at spawn XZ to avoid spawning under/over terrain.
+	var from := Vector3(base.x, base.y + 5.0, base.z)
+	var to := Vector3(base.x, base.y - 3.0, base.z)
+	var query := PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [self]
+	var result := get_world_3d().direct_space_state.intersect_ray(query)
+	if not result.is_empty():
+		base.y = float((result["position"] as Vector3).y) + 0.1
 	return base
 
 
@@ -192,7 +214,7 @@ func _spawn_customer() -> void:
 	var pick: Dictionary = CUSTOMER_VARIANTS[randi() % CUSTOMER_VARIANTS.size()]
 	get_tree().current_scene.add_child(customer)
 	customer.global_position = spawn_pos
-	customer.call("setup_customer", pick["name"], pick["russ"])
+	customer.call("setup_customer", pick["name"])
 	var model_scene: PackedScene = CUSTOMER_MODELS.get(str(pick["name"]), null)
 	if model_scene != null and customer.has_method("set_model"):
 		customer.call("set_model", model_scene)
@@ -202,17 +224,15 @@ func _spawn_customer() -> void:
 
 func on_customer_arrived(customer: CharacterBody3D) -> void:
 	if not is_open:
+		_active_customer = null
 		customer.queue_free()
 		return
 	var customer_name := str(customer.get("customer_name"))
-	var russ := bool(customer.get("is_russ_customer"))
 	var greeting_options: Array[String] = [
 		"Hei. Hva koster lemonaden?",
 		"Selger du lemonade?",
 		"Jeg er tørst."
 	]
-	if russ:
-		greeting_options.append("Kva e dette for noe?")
 	var greeting: String = greeting_options[randi() % greeting_options.size()]
 	DialogueUI.show_menu(
 		[greeting],
@@ -238,8 +258,7 @@ func _sell(price: int, customer: Node) -> void:
 		GameManager.add_flat_money_reward(price)
 		paid = true
 	elif price == 50:
-		var is_russ := customer.is_in_group("Russ")
-		if is_russ or randf() > 0.6:
+		if randf() < 0.6:
 			customer_response = "Jaja..."
 			GameManager.add_flat_money_reward(price)
 			paid = true
@@ -247,24 +266,25 @@ func _sell(price: int, customer: Node) -> void:
 			customer_response = _pick_random(["50 kr?! For lemonade?", "Det er for dyrt.", "Nei takk."])
 
 	var leave_cb := func():
-		if paid and customer.is_in_group("Russ"):
-			_trigger_russ_peace(customer as Node3D)
-		if is_instance_valid(customer):
+		if is_instance_valid(customer) and customer.has_method("leave"):
+			customer.call("leave")
+		elif is_instance_valid(customer):
 			customer.queue_free()
-		_active_customer = null
+			_active_customer = null
+		_rehide_weapon_if_still_sitting()
 	DialogueUI.show_dialogue([customer_response], customer_name, leave_cb)
 
-func _trigger_russ_peace(russ_customer: Node3D) -> void:
-	var enemies := get_tree().get_nodes_in_group("Enemies")
-	for enemy in enemies:
-		if not (enemy is Node3D):
-			continue
-		var enemy_node := enemy as Node3D
-		if enemy_node.global_position.distance_to(russ_customer.global_position) > 15.0:
-			continue
-		if enemy_node.has_method("set_temporary_friendly"):
-			enemy_node.call("set_temporary_friendly", 30.0)
-	DialogueUI.show_dialogue(["Russen er fornøyd. 30 sekunder fred."], "Lemonadebod", Callable())
+
+func on_customer_leaving(_customer: Node) -> void:
+	_active_customer = null
+
+
+func _rehide_weapon_if_still_sitting() -> void:
+	if not player_sitting:
+		return
+	var player := get_tree().get_first_node_in_group("PlayerCharacter")
+	if player and player.has_method("set_weapon_active"):
+		player.set_weapon_active(false)
 
 func _pick_random(options: Array[String]) -> String:
 	if options.is_empty():

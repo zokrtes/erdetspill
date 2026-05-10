@@ -29,6 +29,8 @@ enum AttackType {
 
 @export_category("Facing")
 @export var facing_tolerance : float = 15.0  # Degrees tolerance (15 = quite strict, 30 = forgiving)
+@export var detection_range: float = 20.0
+@export var lose_sight_range: float = 24.0
 
 # Weapon resource for ranged attacks (assign in inspector)
 @export var enemy_weapon : Resource
@@ -41,8 +43,16 @@ enum AttackType {
 @export var ragdoll_force : float = 5.0
 @export var ragdoll_torque : float = 10.0
 @export var ragdoll_lifetime : float = 3.0
+@export var drop_item_id: String = ""
+@export var drop_item_amount: int = 1
+
+@export_category("Audio")
+@export var attack_sound: AudioStream
+@export var death_sound: AudioStream
+@export var hurt_sound: AudioStream
 
 @export_category("Colors")
+@export var use_color_override: bool = false
 @export var melee_color : Color = Color(1.0, 0.2, 0.2, 1.0)         # Red
 @export var hitscan_color : Color = Color(0.2, 1.0, 0.2, 1.0)       # Green
 @export var projectile_color : Color = Color(0.2, 0.2, 1.0, 1.0)    # Blue
@@ -52,8 +62,7 @@ enum AttackType {
 @onready var random_target_3d: RandomTarget3D = $RandomTarget3D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var geometry_node: Node3D = $Geometry
-@onready var vision_area: SimpleVision3D = $SimpleVision3D
+@onready var geometry_node: Node3D = get_node_or_null("Geometry") as Node3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var weapon_slot: Node3D = $WeaponSlot  # Add a Node3D as weapon spawn point
 
@@ -63,13 +72,31 @@ var target : Node3D
 var can_attack : bool = true
 var attack_timer : float = 0.0
 
+var _is_flashing: bool = false
+var _flash_originals: Array = []
+
 func _ready() -> void:
 	add_to_group("Enemies")
 	ChangeState(States.Walking)
+	if geometry_node == null:
+		geometry_node = get_node_or_null("CrowGlbModel") as Node3D
+	if geometry_node == null:
+		for child in get_children():
+			if child is Node3D and child != follow_target_3d and child != random_target_3d and child != collision_shape and child != weapon_slot:
+				geometry_node = child as Node3D
+				break
+	if collision_shape and collision_shape.position != Vector3.ZERO:
+		collision_shape.position = Vector3.ZERO
 	
 	if health_component:
 		health_component.connect("on_death", _on_enemy_death)
-		
+
+	var sfx := AudioStreamPlayer3D.new()
+	sfx.name = "SFX"
+	sfx.max_distance = 20.0
+	sfx.unit_size = 5.0
+	add_child(sfx)
+
 	_update_mesh_color()  # Add this
 
 func _process(delta: float) -> void:
@@ -87,6 +114,13 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if state == States.Dead:
 		return
+	_update_target_tracking()
+	if state == States.Pursuit and target != null:
+		var look_dir := target.global_position - global_position
+		look_dir.y = 0.0
+		if look_dir.length() > 0.1:
+			var desired_y := atan2(-look_dir.x, -look_dir.z)
+			rotation.y = lerp_angle(rotation.y, desired_y, 0.1)
 	
 	if target and state != States.Attacking:
 		var distance_to_target = global_position.distance_to(target.global_position)
@@ -101,13 +135,57 @@ func _physics_process(delta: float) -> void:
 			AttackType.PROJECTILE:
 				current_attack_range = projectile_range
 		
-		# ONLY ATTACK IF WITHIN RANGE AND FACING TARGET
-		if distance_to_target <= current_attack_range and is_facing_target():
+		# Melee should be distance-only. Ranged attacks still require facing.
+		var can_attack_target := false
+		if attack_type == AttackType.MELEE:
+			can_attack_target = distance_to_target <= current_attack_range
+		else:
+			can_attack_target = distance_to_target <= current_attack_range and is_facing_target()
+		if can_attack_target:
 			ChangeState(States.Attacking)
-	
+
+	if is_on_floor() and velocity.length() > 0.3:
+		var move_dir := Vector3(velocity.x, 0.0, velocity.z)
+		if move_dir.length_squared() > 0.0001:
+			move_dir = move_dir.normalized()
+			var knee_origin := global_position + Vector3(0.0, 0.15, 0.0)
+			var knee_end := knee_origin + move_dir * 0.4
+			var sq := PhysicsRayQueryParameters3D.create(knee_origin, knee_end)
+			sq.exclude = [self]
+			var hit := get_world_3d().direct_space_state.intersect_ray(sq)
+			if not hit.is_empty():
+				velocity.y = maxf(velocity.y, 3.5)
+
 	move_and_slide()
+
+
+func _update_target_tracking() -> void:
+	var player := get_tree().get_first_node_in_group("PlayerCharacter") as Node3D
+	if player == null:
+		if state != States.Attacking:
+			ChangeState(States.Walking)
+		return
+
+	if target != null and (not is_instance_valid(target) or target == self):
+		target = null
+
+	if target == null:
+		var distance_to_player := global_position.distance_to(player.global_position)
+		if distance_to_player <= detection_range:
+			target = player
+			if state != States.Attacking:
+				ChangeState(States.Pursuit)
+		return
+
+	if target == player:
+		var distance_to_player := global_position.distance_to(player.global_position)
+		if distance_to_player > lose_sight_range and state != States.Attacking:
+			target = null
+			ChangeState(States.Walking)
 	
 func _update_mesh_color():
+	if not use_color_override:
+		return
 	if not geometry_node:
 		return
 	
@@ -190,7 +268,8 @@ func _perform_attack():
 	
 	can_attack = false
 	attack_timer = attack_cooldown
-	
+	_play_sfx(attack_sound)
+
 	if animation_player and animation_player.has_animation("attack"):
 		animation_player.play("attack")
 	
@@ -267,33 +346,27 @@ func _on_follow_target_3d_navigation_finished() -> void:
 	if state != States.Dead and state != States.Attacking:
 		follow_target_3d.SetFixedTarget(random_target_3d.GetNextPoint())
 
-func _on_simple_vision_3d_get_sight(body: Node3D) -> void:
-	if state != States.Dead and state != States.Attacking:
-		target = body
-		ChangeState(States.Pursuit)
-
-func _on_simple_vision_3d_lost_sight() -> void:
-	if state != States.Dead and state != States.Attacking:
-		ChangeState(States.Walking)
-
 func hitscanHit(damageVal : float, _hitscanDir : Vector3, _hitscanPos : Vector3):
 	if health_component and state != States.Dead:
 		health_component.take_damage(damageVal)
-		
+		_play_sfx(hurt_sound)
+		_flash_hit()
+
 func projectileHit(damageVal : float, _projectileDir : Vector3):
 	if health_component and state != States.Dead:
 		health_component.take_damage(damageVal)
+		_play_sfx(hurt_sound)
+		_flash_hit()
 
 func _on_enemy_death():
+	_play_sfx(death_sound)
 	print("Enemy died!")
 	state = States.Dead
+	_drop_hunt_item()
 	
 	target = null
 	follow_target_3d.ClearTarget()
 	velocity = Vector3.ZERO
-	
-	if vision_area:
-		vision_area.Enabled = false
 	
 	if collision_shape:
 		collision_shape.disabled = true
@@ -304,6 +377,16 @@ func _on_enemy_death():
 	
 	await get_tree().create_timer(0.1).timeout
 	queue_free()
+
+func _drop_hunt_item() -> void:
+	if drop_item_id == "" or GameManager == null:
+		return
+	var amount := max(1, drop_item_amount)
+	GameManager.add_item(drop_item_id, amount)
+	if drop_item_id == "fugleskinn":
+		print("🐦 Fugleskinn dropped")
+	elif drop_item_id == "elgskinn":
+		print("🦌 Elgskinn dropped")
 
 func _convert_to_rigidbody():
 	var rigid_body = RigidBody3D.new()
@@ -345,3 +428,56 @@ func _convert_to_rigidbody():
 
 func is_dead() -> bool:
 	return state == States.Dead
+
+
+func _play_sfx(stream: AudioStream) -> void:
+	if stream == null:
+		return
+	var sfx := get_node_or_null("SFX") as AudioStreamPlayer3D
+	if sfx == null:
+		return
+	sfx.stream = stream
+	sfx.play()
+
+
+func _collect_meshes(node: Node, result: Array) -> void:
+	if node == null:
+		return
+	if node is MeshInstance3D:
+		result.append(node)
+	for child in node.get_children():
+		_collect_meshes(child, result)
+
+
+func _flash_hit() -> void:
+	if _is_flashing or geometry_node == null:
+		return
+	_is_flashing = true
+	var meshes: Array = []
+	_collect_meshes(geometry_node, meshes)
+	if meshes.is_empty():
+		_is_flashing = false
+		return
+	_flash_originals.clear()
+	for m in meshes:
+		var mi := m as MeshInstance3D
+		_flash_originals.append(mi.get_surface_override_material(0))
+		var flash := StandardMaterial3D.new()
+		flash.albedo_color = Color(1, 0, 0, 1)
+		flash.emission_enabled = true
+		flash.emission = Color(1, 0, 0, 1)
+		flash.emission_energy_multiplier = 2.0
+		mi.set_surface_override_material(0, flash)
+	get_tree().create_timer(0.08).timeout.connect(func (): _end_flash_hit(meshes), CONNECT_ONE_SHOT)
+
+
+func _end_flash_hit(meshes: Array) -> void:
+	for i in meshes.size():
+		var mi := meshes[i] as MeshInstance3D
+		if is_instance_valid(mi):
+			var orig: Material = _flash_originals[i] as Material
+			mi.set_surface_override_material(0, orig)
+	_flash_originals.clear()
+	_is_flashing = false
+	if use_color_override:
+		_update_mesh_color()

@@ -25,40 +25,23 @@ func _ready() -> void:
 	print("LightingCycle Sun: ", sun)
 	print("LightingCycle WorldEnv: ", world_env)
 	print("LightingCycle day_duration_seconds: ", GameManager.day_duration_seconds)
-	print("LightingCycle power_is_out: ", GameManager.power_is_out)
 	if GameManager.has_signal("day_changed"):
 		GameManager.day_changed.connect(_on_day_changed)
-	if GameManager.has_signal("power_outage_triggered"):
-		GameManager.power_outage_triggered.connect(_on_power_outage)
 	_apply_lighting(time_of_day)
 
 
 func _process(delta: float) -> void:
-	if GameManager.power_is_out:
-		return
 	var day_duration := GameManager.day_duration_seconds
-	if day_duration <= 0.0:
-		return
-	time_of_day += delta / day_duration
-	if time_of_day >= 1.0:
-		time_of_day -= 1.0
+	if day_duration > 0.0:
+		time_of_day += delta / day_duration
+		if time_of_day >= 1.0:
+			time_of_day -= 1.0
 	_apply_lighting(time_of_day)
 
 
 func _on_day_changed(_new_day: int) -> void:
 	time_of_day = 0.25
 	_apply_lighting(time_of_day)
-
-
-func _on_power_outage() -> void:
-	if sun:
-		sun.light_energy = 0.1
-		sun.light_color = Color(0.3, 0.3, 0.4)
-	if world_env and world_env.environment:
-		world_env.environment.ambient_light_energy = 0.05
-	for light in get_tree().get_nodes_in_group("PoweredLight"):
-		if light is Node3D:
-			light.visible = false
 
 
 func _apply_lighting(t: float) -> void:
@@ -169,11 +152,6 @@ func _apply_lighting(t: float) -> void:
 			sky_mat.sky_horizon_color = sky_horizon
 			sky_mat.ground_horizon_color = sky_horizon.darkened(0.2)
 			sky_mat.ground_bottom_color = sky_top.darkened(0.4)
-
-	# Powered lights on when sun is dim
-	var lights_on := sun_energy < 0.4 and not GameManager.power_is_out
-	for light in get_tree().get_nodes_in_group("PoweredLight"):
-		light.visible = lights_on
 
 
 func _find_node_by_class(node: Node, class_name_str: String) -> Node:

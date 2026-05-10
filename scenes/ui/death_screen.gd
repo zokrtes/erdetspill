@@ -1,9 +1,7 @@
 extends CanvasLayer
 
-@onready var penalty_label: Label = $Overlay/CenterPanel/VBoxContainer/PenaltyLabel
 @onready var retry_button: Button = $Overlay/CenterPanel/VBoxContainer/RetryButton
-
-var penalty_amount: int = 0
+@onready var title_label: Label = $Overlay/CenterPanel/VBoxContainer/TitleLabel
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -17,14 +15,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_retry_pressed()
 		get_viewport().set_input_as_handled()
 
-func set_penalty(amount: int) -> void:
-	penalty_amount = max(0, amount)
-	_update_text()
-
 func _update_text() -> void:
-	if not penalty_label:
-		return
-	penalty_label.text = "Du mistet %d kroner." % penalty_amount
+	if title_label:
+		title_label.text = "DU DØDE"
 
 func _on_retry_pressed() -> void:
 	get_tree().paused = false

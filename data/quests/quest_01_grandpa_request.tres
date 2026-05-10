@@ -1,7 +1,11 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://n3x4ufb3lpnx"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://cg48hry6ekg4r"]
 
 [ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
 [ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+[ext_resource type="Script" uid="uid://cbwqdlinedlg1" path="res://components/dialogue/dialogue_line.gd" id="3_dline"]
+[ext_resource type="AudioStream" uid="uid://dyvn3f02kiakx" path="res://assets/sfx/erdetlyd/vox/bestefar/q01_01.ogg" id="4_a1"]
+[ext_resource type="AudioStream" uid="uid://ihlmknyc5664" path="res://assets/sfx/erdetlyd/vox/bestefar/q01_02.ogg" id="5_a2"]
+[ext_resource type="AudioStream" uid="uid://eb6g8b2bs1v2" path="res://assets/sfx/erdetlyd/vox/bestefar/q01_03.ogg" id="6_a3"]
 
 [sub_resource type="Resource" id="Resource_6acys"]
 script = ExtResource("1_obj")
@@ -10,14 +14,29 @@ description = "Snakk med bestefar"
 type = 1
 target_id = "grandpa"
 
+[sub_resource type="Resource" id="Resource_ol1"]
+script = ExtResource("3_dline")
+text = "Mormor er død."
+sound = ExtResource("4_a1")
+
+[sub_resource type="Resource" id="Resource_ol2"]
+script = ExtResource("3_dline")
+text = "Jeg vil ha to is."
+sound = ExtResource("5_a2")
+
+[sub_resource type="Resource" id="Resource_ol3"]
+script = ExtResource("3_dline")
+text = "Her er arvedokumentet hennes, løs det inn i banken og kjøp is for pengene."
+sound = ExtResource("6_a3")
+
 [resource]
 script = ExtResource("2_quest")
 quest_id = "GRANDPA_REQUEST"
 name = "Bestefars ønske"
-description = "Bestefar har en vikt beskjed om mormors arv."
+description = "Bestefar vil ha noe."
 brief_description = "Bestefar vil ha noe. Finn ut hva du kan gjøre."
 objectives = Array[ExtResource("1_obj")]([SubResource("Resource_6acys")])
 reward_items = Array[String](["inheritance_document"])
 unlock_quests = Array[String](["BANK_INHERITANCE"])
-offer_dialogue = Array[String](["Sett deg ned.", "Jeg vil ha to is.", "Gå i butikken og kjøp to is til meg.", "...", "Mormor døde.", "Her er arven hennes.", "*Gir deg arvedokumentet*", "Løs det inn i banken.", "Bruk pengene på is."])
-completion_dialogue = Array[String](["Du har fått et arvedokument!", "Sjekk questloggen for å se bank-oppdraget."])
+offer_dialogue = Array[String](["Mormor er død.", "Jeg vil ha to is.", "Her er arvedokumentet hennes, løs det inn i banken og kjøp is for pengene."])
+offer_lines = Array[ExtResource("3_dline")]([SubResource("Resource_ol1"), SubResource("Resource_ol2"), SubResource("Resource_ol3")])

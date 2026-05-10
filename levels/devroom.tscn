@@ -36,13 +36,11 @@
 [ext_resource type="Texture2D" uid="uid://cw7g7cwkh2m46" path="res://assets/textures/general/wood1.jpeg" id="33_sr6sa"]
 [ext_resource type="Texture2D" uid="uid://dtm7ollcylxbo" path="res://assets/textures/images/guttaboys.png" id="34_k6xma"]
 [ext_resource type="Resource" uid="uid://btvu8fyfnlywr" path="res://data/quests/quest_05_scholarship_application.tres" id="35_keefq"]
-[ext_resource type="PackedScene" uid="uid://c7debugpanel01" path="res://scenes/ui/debug_panel.tscn" id="37_dbgui"]
 [ext_resource type="PackedScene" path="res://components/quest/scholarship_terminal.tscn" id="38_schterm"]
 [ext_resource type="PackedScene" path="res://scenes/ui/inventory_panel.tscn" id="40_invui"]
 [ext_resource type="PackedScene" uid="uid://d27xhk2ygjsbr" path="res://addons/fpstemplate/Targets/Scenes/HitableBoxScene.tscn" id="41_c7jfs"]
 [ext_resource type="PackedScene" uid="uid://cere2ti6h4jwv" path="res://scenes/ui/item_notification.tscn" id="41_itemnotif"]
 [ext_resource type="PackedScene" uid="uid://d1b3qaq4wk8ib" path="res://scenes/store/store_3m.tscn" id="50_store3m"]
-[ext_resource type="PackedScene" uid="uid://bcp8x8t6qq45n" path="res://scenes/Enemies/russen.tscn" id="51_russen"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vjbcd"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -2170,8 +2168,6 @@ size = Vector2(0.8, 0.8)
 [node name="World" type="Node3D" unique_id=2030415537]
 editor_description = "tag: devroom layout — stipend/form station is to the player's RIGHT when facing Chief Keef (dialogue must match)."
 
-[node name="DebugPanel" parent="." unique_id=1280067136 instance=ExtResource("37_dbgui")]
-
 [node name="InventoryPanel" parent="." unique_id=914774312 instance=ExtResource("40_invui")]
 
 [node name="ItemNotification" parent="." unique_id=1243901191 instance=ExtResource("41_itemnotif")]
@@ -2836,24 +2832,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.928221, 2.401345, 9.847213
 
 [node name="Store3m" parent="." unique_id=1324088721 instance=ExtResource("50_store3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2667217, 0.2148037, 10.721125)
-
-[node name="RussSpawnGroup1" type="Node3D" parent="." unique_id=427064169]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.645, 0.52, 11.148)
-
-[node name="Russ_A" parent="RussSpawnGroup1" unique_id=1541489570 instance=ExtResource("51_russen")]
-transform = Transform3D(0.9961947, 0, -0.08715574, 0, 1, 0, 0.08715574, 0, 0.9961947, 0, 0, 0)
-
-[node name="Russ_B" parent="RussSpawnGroup1" unique_id=1316851111 instance=ExtResource("51_russen")]
-transform = Transform3D(0.9781476, 0, 0.2079117, 0, 1, 0, -0.2079117, 0, 0.9781476, 2.4, 0, -0.8)
-
-[node name="RussSpawnGroup2" type="Node3D" parent="." unique_id=1150372450]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 0.52, -10.3)
-
-[node name="Russ_C" parent="RussSpawnGroup2" unique_id=1868453222 instance=ExtResource("51_russen")]
-transform = Transform3D(0.9063078, 0, 0.4226183, 0, 1, 0, -0.4226183, 0, 0.9063078, 0, 0, 0)
-
-[node name="Russ_D" parent="RussSpawnGroup2" unique_id=617993751 instance=ExtResource("51_russen")]
-transform = Transform3D(0.8480481, 0, -0.52991927, 0, 1, 0, 0.52991927, 0, 0.8480481, -2.2, 0, 1)
 
 [node name="ScholarshipTerminal" parent="." unique_id=1783519547 instance=ExtResource("38_schterm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.976181, 0.51165915, 8.178039)

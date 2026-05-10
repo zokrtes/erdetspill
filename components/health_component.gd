@@ -13,14 +13,19 @@ var is_dead : bool = false
 func _ready():
 	current_health = max_health
 
-func take_damage(damage: float):
+func take_damage(amount: float):
 	if is_dead:
 		return
-		
-	current_health -= damage
-	on_damage_taken.emit(current_health, damage)
+
+	print("DAMAGE TAKEN: ", amount)
+	var hp_before := current_health
+	var hp_after := current_health - amount
+	print("HP before: ", hp_before, " damage: ", amount, " HP after: ", hp_after)
+
+	current_health -= amount
+	on_damage_taken.emit(current_health, amount)
 	
-	print(get_parent().name, " took ", damage, " damage. Health: ", current_health)
+	print(get_parent().name, " took ", amount, " damage. Health: ", current_health)
 	
 	if current_health <= 0:
 		is_dead = true

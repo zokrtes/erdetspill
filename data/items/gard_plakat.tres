@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "gard_plakat"
+display_name = "Gard-plakat"
+description = "En plakat. Noen har hengt den opp."
+category = 2
+stackable = true
+max_stack = 20

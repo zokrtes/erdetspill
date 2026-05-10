@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://edikhjm0u3gs" path="res://addons/3dEnemyToolkit/Example/example_enemy.gd" id="1_6nmso"]
 [ext_resource type="Script" uid="uid://dqjjf8pcurpdl" path="res://addons/3dEnemyToolkit/FollowTarget.gd" id="2_w5i6f"]
 [ext_resource type="Script" uid="uid://bwxw5fxeqf38i" path="res://addons/3dEnemyToolkit/RandomTarget3D.gd" id="3_lsadq"]
-[ext_resource type="Script" uid="uid://bja5r88mp6lox" path="res://addons/3dEnemyToolkit/SimpleVision3D.gd" id="4_ivo35"]
 [ext_resource type="Script" uid="uid://cen74ogojn8ue" path="res://components/health_component.gd" id="5_umcef"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ck8vg"]
@@ -54,9 +53,6 @@ script = ExtResource("2_w5i6f")
 [node name="RandomTarget3D" type="Node3D" parent="." unique_id=1405963105]
 script = ExtResource("3_lsadq")
 
-[node name="SimpleVision3D" type="Node3D" parent="." unique_id=119749698]
-script = ExtResource("4_ivo35")
-
 [node name="HealthComponent" type="Node" parent="." unique_id=664186912]
 script = ExtResource("5_umcef")
 
@@ -67,5 +63,3 @@ libraries/ = SubResource("AnimationLibrary_63nje")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.42037052, -1.0292735)
 
 [connection signal="navigation_finished" from="FollowTarget3D" to="." method="_on_follow_target_3d_navigation_finished"]
-[connection signal="GetSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_get_sight"]
-[connection signal="LostSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_lost_sight"]

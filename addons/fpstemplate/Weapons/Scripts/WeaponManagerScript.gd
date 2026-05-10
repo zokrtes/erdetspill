@@ -69,7 +69,12 @@ func initialize():
 	if weaponStack.size() > 0:
 		#enable (equip and set up) the first weapon on the weapon stack
 		enterWeapon(weaponStack[0])
-		
+	else:
+		cW = null
+		cWModel = null
+		canUseWeapon = false
+		canChangeWeapons = false
+
 func exitWeapon(nextWeapon : int):
 	#this function manage the first part of the weapon switching mechanic
 	#in this part, the current weapon is disabled (unequiped and taked down)
@@ -123,8 +128,11 @@ func _process(_delta : float):
 		reloadManager.autoReload()
 		
 	displayStats()
+	_refresh_reserve_dependent_weapon_meshes()
 	
 func weaponInputs():
+	if cW == null:
+		return
 	if Input.is_action_pressed(shoot_action): shootManager.shoot()
 			
 	if Input.is_action_just_pressed(reload_action): reloadManager.reload()
@@ -140,7 +148,11 @@ func weaponInputs():
 			changeWeapon(weaponStack[weaponIndex])
 		
 func displayStats():
+	if hud == null:
+		return
 	hud.displayWeaponStack(weaponStack.size())
+	if cW == null or ammoManager == null:
+		return
 	hud.displayWeaponName(cW.weaponName)
 	hud.displayTotalAmmoInMag(cW.totalAmmoInMag, cW.nbProjShotsAtSameTime)
 	hud.displayTotalAmmo(ammoManager.ammoDict[cW.ammoType], cW.nbProjShotsAtSameTime)
@@ -155,9 +167,29 @@ func acquire_weapon_by_id(weapon_id: int) -> void:
 	weaponStack.append(weapon_id)
 	weaponIndex = weaponStack.size() - 1
 	changeWeapon(weapon_id)
+	_refresh_reserve_dependent_weapon_meshes()
+
+
+func _refresh_reserve_dependent_weapon_meshes() -> void:
+	if ammoManager == null:
+		return
+	var rocket_node := get_node_or_null("WeaponContainer/RocketLauncher/RocketMesh") as MeshInstance3D
+	if rocket_node != null:
+		var rocket_left: int = int(ammoManager.ammoDict.get("RocketAmmo", 0))
+		rocket_node.visible = rocket_left > 0
+	var grus_slot := get_node_or_null("WeaponContainer/GrusSkive") as Node3D
+	if grus_slot != null:
+		var grus_model := grus_slot.get_node_or_null("GrusSkiveModel") as Node3D
+		if grus_model != null:
+			var grus_left: int = int(ammoManager.ammoDict.get("GrusSkiveAmmo", 0))
+			var show_grus: bool = grus_left > 0 and (6 in weaponStack)
+			grus_model.visible = show_grus
 
 
 func changeWeapon(nextWeapon : int):
+	if cW == null:
+		enterWeapon(nextWeapon)
+		return
 	if canChangeWeapons and !cW.isShooting and !cW.isReloading:
 		exitWeapon(nextWeapon)
 	else:

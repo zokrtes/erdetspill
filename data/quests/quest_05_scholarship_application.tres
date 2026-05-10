@@ -1,31 +1,32 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://d4f6efmbdmyil"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://cgb21otos0us6"]
 
-[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
-[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_4xtab"]
+[ext_resource type="Script" uid="uid://cbwqdlinedlg1" path="res://components/dialogue/dialogue_line.gd" id="1_fdgti"]
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_fdgti"]
 
 [sub_resource type="Resource" id="Resource_4xtab"]
-script = ExtResource("1_obj")
+script = ExtResource("1_4xtab")
 objective_id = "talk_to_chief_keef"
 description = "Snakk med Chief Keef i Lånekassa"
 type = 1
 target_id = "chief_keef"
 
 [sub_resource type="Resource" id="Resource_fdgti"]
-script = ExtResource("1_obj")
+script = ExtResource("1_4xtab")
 objective_id = "complete_scholarship_form"
 description = "Fullfør stipendskjema-minigame"
 type = 9
 target_id = "scholarship_form"
 
 [resource]
-script = ExtResource("2_quest")
+script = ExtResource("2_fdgti")
 quest_id = "SCHOLARSHIP_APPLICATION"
-name = "Skaff stipend"
-description = "Snakk med Chief Keef og fyll ut stipendskjema."
+name = "Stipend"
+description = "Gå til Lånekassa"
 brief_description = "Det finnes kanskje måter å skaffe mer penger på."
 required_quest_ids = Array[String](["GRANDPA_DISAPPOINTMENT"])
-objectives = Array[ExtResource("1_obj")]([SubResource("Resource_4xtab"), SubResource("Resource_fdgti")])
+objectives = Array[ExtResource("1_4xtab")]([SubResource("Resource_4xtab"), SubResource("Resource_fdgti")])
 reward_items = Array[String](["approved_application"])
 unlock_quests = Array[String](["BANK_DEPOSIT"])
-offer_dialogue = Array[String](["Yo.", "Stipend?", "Ja, det fikser vi.", "Se den stasjonen til høyre for deg?", "Gå dit og fyll ut skjemaet.", "Send inn når du er ferdig.", "Enkelt."])
-completion_dialogue = Array[String](["Skjemaet er godkjent.", "Her er stipendet ditt. Bruk det klokt."])
+offer_dialogue = Array[String](["Eg er lei av folk som sit og snakkar om at Lånekassen bryr seg ikkje og fikser ingenting.", "Du veit ikkje kva du snakkar om.", "Me sit her kvar dag, behandlar søknadar og held systemet i gang.", "Du trur det er lett? Prøv å handtere tusen studentar som masar om stipend samtidig.", "Stasjonen er til høyre for deg. Fyll ut og send inn."])
+completion_dialogue = Array[String](["Godkjent.", "Her er søknaden din."])

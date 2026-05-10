@@ -18,6 +18,9 @@ const BUSTGLASS3 := preload("res://assets/sfx/hl1-master/sound/debris/bustglass3
 signal intro_finished
 
 func _ready() -> void:
+	if _should_skip_intro():
+		_skip_intro_immediately()
+		return
 	if russ_sound:
 		russ_audio.stream = russ_sound
 	glass_audio.stream = glass_sound
@@ -26,6 +29,19 @@ func _ready() -> void:
 	hint_label.modulate.a = 0.0
 	_freeze_player(true)
 	_run_intro()
+
+
+func _should_skip_intro() -> bool:
+	var current_scene := get_tree().current_scene
+	if current_scene != null:
+		var scene_game_manager := current_scene.get_node_or_null("GameManager")
+		if scene_game_manager != null:
+			var scene_value: Variant = scene_game_manager.get("play_intro_sequence")
+			if scene_value is bool:
+				return not bool(scene_value)
+	if GameManager != null:
+		return not bool(GameManager.play_intro_sequence)
+	return false
 
 func _run_intro() -> void:
 	# 0.0s mark -> vox1.ogg
@@ -66,6 +82,24 @@ func _run_intro() -> void:
 	await fade_tween.finished
 
 	queue_free()
+
+func _skip_intro_immediately() -> void:
+	_apply_intro_skip_speed_boost()
+	_freeze_player(false)
+	intro_finished.emit()
+	queue_free()
+
+func _apply_intro_skip_speed_boost() -> void:
+	var player := get_tree().get_first_node_in_group("PlayerCharacter")
+	if player == null:
+		return
+	if not (player is PlayerCharacter):
+		return
+	var pc := player as PlayerCharacter
+	if pc.has_meta("intro_skip_run_speed_boost_applied"):
+		return
+	pc.runSpeed *= 3.0
+	pc.set_meta("intro_skip_run_speed_boost_applied", true)
 
 func _freeze_player(frozen: bool) -> void:
 	var player := get_tree().get_first_node_in_group("PlayerCharacter")

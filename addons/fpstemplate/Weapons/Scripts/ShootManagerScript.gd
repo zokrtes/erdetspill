@@ -128,29 +128,41 @@ func hitscanShot(pointOfCollisionHitscan : Vector3):
 		var colliderPoint = hitscanBulletCollision.position
 		var colliderNormal = hitscanBulletCollision.normal 
 		var finalDamage : float
-		var dmg_multiplier := 1.0
-		if GameManager and GameManager.has_method("get_damage_multiplier"):
-			dmg_multiplier = float(GameManager.get_damage_multiplier())
 		
 		if collider.is_in_group("Enemies") and collider.has_method("hitscanHit"):
-			finalDamage = cW.damagePerProj * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange) * dmg_multiplier
+			finalDamage = cW.damagePerProj * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange)
 			collider.hitscanHit(finalDamage, hitscanBulletDirection, hitscanBulletCollision.position)
+			_spawn_blood_at(colliderPoint, colliderNormal)
 		
 		elif collider.is_in_group("EnemiesHead") and collider.has_method("hitscanHit"):
-				finalDamage = cW.damagePerProj * cW.headshotDamageMult * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange) * dmg_multiplier
+				finalDamage = cW.damagePerProj * cW.headshotDamageMult * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange)
 				collider.hitscanHit(finalDamage, hitscanBulletDirection, hitscanBulletCollision.position)
+				_spawn_blood_at(colliderPoint, colliderNormal)
 		
 		elif collider.is_in_group("HitableObjects") and collider.has_method("hitscanHit"): 
-			finalDamage = cW.damagePerProj * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange) * dmg_multiplier
+			finalDamage = cW.damagePerProj * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange)
 			collider.hitscanHit(finalDamage/6.0, hitscanBulletDirection, hitscanBulletCollision.position)
 			weaponManager.displayBulletHole(colliderPoint, colliderNormal, collider)
 		
-		elif GameManager.apply_weapon_damage_to_npc_collider(collider, float(cW.damagePerProj) * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange) * dmg_multiplier):
-			pass
+		elif GameManager.apply_weapon_damage_to_npc_collider(collider, float(cW.damagePerProj) * cW.damageDropoff.sample(pointOfCollisionHitscan.distance_to(global_position) / cW.maxRange)):
+			_spawn_blood_at(colliderPoint, colliderNormal)
 			
 		else:
 			weaponManager.displayBulletHole(colliderPoint, colliderNormal, collider)
-			
+
+
+func _spawn_blood_at(pos: Vector3, normal: Vector3) -> void:
+	var blood_scene := load("res://scenes/vfx/blood_splatter.tscn") as PackedScene
+	if blood_scene == null:
+		return
+	var blood := blood_scene.instantiate()
+	var root: Node = get_tree().current_scene
+	if root == null:
+		root = get_tree().root
+	root.add_child(blood)
+	if blood.has_method("play"):
+		blood.call("play", pos, normal)
+
 func projectileShot(pointOfCollisionProjectile : Vector3):
 	rng = RandomNumberGenerator.new()
 	
@@ -171,11 +183,8 @@ func projectileShot(pointOfCollisionProjectile : Vector3):
 	projInstance.global_transform = cleanTransform
 	
 	#set projectile properties 
-	var dmg_multiplier := 1.0
-	if GameManager and GameManager.has_method("get_damage_multiplier"):
-		dmg_multiplier = float(GameManager.get_damage_multiplier())
 	projInstance.direction = projectileDirection
-	projInstance.damage = cW.damagePerProj * dmg_multiplier
+	projInstance.damage = cW.damagePerProj
 	projInstance.timeBeforeVanish = cW.projTimeBeforeVanish
 	projInstance.gravity_scale = cW.projGravityVal
 	projInstance.isExplosive = cW.isProjExplosive

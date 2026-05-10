@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://ca6ah0k6mha6e"]
 
 [ext_resource type="PackedScene" uid="uid://use31ui2e36q" path="res://assets/props/glb/falke/GateSkilt.glb" id="1_6vc0l"]
+[ext_resource type="Script" uid="uid://bfv856cspkca8" path="res://scenes/props/veiskilt.gd" id="1_om2hl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6vc0l"]
+height = 3.6950684
+radius = 0.09277344
 
 [node name="Veiskilt2" type="Node3D" unique_id=251995184]
 transform = Transform3D(1.3311836e-07, 0, -1.0000002, 0, 1, 0, 1.0000002, 0, 1.3311836e-07, 0, 0, 0)
+script = ExtResource("1_om2hl")
 
 [node name="GateSkilt2" parent="." unique_id=43039352 instance=ExtResource("1_6vc0l")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -21,3 +27,9 @@ modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "erdethovedgata"
 font_size = 44
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=279637790]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=355794038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.767456, 0)
+shape = SubResource("CylinderShape3D_6vc0l")

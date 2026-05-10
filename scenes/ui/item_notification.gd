@@ -9,8 +9,6 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if GameManager and not GameManager.item_added.is_connected(_on_item_added):
 		GameManager.item_added.connect(_on_item_added)
-	if GameManager and not GameManager.level_up.is_connected(_on_level_up):
-		GameManager.level_up.connect(_on_level_up)
 
 func _on_item_added(item_id: String, amount: int):
 	if item_id == "approved_application":
@@ -49,20 +47,6 @@ func _show_notification(text: String):
 	tween.tween_interval(1.7)
 	tween.tween_property(panel, "modulate:a", 0.0, 0.3)
 	tween.finished.connect(panel.queue_free)
-
-func _on_level_up(new_level: int) -> void:
-	var messages := [
-		"",
-		"LEVEL 2\n+20% skade",
-		"LEVEL 3\n+50% skade",
-		"LEVEL 4\n+85% skade",
-		"LEVEL 5\nMAX SKADE - 2.5x"
-	]
-	var idx = clamp(new_level - 1, 0, messages.size() - 1)
-	var msg = messages[idx]
-	if msg == "":
-		return
-	_show_notification(msg)
 
 func _load_item_data(item_id: String) -> ItemData:
 	var path := ITEM_DATA_TEMPLATE % item_id

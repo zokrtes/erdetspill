@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cucpnteqf0mpr" path="res://components/shop/build_zone.gd" id="1_build_zone_script"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_build_zone"]
-size = Vector3(2.4433594, 1.2, 2.1572266)
+size = Vector3(3, 1.2, 3)
 
 [node name="BuildZone" type="Area3D" unique_id=1690159181]
 script = ExtResource("1_build_zone_script")

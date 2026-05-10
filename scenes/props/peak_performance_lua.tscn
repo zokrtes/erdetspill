@@ -28,5 +28,5 @@ shape = SubResource("SphereShape3D_pickup")
 [node name="Label3D" type="Label3D" parent="." unique_id=1415159043]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 billboard = 1
-text = "Peak Performance-lua"
+text = "Peak Performance-caps"
 font_size = 22

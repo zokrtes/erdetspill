@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://crr2wft28n2q3"]
+
+[ext_resource type="Script" path="res://scenes/ui/flashlight_hint.gd" id="1_script"]
+
+[node name="FlashlightHint" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -120.0
+offset_right = 120.0
+offset_bottom = -88.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "F — Lommelykt"
+horizontal_alignment = 1
+vertical_alignment = 1
+modulate = Color(1, 1, 1, 0.8)

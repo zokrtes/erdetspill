@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://bpqvgr02yjulv"]
+
+[ext_resource type="Script" uid="uid://8kb62vqe6ehr" path="res://scenes/ui/title_screen.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://cy24cqj51t5j" path="res://assets/sfx/erdetlyd/musikk/erdetspill temasang.ogg" id="2_theme"]
+
+[sub_resource type="Environment" id="Environment_black"]
+background_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_starfield"]
+emission_shape_scale = Vector3(8, 8, 8)
+emission_shape = 2
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqpy5"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_star"]
+material = SubResource("StandardMaterial3D_aqpy5")
+radius = 0.02
+height = 0.04
+
+[node name="TitleScreen" type="Node3D" unique_id=1572906791]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1368609952]
+environment = SubResource("Environment_black")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1473541747]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.7414927)
+current = true
+
+[node name="TitleText" type="Node3D" parent="." unique_id=129650841]
+
+[node name="Label3D" type="Label3D" parent="TitleText" unique_id=125638153]
+billboard = 1
+text = "erdetspill"
+font_size = 128
+
+[node name="SubtitleText" type="Node3D" parent="TitleText" unique_id=1362373474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+
+[node name="Label3D" type="Label3D" parent="TitleText/SubtitleText" unique_id=228044889]
+billboard = 1
+modulate = Color(0.69803923, 0.69803923, 0.69803923, 0.54509807)
+text = "en demo"
+font_size = 48
+
+[node name="StarfieldBackground" type="GPUParticles3D" parent="." unique_id=815126299]
+amount = 399
+lifetime = 999.0
+preprocess = 999.0
+process_material = SubResource("ParticleProcessMaterial_starfield")
+draw_pass_1 = SubResource("SphereMesh_star")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=772367849]
+stream = ExtResource("2_theme")
+
+[node name="MenuUI" type="CanvasLayer" parent="." unique_id=392969429]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuUI" unique_id=1388863619]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -200.0
+offset_right = 360.0
+offset_bottom = -40.0
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="MenuUI/VBoxContainer" unique_id=931494858]
+layout_mode = 2
+text = "SPILL"
+
+[node name="SettingsButton" type="Button" parent="MenuUI/VBoxContainer" unique_id=2119436186]
+layout_mode = 2
+text = "INNSTILLINGER"
+
+[node name="CreditsButton" type="Button" parent="MenuUI/VBoxContainer" unique_id=1074117199]
+layout_mode = 2
+text = "KREDITERINGER"
+
+[node name="ExitButton" type="Button" parent="MenuUI/VBoxContainer" unique_id=1935259148]
+layout_mode = 2
+text = "AVSLUTT"

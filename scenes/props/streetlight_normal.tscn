@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dh4ng2hwqsrew"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b53tg"]
+top_radius = 0.07
+bottom_radius = 0.09
+height = 4.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7do6i"]
+albedo_color = Color(0.22, 0.22, 0.24, 1)
+metallic = 0.35
+roughness = 0.65
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m8baf"]
+height = 4.2
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8vd2"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[node name="StreetlightNormal" type="StaticBody3D" unique_id=1477071796]
+
+[node name="LightFlicker" type="Node" parent="." unique_id=1924360695]
+process_mode = 4
+
+[node name="PoleMesh" type="MeshInstance3D" parent="." unique_id=36122854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+mesh = SubResource("CylinderMesh_b53tg")
+surface_material_override/0 = SubResource("StandardMaterial3D_7do6i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=969854726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+shape = SubResource("CylinderShape3D_m8baf")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=419131265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.614746, 0)
+light_color = Color(1, 0.95, 0.8, 1)
+light_energy = 1.2
+omni_range = 13.472636
+
+[node name="CSGBox3D" type="CSGSphere3D" parent="." unique_id=576795076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 0)
+cast_shadow = 0
+material = SubResource("StandardMaterial3D_i8vd2")

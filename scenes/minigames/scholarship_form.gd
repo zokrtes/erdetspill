@@ -3,6 +3,7 @@ extends CanvasLayer
 const TOTAL_TIME := 45.0
 const SIGNATURE_LINE_WIDTH := 2.0
 const TIMER_WARNING_SECONDS := 15.0
+const RESULT_OVERLAY_DURATION := 2.0
 
 const NORMAL_QUESTIONS: Array[String] = [
 	"Fullt navn:",
@@ -29,6 +30,12 @@ const EXISTENTIAL_QUESTIONS: Array[String] = [
 	"Hva ville mormor ha sagt?"
 ]
 
+@export var success_sound: AudioStream
+@export var fail_sound: AudioStream
+@export var approved_sound: AudioStream
+@export var rejected_sound: AudioStream
+@export var error_sound: AudioStream
+
 @onready var form_panel: PanelContainer = $FormPanel
 @onready var questions_container: VBoxContainer = $FormPanel/Margin/RootVBox/QuestionsVBox
 @onready var timer_label: Label = $FormPanel/Margin/RootVBox/HeaderHBox/TimerLabel
@@ -37,9 +44,14 @@ const EXISTENTIAL_QUESTIONS: Array[String] = [
 @onready var signature_box: Control = $FormPanel/Margin/RootVBox/SignatureFrame/SignatureBox
 @onready var submit_button: Button = $FormPanel/Margin/RootVBox/FooterHBox/SubmitButton
 @onready var clear_button: Button = $FormPanel/Margin/RootVBox/FooterHBox/ClearButton
+@onready var error_label: Label = $FormPanel/Margin/RootVBox/ErrorLabel
 @onready var rejection_overlay: ColorRect = $FormPanel/RejectionOverlay
 @onready var rejection_reason_label: Label = $FormPanel/RejectionOverlay/Dialog/Margin/VBox/ReasonLabel
 @onready var rejection_extra_label: Label = $FormPanel/RejectionOverlay/Dialog/Margin/VBox/ExtraLabel
+@onready var result_overlay: Panel = $ResultOverlay
+@onready var result_label: Label = $ResultOverlay/ResultLabel
+@onready var success_audio: AudioStreamPlayer = $SuccessAudio
+@onready var fail_audio: AudioStreamPlayer = $FailAudio
 
 var question_labels: Array[Label] = []
 var input_fields: Array[LineEdit] = []
@@ -54,6 +66,7 @@ var _is_drawing_signature: bool = false
 var _time_remaining: float = TOTAL_TIME
 var _is_resolved: bool = false
 var _closed_with_end_call: bool = false
+var _is_submitting: bool = false
 
 var _default_line_edit_style: StyleBox
 var _default_signature_style: StyleBox
@@ -67,9 +80,10 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_cache_fields()
 	_apply_visual_style()
+	_configure_result_audio()
 	form_panel.visible = true
-	if submit_button and not submit_button.pressed.is_connected(_on_submit_button_pressed):
-		submit_button.pressed.connect(_on_submit_button_pressed)
+	if submit_button and not submit_button.pressed.is_connected(_on_submit_pressed):
+		submit_button.pressed.connect(_on_submit_pressed)
 	if clear_button and not clear_button.pressed.is_connected(_on_clear_button_pressed):
 		clear_button.pressed.connect(_on_clear_button_pressed)
 	call_deferred("_initialize_form_contents")
@@ -86,8 +100,9 @@ func _process(delta: float):
 		return
 	_time_remaining = max(0.0, _time_remaining - delta)
 	_update_timer_label()
-	if _time_remaining <= 0.0:
-		_submit_form(true)
+	if _time_remaining <= 0.0 and not _is_submitting:
+		_is_submitting = true
+		await _validate_and_submit(true)
 
 func _exit_tree():
 	if not _is_resolved:
@@ -126,10 +141,13 @@ func _apply_visual_style():
 func _reset_form_state():
 	_is_resolved = false
 	_closed_with_end_call = false
+	_is_submitting = false
 	_time_remaining = TOTAL_TIME
 	_update_timer_label()
 	rejection_overlay.hide()
 	rejection_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	result_overlay.hide()
+	result_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	_assign_random_questions()
 	for field in input_fields:
 		field.text = ""
@@ -145,6 +163,11 @@ func _reset_form_state():
 	signature_frame.add_theme_stylebox_override("panel", _default_box_style)
 	signature_box.queue_redraw()
 	status_label.text = ""
+	if error_label:
+		error_label.text = ""
+		error_label.visible = false
+	submit_button.disabled = false
+	submit_button.text = "Send inn"
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _assign_random_questions():
@@ -175,9 +198,23 @@ func _update_timer_label():
 	timer_label.text = "Tid igjen: %d:%02d" % [minutes, seconds]
 	timer_label.add_theme_color_override("font_color", Color(0.85, 0.1, 0.1, 1.0) if _time_remaining <= TIMER_WARNING_SECONDS else Color.BLACK)
 
-func _submit_form(from_timeout: bool = false):
+func _validate_and_submit(from_timeout: bool = false):
 	if _is_resolved:
 		return
+	if signature_out_of_bounds:
+		await _show_result_and_close(false, "SØKNAD AVVIST ✗")
+		return
+	if not signature_has_content:
+		if from_timeout:
+			await _show_result_and_close(false, "SØKNAD AVVIST ✗")
+			return
+		signature_frame.add_theme_stylebox_override("panel", _signature_error_style)
+		status_label.text = "Du må signere søknaden."
+		submit_button.disabled = false
+		submit_button.text = "Send inn"
+		_is_submitting = false
+		return
+
 	var empty_fields: Array[LineEdit] = []
 	for field in input_fields:
 		var empty := field.text.strip_edges() == ""
@@ -187,27 +224,16 @@ func _submit_form(from_timeout: bool = false):
 
 	if not empty_fields.is_empty():
 		if from_timeout:
-			_show_rejection("Tiden er ute. Søknaden avvist.", "Tips: Skriv raskere neste gang.")
+			await _show_result_and_close(false, "SØKNAD AVVIST ✗")
 			return
 		status_label.text = "Søknaden er ufullstendig."
+		submit_button.disabled = false
+		submit_button.text = "Send inn"
+		_is_submitting = false
 		return
 
-	if signature_out_of_bounds:
-		var extra := "Tips: Skriv raskere neste gang." if from_timeout else ""
-		_show_rejection("Signaturen er utenfor boksen.\nSøknaden er avvist.", extra)
-		return
-
-	if not signature_has_content:
-		if from_timeout:
-			_show_rejection("Tiden er ute. Søknaden avvist.", "Tips: Skriv raskere neste gang.")
-			return
-		signature_frame.add_theme_stylebox_override("panel", _signature_error_style)
-		status_label.text = "Signatur mangler."
-		return
-
-	status_label.text = "Søknaden er godkjent!"
-	await get_tree().create_timer(1.5).timeout
-	_finish_success()
+	status_label.text = ""
+	await _show_result_and_close(true, "SØKNAD GODKJENT ✓")
 
 func _finish_success():
 	if _is_resolved:
@@ -225,6 +251,8 @@ func _finish_hard_fail():
 	_reset_scholarship_minigame_progress()
 	_closed_with_end_call = true
 	GameManager.end_minigame("scholarship_form", 0)
+	_set_player_form_mode(false)
+	queue_free()
 
 func _show_rejection(reason: String, extra: String = ""):
 	rejection_reason_label.text = reason
@@ -232,6 +260,32 @@ func _show_rejection(reason: String, extra: String = ""):
 	rejection_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	rejection_overlay.show()
 	_finish_hard_fail()
+
+func _configure_result_audio() -> void:
+	if success_sound == null and ResourceLoader.exists("res://assets/sfx/erdetlyd/success.ogg"):
+		success_sound = load("res://assets/sfx/erdetlyd/success.ogg")
+	if fail_sound == null and ResourceLoader.exists("res://assets/sfx/erdetlyd/fail.ogg"):
+		fail_sound = load("res://assets/sfx/erdetlyd/fail.ogg")
+	if success_audio:
+		success_audio.stream = success_sound
+	if fail_audio:
+		fail_audio.stream = fail_sound
+
+func _show_result_and_close(success: bool, text: String) -> void:
+	if _is_resolved:
+		return
+	result_label.text = text
+	result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3, 1.0) if success else Color(0.9, 0.2, 0.2, 1.0))
+	result_overlay.show()
+	var stream: AudioStream = approved_sound if success else rejected_sound
+	if stream == null:
+		stream = success_sound if success else fail_sound
+	_play_ephemeral_result_sound(stream)
+	await get_tree().create_timer(RESULT_OVERLAY_DURATION).timeout
+	if success:
+		_finish_success()
+	else:
+		_finish_hard_fail()
 
 func _reset_scholarship_minigame_progress():
 	var quest: Quest = GameManager.active_quests.get("SCHOLARSHIP_APPLICATION")
@@ -256,9 +310,42 @@ func _set_player_form_mode(enabled: bool):
 		if player and player.has_method("should_use_fps_mouse_capture") and player.should_use_fps_mouse_capture():
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _on_submit_button_pressed():
-	print("Send button pressed")
-	_submit_form(false)
+func _on_submit_pressed() -> void:
+	if _is_submitting:
+		return
+	_is_submitting = true
+	submit_button.disabled = true
+	submit_button.text = "Behandler..."
+	await get_tree().process_frame
+	if signature_out_of_bounds:
+		_show_field_error("Signaturen er utenfor feltet.")
+		submit_button.disabled = false
+		submit_button.text = "Send inn"
+		_is_submitting = false
+		return
+	if not signature_has_content:
+		signature_frame.add_theme_stylebox_override("panel", _signature_error_style)
+		_show_field_error("Du må signere søknaden.")
+		submit_button.disabled = false
+		submit_button.text = "Send inn"
+		_is_submitting = false
+		return
+	signature_frame.add_theme_stylebox_override("panel", _default_box_style)
+
+	var error := _validate_all_fields()
+	if error != "":
+		submit_button.disabled = false
+		submit_button.text = "Send inn"
+		_is_submitting = false
+		if error.begins_with("HARD_FAIL:"):
+			var msg := error.trim_prefix("HARD_FAIL:")
+			await _show_result_and_close(false, msg)
+		else:
+			_show_field_error(error)
+		return
+
+	_show_field_error("")
+	await _show_result_and_close(true, "SØKNAD GODKJENT ✓")
 
 func _on_clear_button_pressed():
 	signature_points.clear()
@@ -269,6 +356,7 @@ func _on_clear_button_pressed():
 	signature_frame.add_theme_stylebox_override("panel", _default_box_style)
 	signature_box.queue_redraw()
 	status_label.text = ""
+	_show_field_error("")
 
 func _on_rejection_ok_button_pressed():
 	if not _is_resolved:
@@ -331,3 +419,171 @@ func _make_border_style(border_color: Color, bg_color: Color, border_width: int)
 	style.corner_radius_bottom_left = 0
 	style.corner_radius_bottom_right = 0
 	return style
+
+
+func _signature_valid() -> bool:
+	if signature_out_of_bounds:
+		return false
+	if not signature_has_content:
+		signature_frame.add_theme_stylebox_override("panel", _signature_error_style)
+		return false
+	signature_frame.add_theme_stylebox_override("panel", _default_box_style)
+	return true
+
+
+func _validate_all_fields() -> String:
+	if question_labels.size() != input_fields.size():
+		return "Skjemafeil: antall spørsmål stemmer ikke."
+	for i in range(question_labels.size()):
+		var question := question_labels[i].text.strip_edges()
+		var value := input_fields[i].text.strip_edges()
+		var error := _validate_field_by_question(question, value)
+		if error != "":
+			return error
+	return ""
+
+
+func _qerr(question: String, detail: String) -> String:
+	return "«%s» — %s" % [question, detail]
+
+
+func _validate_field_by_question(question: String, value: String) -> String:
+	var lower := value.to_lower()
+
+	match question:
+		"Fullt navn:":
+			if value.is_empty():
+				return _qerr(question, "feltet kan ikke være tomt.")
+			for c in value:
+				if c >= "0" and c <= "9":
+					return _qerr(question, "navn kan ikke inneholde tall.")
+			var name_regex := RegEx.new()
+			name_regex.compile("^[A-Za-zÆØÅæøå ]+$")
+			if name_regex.search(value) == null:
+				return _qerr(question, "navn kan kun inneholde bokstaver og mellomrom.")
+			if value != String(GameManager.player_name):
+				return _qerr(question, "navnet stemmer ikke med registrert spillernavn.")
+
+		"Fødselsdato:":
+			if value.is_empty():
+				return _qerr(question, "feltet kan ikke være tomt.")
+			for c in value:
+				if c != "." and not (c >= "0" and c <= "9"):
+					return _qerr(question, "bruk kun tall og punktum (DD.MM.ÅÅÅÅ).")
+			var date_regex := RegEx.new()
+			date_regex.compile("^\\d{2}\\.\\d{2}\\.\\d{4}$")
+			if date_regex.search(value) == null:
+				return _qerr(question, "bruk formatet DD.MM.ÅÅÅÅ.")
+
+		"Adresse:":
+			if value.is_empty():
+				return _qerr(question, "feltet kan ikke være tomt.")
+			var has_letter := false
+			var has_number := false
+			for c in value:
+				if c >= "0" and c <= "9":
+					has_number = true
+				elif c.is_subsequence_of("abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ"):
+					has_letter = true
+			if not has_number:
+				return _qerr(question, "adressen må inneholde gatenummer.")
+			if not has_letter:
+				return _qerr(question, "adressen må inneholde gatenavn.")
+
+		"Postnummer:":
+			if value.length() != 4:
+				return _qerr(question, "postnummer må være nøyaktig 4 siffer.")
+			if not value.is_valid_int():
+				return _qerr(question, "postnummer kan kun inneholde tall.")
+
+		"Telefonnummer:":
+			if value.length() != 8:
+				return _qerr(question, "telefonnummer må være nøyaktig 8 siffer.")
+			if not value.is_valid_int():
+				return _qerr(question, "telefonnummer kan kun inneholde tall.")
+
+		"E-postadresse:":
+			if value.is_empty():
+				return _qerr(question, "feltet kan ikke være tomt.")
+			if not value.contains("@"):
+				return _qerr(question, "e-post må inneholde @.")
+			var at_idx := value.find("@")
+			var dot_idx := value.rfind(".")
+			if at_idx <= 0 or dot_idx <= at_idx + 1 or dot_idx >= value.length() - 1:
+				return _qerr(question, "ugyldig e-postadresse.")
+
+		"Favorittfarge på brød:":
+			if value.is_empty():
+				return _qerr(question, "feltet kan ikke være tomt.")
+			var color_regex := RegEx.new()
+			color_regex.compile("^[A-Za-zÆØÅæøå ]+$")
+			if color_regex.search(value) == null:
+				return _qerr(question, "bruk bare bokstaver (ingen tall eller spesialtegn).")
+
+		"Antall ganger du har tenkt på elg denne uken:":
+			if value.is_empty():
+				return _qerr(question, "feltet kan ikke være tomt.")
+			if not value.is_valid_int():
+				return _qerr(question, "skriv et heltall (kun tall, ingen bokstaver).")
+
+		"Beskriv lukten av en mandag:":
+			if value.length() < 3:
+				return _qerr(question, "utdyp svaret (minst tre tegn).")
+
+		"Hva er din mening om grus som matvare?":
+			if lower != "ja" and lower != "nei":
+				return _qerr(question, "svar «ja» eller «nei».")
+
+		"Oppgi din nærmeste nabos bilmerke:":
+			if value.is_empty():
+				return _qerr(question, "feltet kan ikke være tomt.")
+			var brand_regex := RegEx.new()
+			brand_regex.compile("^[A-Za-zÆØÅæøå ]+$")
+			if brand_regex.search(value) == null:
+				return _qerr(question, "bruk bare bokstaver (ingen tall).")
+
+		"Hvorfor er du her?":
+			if value.length() < 5:
+				return _qerr(question, "utdyp svaret (minst fem tegn).")
+
+		"Hva er egentlig penger?":
+			if value.length() < 3:
+				return _qerr(question, "utdyp svaret.")
+
+		"Hadde du fortjent dette stipendet?":
+			if lower == "nei":
+				return "HARD_FAIL:Søknaden er avvist. Du innrømmet selv at du ikke fortjener det."
+			if lower != "ja" and lower != "nei":
+				return _qerr(question, "svar «ja» eller «nei».")
+
+		"Er du sikker på at dette er riktig valg?":
+			if lower == "nei":
+				return "HARD_FAIL:Søknaden er avvist. Du var ikke sikker nok."
+			if lower != "ja" and lower != "nei":
+				return _qerr(question, "svar «ja» eller «nei».")
+
+		"Hva ville mormor ha sagt?":
+			if value.length() < 3:
+				return _qerr(question, "utdyp svaret (minst tre tegn).")
+
+	return ""
+
+
+func _show_field_error(message: String) -> void:
+	if error_label == null:
+		return
+	error_label.text = message
+	error_label.modulate = Color(1, 0, 0, 1)
+	error_label.visible = not message.is_empty()
+	if not message.is_empty():
+		_play_ephemeral_result_sound(error_sound)
+
+
+func _play_ephemeral_result_sound(stream: AudioStream) -> void:
+	if stream == null:
+		return
+	var audio := AudioStreamPlayer.new()
+	add_child(audio)
+	audio.stream = stream
+	audio.play()
+	audio.finished.connect(func (): audio.queue_free())

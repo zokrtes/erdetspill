@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Example/example_enemy.gd" id="1_6nmso"]
 [ext_resource type="Script" path="res://addons/3dEnemyToolkit/FollowTarget.gd" id="2_w5i6f"]
 [ext_resource type="Script" path="res://addons/3dEnemyToolkit/RandomTarget3D.gd" id="3_lsadq"]
-[ext_resource type="Script" path="res://addons/3dEnemyToolkit/SimpleVision3D.gd" id="4_ivo35"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ck8vg"]
 
@@ -35,9 +34,5 @@ script = ExtResource("2_w5i6f")
 [node name="RandomTarget3D" type="Node3D" parent="."]
 script = ExtResource("3_lsadq")
 
-[node name="SimpleVision3D" type="Node3D" parent="."]
-script = ExtResource("4_ivo35")
 
 [connection signal="navigation_finished" from="FollowTarget3D" to="." method="_on_follow_target_3d_navigation_finished"]
-[connection signal="GetSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_get_sight"]
-[connection signal="LostSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_lost_sight"]

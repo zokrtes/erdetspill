@@ -13,11 +13,9 @@ target_id = "icecream"
 [resource]
 script = ExtResource("2_quest")
 quest_id = "ECONOMIC_REALITY"
-name = "Ærend"
-description = "Du oppdager at is koster 100 kr stykket. Du har bare 100 kr."
+name = "Kjøp is"
+description = "Gå til butikken."
 brief_description = "Gå til butikken."
 required_quest_ids = Array[String](["BANK_INHERITANCE"])
 objectives = Array[ExtResource("1_obj")]([SubResource("Resource_7jfvu")])
 unlock_quests = Array[String](["GRANDPA_DISAPPOINTMENT"])
-offer_dialogue = Array[String](["Du har fått et nytt oppdrag: Gå til butikken."])
-completion_dialogue = Array[String](["Bra. Du fant butikken.", "Nå gjelder det å kjøpe is."])

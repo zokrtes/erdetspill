@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://duqv3n6jncx57"]
+
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="1_quest"]
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="2_objective"]
+
+[sub_resource type="Resource" id="Resource_l27r2"]
+script = ExtResource("2_objective")
+objective_id = "deliver_grus_to_steinar"
+description = "Lever grus til Steinar"
+type = 8
+target_id = "steinar:grus"
+
+[resource]
+script = ExtResource("1_quest")
+quest_id = "STEINAR_GRUS"
+name = "gRUSA"
+description = "Steinar og Stein vil ha grus."
+brief_description = "Lever en pose grus til Steinar."
+quest_type = 6
+required_quest_ids = Array[String](["IVER_BEVIS"])
+objectives = Array[ExtResource("2_objective")]([SubResource("Resource_l27r2")])
+offer_dialogue = Array[String](["Vi vil ha grus i bytte mot capsen.", "Gå til Iver på Kratergata.", "Få han til å selge grus til deg.", "Kom tilbake med grus, så får du capsen."])
+completion_dialogue = Array[String](["Der."])

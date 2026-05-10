@@ -45,12 +45,13 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="Overlay/CenterPanel/VBoxContainer" unique_id=1782439561]
 layout_mode = 2
-text = "Du døde."
+text = "DU DØDE"
 horizontal_alignment = 1
 
 [node name="PenaltyLabel" type="Label" parent="Overlay/CenterPanel/VBoxContainer" unique_id=401042060]
 layout_mode = 2
-text = "Du mister 0 kroner."
+visible = false
+text = ""
 horizontal_alignment = 1
 
 [node name="RetryButton" type="Button" parent="Overlay/CenterPanel/VBoxContainer" unique_id=182926845]

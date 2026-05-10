@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 id = "peak_performance_lua"
-display_name = "Peak Performance-lua"
+display_name = "Peak Performance-caps"
 description = "Liker du rimming?"
 category = 2
 stackable = false

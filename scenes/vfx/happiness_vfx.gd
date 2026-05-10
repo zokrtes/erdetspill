@@ -1,11 +1,12 @@
 extends Node3D
 
+@onready var stars: GPUParticles3D = $StarParticles
+@onready var hearts: GPUParticles3D = $HeartParticles
 
-func play(at_pos: Vector3) -> void:
-	global_position = at_pos
-	var particles := get_node_or_null("Sparkles") as GPUParticles3D
-	if particles:
-		particles.restart()
-		particles.emitting = true
-	await get_tree().create_timer(1.5).timeout
+func play(pos: Vector3) -> void:
+	global_position = pos
+	stars.emitting = true
+	await get_tree().create_timer(0.3).timeout
+	hearts.emitting = true
+	await get_tree().create_timer(max(stars.lifetime, hearts.lifetime) + 0.2).timeout
 	queue_free()

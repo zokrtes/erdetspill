@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://b6e5uuuasfnny"]
+
+[ext_resource type="Script" uid="uid://edikhjm0u3gs" path="res://addons/3dEnemyToolkit/Example/example_enemy.gd" id="1_enemy"]
+[ext_resource type="Texture2D" uid="uid://bwlhr55oakii8" path="res://assets/textures/images/elg.png" id="2_ipyvw"]
+[ext_resource type="Script" uid="uid://dqjjf8pcurpdl" path="res://addons/3dEnemyToolkit/FollowTarget.gd" id="3_follow"]
+[ext_resource type="Script" uid="uid://bwxw5fxeqf38i" path="res://addons/3dEnemyToolkit/RandomTarget3D.gd" id="4_random"]
+[ext_resource type="Script" uid="uid://cen74ogojn8ue" path="res://components/health_component.gd" id="5_health"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kvrsn"]
+radius = 0.16699219
+height = 2.9680176
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_suid6"]
+size = Vector3(4.746618, 1.7481475, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ingq2"]
+size = Vector3(3.0907187, 1.7943907, 0.1)
+
+[sub_resource type="Animation" id="Animation_fall"]
+resource_name = "fall"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_moose"]
+_data = {
+&"fall": SubResource("Animation_fall")
+}
+
+[node name="MooseEnemy" type="CharacterBody3D" unique_id=505657727]
+collision_layer = 32
+collision_mask = 31
+floor_stop_on_slope = false
+floor_max_angle = 1.0471976
+floor_snap_length = 0.4
+script = ExtResource("1_enemy")
+runSpeed = 6.5
+attack_cooldown = 2.0
+melee_range = 2.5
+facing_tolerance = 45.0
+detection_range = 18.0
+lose_sight_range = 22.0
+melee_knockback = 12.0
+melee_damage = 25.0
+ragdoll_force = 8.0
+ragdoll_torque = 5.0
+ragdoll_lifetime = 4.0
+drop_item_id = "elgskinn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1706067954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7423302, 0)
+shape = SubResource("CapsuleShape3D_kvrsn")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=990989086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03989911, 0.711354, 0)
+shape = SubResource("BoxShape3D_suid6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1416144631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9677031, -0.9882134, 0)
+shape = SubResource("BoxShape3D_ingq2")
+
+[node name="Geometry" type="Node3D" parent="." unique_id=741072133]
+
+[node name="Sprite3D" type="Sprite3D" parent="Geometry" unique_id=207645927]
+transform = Transform3D(1, 0, 0, 0, 0.9111252, 0, 0, 0, 1, 0, 0, 0)
+texture = ExtResource("2_ipyvw")
+
+[node name="FollowTarget3D" type="NavigationAgent3D" parent="." unique_id=1613618656]
+script = ExtResource("3_follow")
+
+[node name="RandomTarget3D" type="Node3D" parent="." unique_id=658684700]
+script = ExtResource("4_random")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1337633656]
+script = ExtResource("5_health")
+max_health = 120.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=441414826]
+libraries/ = SubResource("AnimationLibrary_moose")
+
+[node name="WeaponSlot" type="Node3D" parent="." unique_id=1324471072]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17834824, -0.8)
+
+[connection signal="navigation_finished" from="FollowTarget3D" to="." method="_on_follow_target_3d_navigation_finished"]

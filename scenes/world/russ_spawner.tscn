@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3]
-
-[ext_resource type="Script" path="res://scenes/world/russ_spawner.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://bcp8x8t6qq45n" path="res://scenes/Enemies/russen.tscn" id="2_russ"]
-
-[node name="RussSpawner" type="Node3D"]
-script = ExtResource("1_script")
-russ_scene = ExtResource("2_russ")

@@ -1,7 +1,16 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://q2xeggbpcvdr"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://cimgfumkxmnq4"]
 
 [ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
 [ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
+[ext_resource type="Script" uid="uid://cbwqdlinedlg1" path="res://components/dialogue/dialogue_line.gd" id="3_dline"]
+[ext_resource type="AudioStream" uid="uid://ugb5cbxtmdcm" path="res://assets/sfx/erdetlyd/vox/bestefar/q04_01.ogg" id="4_o1"]
+[ext_resource type="AudioStream" uid="uid://njtlsxhpxhcv" path="res://assets/sfx/erdetlyd/vox/bestefar/q04_02.ogg" id="5_o2"]
+[ext_resource type="AudioStream" uid="uid://cxsamghidspxa" path="res://assets/sfx/erdetlyd/vox/bestefar/q04_03.ogg" id="6_o3"]
+
+[sub_resource type="Resource" id="Resource_dl5"]
+script = ExtResource("3_dline")
+text = "Ikke kom tilbake uten to is."
+sound = ExtResource("6_o3")
 
 [sub_resource type="Resource" id="Resource_58udn"]
 script = ExtResource("1_obj")
@@ -10,13 +19,35 @@ description = "Snakk med bestefar"
 type = 1
 target_id = "grandpa"
 
+[sub_resource type="Resource" id="Resource_dl1"]
+script = ExtResource("3_dline")
+text = "Én is."
+sound = ExtResource("4_o1")
+
+[sub_resource type="Resource" id="Resource_dl2"]
+script = ExtResource("3_dline")
+text = "§Jeg hadde bare nok til én is."
+
+[sub_resource type="Resource" id="Resource_dl3"]
+script = ExtResource("3_dline")
+text = "Du er ung. Søk stipend hos Lånekassa."
+sound = ExtResource("5_o2")
+
+[sub_resource type="Resource" id="Resource_dl4"]
+script = ExtResource("3_dline")
+text = "Ikke kom tilbake uten to is."
+sound = ExtResource("6_o3")
+
 [resource]
 script = ExtResource("2_quest")
 quest_id = "GRANDPA_DISAPPOINTMENT"
 name = "Tilbake til bestefar"
-description = "Bestefar er ikke fornøyd med én is."
+description = "Lever det du har til bestefar."
 brief_description = "Lever det du har til bestefar."
 required_quest_ids = Array[String](["ECONOMIC_REALITY"])
 objectives = Array[ExtResource("1_obj")]([SubResource("Resource_58udn")])
 unlock_quests = Array[String](["SCHOLARSHIP_APPLICATION"])
-offer_dialogue = Array[String](["...", "Én is.", "Jeg ba om TO is.", "§Jeg hadde bare råd til én. De kostet 100 kr stykket. Du ga meg bare 100 kr.", "Du er ung.", "Kan ikke du bare søke stipend?", "Gå til Lånekassa.", "De vil hjelpe deg."])
+offer_dialogue = Array[String](["Én is.", "§Jeg hadde bare nok til én is.", "Du er ung. Søk stipend hos Lånekassa.", "Ikke kom tilbake uten to is."])
+completion_dialogue = Array[String](["Ikke kom tilbake uten to is."])
+offer_lines = Array[ExtResource("3_dline")]([SubResource("Resource_dl1"), SubResource("Resource_dl2"), SubResource("Resource_dl3"), SubResource("Resource_dl4")])
+completion_lines = Array[ExtResource("3_dline")]([SubResource("Resource_dl5")])

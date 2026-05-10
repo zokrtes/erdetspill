@@ -22,7 +22,6 @@ enum QuestState { LOCKED, AVAILABLE, ACTIVE, COMPLETED, FAILED }
 
 @export_category("Rewards")
 @export var reward_money: int = 0
-@export var reward_xp: int = 0
 @export var reward_items: Array[String] = []
 @export var reward_title: String = ""
 @export var unlock_quests: Array[String] = []
@@ -30,6 +29,9 @@ enum QuestState { LOCKED, AVAILABLE, ACTIVE, COMPLETED, FAILED }
 @export_category("Dialogue")
 @export var offer_dialogue: Array[String] = []
 @export var completion_dialogue: Array[String] = []
+## When non-empty, NPC dialogue uses these (text + optional sound per line). Otherwise falls back to string-only `offer_dialogue` / `completion_dialogue`.
+@export var offer_lines: Array[DialogueLine] = []
+@export var completion_lines: Array[DialogueLine] = []
 
 # Runtime state
 var state: QuestState = QuestState.LOCKED

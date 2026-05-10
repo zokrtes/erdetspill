@@ -17,7 +17,7 @@ func _ready() -> void:
 func _input(_event: InputEvent) -> void:
 	if not in_range:
 		return
-	if Input.is_action_just_pressed("interaction"):
+	if Input.is_action_just_pressed("interaction") or Input.is_action_just_pressed("carry_object"):
 		GameManager.add_item("peak_performance_lua", 1)
 		var quest_system: Node = get_node_or_null("/root/QuestSystem")
 		if quest_system and quest_system.has_method("on_item_collected"):

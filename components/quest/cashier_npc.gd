@@ -12,30 +12,30 @@ var _player_ref: Node3D = null
 var _showed_excuse_this_visit: bool = false
 
 var inflation_excuses: Array[String] = [
-	"Det har vært stor etterspørsel i dag.",
-	"Leverandøren skrudde opp prisene.",
-	"Inflasjonen, du vet hvordan det er.",
-	"Vi har nesten ikke is igjen.",
-	"Strømprisene påvirker kjøleskapet.",
-	"Det er helg snart.",
-	"Sjefen min bestemte det i morges."
+	"Varene har vært veldig populære i dag.",
+	"Leverandøren økte prisene igjen.",
+	"Prisene går opp overalt for tiden.",
+	"Vi begynner å gå tomme for is.",
+	"Strømprisene gjør det dyrere å holde fryserne kalde.",
+	"Helgene er alltid litt dyrere.",
+	"Sjefen endret prisene tidligere i dag."
 ]
 
 var greetings: Array[String] = [
-	"Kan jeg hjelpe deg?",
-	"Legg varene pa bandet.",
-	"Ta deg god tid."
+	"Kan jeg hjelpe deg med noe?",
+	"Legg varene på båndet, takk.",
+	"Bare ta den tiden du trenger."
 ]
 var broke_lines: Array[String] = [
 	"Du har ikke nok penger.",
-	"Kort i boks? Det holder ikke.",
-	"Kom tilbake nar du har penger."
+	"Kortet ble avvist.",
+	"Kom tilbake når du har nok penger."
 ]
 var confirm_lines: Array[String] = [
-	"Vaersagod.",
-	"Ha en fin dag!",
-	"Kom igjen snart.",
-	"Der gar du."
+	"Vær så god!",
+	"Ha en fin dag videre!",
+	"Velkommen tilbake snart.",
+	"Takk for handelen."
 ]
 
 func _ready() -> void:
@@ -136,9 +136,9 @@ func _continue_interaction_after_excuse() -> void:
 			first_time_greeting = false
 			DialogueUI.show_dialogue(
 				[
-					"Hei! Velkommen.",
-					"Legg det du vil kjøpe på båndet her.",
-					"Så tar vi det derfra."
+					"Hei! Velkommen inn.",
+					"Legg varene du vil kjøpe på båndet her.",
+					"Så ordner vi resten."
 				],
 				npc_name,
 				Callable()
@@ -186,7 +186,7 @@ func _classify_cart_spend_kind(items: Array[RigidBody3D]) -> String:
 	return "general"
 
 
-func _give_weapon_to_player(weapon_int_id: int) -> void:
+func _give_weapon_to_player(weapon_int_id: int, skip_reserve_ammo: bool = false) -> void:
 	var player := _get_player()
 	if player == null:
 		return
@@ -199,12 +199,45 @@ func _give_weapon_to_player(weapon_int_id: int) -> void:
 		weapon_manager.acquire_weapon_by_id(weapon_int_id)
 	else:
 		weapon_manager.weaponStack.append(weapon_int_id)
+	if not skip_reserve_ammo:
+		_setup_weapon_ammo(weapon_int_id, weapon_manager)
+	else:
+		if weapon_manager.has_method("_refresh_reserve_dependent_weapon_meshes"):
+			weapon_manager._refresh_reserve_dependent_weapon_meshes()
 	print("🔫 Weapon added to stack: ", weapon_int_id)
+
+
+func _setup_weapon_ammo(weapon_int_id: int, weapon_manager: Node) -> void:
+	if weapon_manager == null or not "weaponList" in weapon_manager:
+		return
+	var weapon_list: Dictionary = weapon_manager.weaponList
+	if not weapon_list.has(weapon_int_id):
+		return
+	var weapon_resource = weapon_list[weapon_int_id]
+	if weapon_resource == null:
+		return
+	var max_mag := int(weapon_resource.totalAmmoInMagRef) if int(weapon_resource.totalAmmoInMagRef) > 0 else int(weapon_resource.totalAmmoInMag)
+	if max_mag <= 0:
+		return
+	if not bool(weapon_resource.allAmmoInMag):
+		weapon_resource.totalAmmoInMag = max_mag / 2
+	var ammo_type: String = str(weapon_resource.ammoType)
+	var ammo_manager: Node = weapon_manager.get_node_or_null("AmmunitionManager")
+	if ammo_manager == null and "ammoManager" in weapon_manager:
+		ammo_manager = weapon_manager.ammoManager
+	if ammo_manager == null or ammo_type == "":
+		return
+	if not "ammoDict" in ammo_manager or not "maxNbPerAmmoDict" in ammo_manager:
+		return
+	var max_reserve := int(ammo_manager.maxNbPerAmmoDict.get(ammo_type, 0))
+	if max_reserve > 0:
+		ammo_manager.ammoDict[ammo_type] = max_reserve
 
 
 func _process_purchase(items: Array[RigidBody3D], total: int) -> void:
 	if items.is_empty() or total <= 0:
 		return
+	var show_good_choice := false
 	var charge_total := _calculate_purchase_total(items)
 	var spend_kind := _classify_cart_spend_kind(items)
 	if not GameManager.remove_money(charge_total, spend_kind):
@@ -215,7 +248,8 @@ func _process_purchase(items: Array[RigidBody3D], total: int) -> void:
 		if not is_instance_valid(item):
 			continue
 		if item.is_in_group("WallWeapon"):
-			_give_weapon_to_player(int(item.weapon_int_id))
+			var skip_res: bool = item.get("skip_reserve_ammo_on_pickup") == true
+			_give_weapon_to_player(int(item.weapon_int_id), skip_res)
 			if item.has_method("mark_as_sold"):
 				item.mark_as_sold()
 			continue
@@ -230,10 +264,15 @@ func _process_purchase(items: Array[RigidBody3D], total: int) -> void:
 					player.add_ammo_to_inventory(ammo_type, int(item.ammo_amount))
 				else:
 					push_warning("Player missing ammo refill path for type: %s" % ammo_type)
+				var wm: Node = player.get_node_or_null(player.weapon_controller_path)
+				if wm and wm.has_method("_refresh_reserve_dependent_weapon_meshes"):
+					wm._refresh_reserve_dependent_weapon_meshes()
 		else:
 			GameManager.add_item(item.item_id, 1)
 			if item.item_id == "icecream" and quest_system:
 				quest_system.on_item_purchased("icecream", 1)
+			if item.item_id == "icecream" and GameManager.has_active_quest("ECONOMIC_REALITY"):
+				show_good_choice = true
 			if item.item_id == "icecream" and GameManager.has_method("on_icecream_purchased"):
 				GameManager.on_icecream_purchased()
 		item.queue_free()
@@ -241,11 +280,23 @@ func _process_purchase(items: Array[RigidBody3D], total: int) -> void:
 	if zone:
 		zone.items_on_counter = zone.items_on_counter.filter(func(item): return is_instance_valid(item))
 		zone._update_price_label()
-	DialogueUI.show_dialogue([_pick_random_line(confirm_lines)], npc_name, Callable())
+	if GameManager.has_active_quest("ECONOMIC_REALITY"):
+		if not GameManager.has_item("icecream", 1):
+			var econ_quest: Quest = GameManager.active_quests.get("ECONOMIC_REALITY") as Quest
+			if econ_quest:
+				econ_quest.description = "Kjøp is i butikken"
+				GameManager.quest_progress_updated.emit(
+					"ECONOMIC_REALITY",
+					int(econ_quest.get_total_progress())
+				)
+	var purchase_lines: Array[String] = [_pick_random_line(confirm_lines)]
+	if show_good_choice:
+		purchase_lines.append("God valg.")
+	DialogueUI.show_dialogue(purchase_lines, npc_name, Callable())
 
 func _build_cart_summary_text(items: Array[RigidBody3D], total_cost: int) -> String:
 	var lines: Array[String] = []
-	lines.append("Handlekurv:")
+	lines.append("Handlekurv")
 	for item in items:
 		if not is_instance_valid(item):
 			continue
@@ -259,8 +310,8 @@ func _build_cart_summary_text(items: Array[RigidBody3D], total_cost: int) -> Str
 			item_price = int(GameManager.get_icecream_price())
 		lines.append("- %s (%d NOK)" % [item_name, item_price])
 	lines.append("")
-	lines.append("Totalt: %d NOK" % total_cost)
-	lines.append("Kjop varene?")
+	lines.append("Totalt: %d kr" % total_cost)
+	lines.append("Vil du kjøpe varene?")
 	return "\n".join(lines)
 
 func _calculate_purchase_total(items: Array[RigidBody3D]) -> int:

@@ -94,6 +94,8 @@ var movement_frozen: bool = false
 var camera_frozen: bool = false
 var dialogue_waiting_for_button: bool = false
 var is_sitting: bool = false
+var _external_knockback: Vector3 = Vector3.ZERO
+const KNOCKBACK_DECAY: float = 14.0
 
 func should_use_fps_mouse_capture() -> bool:
 	return not is_sitting and not movement_frozen and not camera_frozen and not dialogue_waiting_for_button
@@ -106,9 +108,6 @@ var pickup_hint_label: Label3D
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var health_bar: ProgressBar = $HUD/UIStats/Stats/HealthBar
-@onready var health_label: Label = $HUD/UIStats/Stats/HealthLabel
-@onready var xp_bar: ProgressBar = $HUD/UIStats/Stats/XPBar
-@onready var xp_label: Label = $HUD/UIStats/Stats/XPLabel
 const DEATH_SCREEN_SCENE: PackedScene = preload("res://scenes/ui/death_screen.tscn")
 
 func _ready():
@@ -137,18 +136,18 @@ func _ready():
 			GameManager.minigame_ended.connect(_on_minigame_ended)
 		if not GameManager.consumable_used.is_connected(_on_consumable_used):
 			GameManager.consumable_used.connect(_on_consumable_used)
-		if not GameManager.xp_changed.is_connected(_on_xp_changed):
-			GameManager.xp_changed.connect(_on_xp_changed)
-		if not GameManager.level_up.is_connected(_on_level_up):
-			GameManager.level_up.connect(_on_level_up)
-		_refresh_xp_ui()
-	_setup_pickup_hint_label()
+		_setup_pickup_hint_label()
 
 func _process(_delta: float):
 	displayProperties()
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F:
+		var fl := get_node_or_null("CameraHolder/CameraRecoilHolder/Camera/Flashlight") as SpotLight3D
+		if fl:
+			fl.visible = not fl.visible
+		get_viewport().set_input_as_handled()
 	# Sitting: block a few actions from propagating. When not sitting, return so keys are not marked handled.
 	if not is_sitting:
 		return
@@ -172,8 +171,20 @@ func _physics_process(_delta : float):
 		move_and_slide()
 		return
 	modifyPhysicsProperties()
+	_apply_external_knockback(_delta)
 	
 	move_and_slide()
+
+
+func apply_external_knockback(impulse: Vector3) -> void:
+	_external_knockback += impulse
+
+
+func _apply_external_knockback(delta: float) -> void:
+	if _external_knockback.length_squared() <= 0.0001:
+		return
+	velocity += _external_knockback
+	_external_knockback = _external_knockback.move_toward(Vector3.ZERO, KNOCKBACK_DECAY * delta)
 	
 func displayProperties():
 	#display properties on the hud
@@ -200,6 +211,14 @@ func gravityApply(delta : float):
 func _on_damage_taken(current_health: float, damage_taken: float):
 	print("Player took ", damage_taken, " damage! Health: ", current_health)
 	_refresh_health_ui()
+	var overlay := get_node_or_null("DamageFlashLayer/DamageOverlay") as ColorRect
+	if overlay == null:
+		return
+	var c := overlay.color
+	c.a = 0.4
+	overlay.color = c
+	var tw := create_tween()
+	tw.tween_property(overlay, "color:a", 0.0, 0.4)
 
 # tag: consumables — god_morgen_yoghurt / painkillers heal amounts (ItemData CONSUMABLE).
 func _on_consumable_used(item_id: String):
@@ -216,38 +235,26 @@ func _on_consumable_used(item_id: String):
 	health_component.heal(heal_amount)
 	_refresh_health_ui()
 
-func _refresh_health_ui():
-	if not health_component:
+
+func _refresh_health_ui() -> void:
+	if not health_component or health_bar == null:
 		return
 	var current_hp := int(clamp(health_component.current_health, 0.0, health_component.max_health))
-	var max_hp := int(health_component.max_health)
-	if health_bar:
-		health_bar.max_value = health_component.max_health
-		health_bar.value = current_hp
-		var fill := StyleBoxFlat.new()
-		fill.bg_color = Color(0.75, 0.12, 0.12, 1.0) if current_hp < 30 else Color(0.23, 0.76, 0.27, 1.0)
-		health_bar.add_theme_stylebox_override("fill", fill)
-	if health_label:
-		health_label.text = "HP: %d/%d" % [current_hp, max_hp]
+	health_bar.max_value = health_component.max_health
+	health_bar.value = current_hp
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = Color(0.75, 0.12, 0.12, 1.0) if current_hp < 30 else Color(0.23, 0.76, 0.27, 1.0)
+	health_bar.add_theme_stylebox_override("fill", fill)
 
-func _on_xp_changed(_new_xp: int) -> void:
-	_refresh_xp_ui()
-
-func _on_level_up(_new_level: int) -> void:
-	_refresh_xp_ui()
-
-func _refresh_xp_ui() -> void:
-	if GameManager == null:
-		return
-	if xp_bar:
-		xp_bar.value = GameManager.get_xp_progress()
-	if xp_label:
-		if GameManager.player_level >= 5:
-			xp_label.text = "MAX"
-		else:
-			xp_label.text = "LVL %d" % GameManager.player_level
 
 func _on_player_death():
+	if DialogueUI and DialogueUI.is_open():
+		DialogueUI.close()
+	if has_method("freeze_for_dialogue"):
+		freeze_for_dialogue(false)
+	if has_method("set_weapon_active"):
+		set_weapon_active(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	var money_now = int(GameManager.player_money)
 	var penalty = max(10, int(money_now * 0.2))
 	penalty = min(money_now, penalty)
@@ -444,11 +451,11 @@ func set_dialogue_waiting_for_button(waiting: bool):
 	if waiting:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-## Sitting at the lemonade stand: block movement but keep camera/mouselook free for UI.
+## Sitting at the lemonade stand: block movement and FPS look; mouse is free for UI.
 func sit_at_stand(sitting: bool) -> void:
 	is_sitting = sitting
 	movement_frozen = sitting
-	camera_frozen = false
+	camera_frozen = sitting
 	if sitting:
 		velocity = Vector3.ZERO
 		_force_stand_up()

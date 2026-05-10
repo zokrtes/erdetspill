@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://btrl1i0nc7oh8"]
+
+[ext_resource type="PackedScene" uid="uid://dyffws1rjud4v" path="res://assets/props/character/steiner/steinar.tscn" id="1_errlg"]
+[ext_resource type="PackedScene" uid="uid://bqm8npcbase01" path="res://scenes/npc/npc_base.tscn" id="1_lpvoh"]
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="3_at5dv"]
+[ext_resource type="Resource" uid="uid://dwjnt5wgkk2dn" path="res://data/quests/quest_10_steinar_grus.tres" id="4_jcd4p"]
+[ext_resource type="AudioStream" uid="uid://n6k8cdsgl8c5" path="res://assets/sfx/hl1-master/sound/weapons/electro4.wav" id="5_uacia"]
+[ext_resource type="PackedScene" uid="uid://b4rpv1jq8gvqh" path="res://assets/props/character/steiner/stein.tscn" id="6_yk7ts"]
+
+[node name="Node3D" type="Node3D" unique_id=1983186800]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=995340942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.8920696)
+
+[node name="Steinar" parent="." unique_id=184127252 instance=ExtResource("1_lpvoh")]
+transform = Transform3D(0.9998477, 0, -0.017451685, 0, 1, 0, 0.017451685, 0, 0.9998477, 0, 0, 0)
+npc_id = "steinar"
+npc_name = "Steinar"
+npc_color = Color(0.5, 0.3, 0.1, 1)
+character_model = ExtResource("1_errlg")
+quests = Array[ExtResource("3_at5dv")]([ExtResource("4_jcd4p")])
+idle_dialogue = Array[String](["Vi vil bli gRUSA.", "Ingen grus, ingen caps."])
+inhale_sound = ExtResource("5_uacia")
+
+[node name="Stein" parent="." unique_id=531182351 instance=ExtResource("1_lpvoh")]
+transform = Transform3D(0.99939084, 0, 0.034899496, 0, 1, 0, -0.034899496, 0, 0.99939084, 2.1418922, 0, -0.07479652)
+npc_id = "stein"
+npc_name = "Stein"
+npc_color = Color(0.4, 0.3, 0.15, 1)
+character_model = ExtResource("6_yk7ts")
+idle_dialogue = Array[String](["Steinar bestemmer.", "Grus."])
+inhale_sound = ExtResource("5_uacia")

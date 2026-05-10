@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "grus"
+display_name = "Grus"
+description = "En pose grus. Lukter av asfalt."
+category = 2
+stackable = false
+max_stack = 1

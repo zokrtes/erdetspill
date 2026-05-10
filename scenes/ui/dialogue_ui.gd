@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal dialogue_finished
+signal dialogue_line_shown(line_index: int)
 
 @onready var dialogue_panel: Control = $DialoguePanel
 @onready var speaker_label: Label = $DialoguePanel/MarginContainer/VBoxContainer/SpeakerLabel
@@ -23,6 +24,7 @@ func _ready() -> void:
 
 func show_dialogue(lines: Array, speaker: String = "", on_close: Callable = Callable()) -> void:
 	_lines = lines.duplicate()
+	# dialogue_line_shown uses this counter; it starts at 0 again every time show_dialogue runs.
 	_index = 0
 	_speaker = speaker
 	_on_close = on_close
@@ -66,7 +68,11 @@ func close() -> void:
 	dialogue_panel.visible = false
 	_clear_menu_buttons()
 	continue_button.visible = true
+	_lines.clear()
+	_index = 0
+	_speaker = ""
 	_freeze_player(false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if _on_close.is_valid():
 		_on_close.call()
 	_on_close = Callable()
@@ -80,6 +86,7 @@ func _show_next_line() -> void:
 		close()
 		return
 	var line = _lines[_index]
+	var shown_index: int = _index
 	_index += 1
 	var text: String = ""
 	var is_thought: bool = false
@@ -96,6 +103,7 @@ func _show_next_line() -> void:
 		"font_color",
 		THOUGHT_COLOR if is_thought else NPC_COLOR
 	)
+	dialogue_line_shown.emit(shown_index)
 
 func _on_continue_pressed() -> void:
 	_show_next_line()

@@ -1,37 +1,51 @@
 [gd_scene format=3 uid="uid://bvhappyvfx001"]
 
-[ext_resource type="Script" path="res://scenes/vfx/happiness_vfx.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dpu2vi8gvqu31" path="res://scenes/vfx/happiness_vfx.gd" id="1_script"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_spark"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_star"]
 direction = Vector3(0, 1, 0)
-spread = 60.0
-initial_velocity_min = 0.8
-initial_velocity_max = 2.5
-gravity = Vector3(0, 0.4, 0)
-color = Color(1, 1, 0.95, 1)
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -2, 0)
+scale_min = 0.08
+scale_max = 0.2
+color = Color(1, 0.95, 0.3, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spark"]
-albedo_color = Color(1, 0.98, 0.85, 1)
-emission_enabled = true
-emission = Color(1, 0.95, 0.7, 1)
-emission_energy_multiplier = 0.8
+[sub_resource type="SphereMesh" id="SphereMesh_star"]
+radius = 0.06
+height = 0.12
 
-[sub_resource type="SphereMesh" id="SphereMesh_spark"]
-material = SubResource("StandardMaterial3D_spark")
-radius = 0.04
-height = 0.08
-radial_segments = 6
-rings = 4
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_heart"]
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, -1, 0)
+scale_min = 0.1
+scale_max = 0.25
+color = Color(1, 0.4, 0.5, 1)
 
-[node name="HappinessVfx" type="Node3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_heart"]
+radius = 0.07
+height = 0.14
+
+[node name="HappinessVfx" type="Node3D" unique_id=155554155]
 script = ExtResource("1_script")
 
-[node name="Sparkles" type="GPUParticles3D" parent="."]
-amount = 20
+[node name="StarParticles" type="GPUParticles3D" parent="." unique_id=271479462]
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.3
+process_material = SubResource("ParticleProcessMaterial_star")
+draw_pass_1 = SubResource("SphereMesh_star")
+
+[node name="HeartParticles" type="GPUParticles3D" parent="." unique_id=109019127]
+emitting = false
+amount = 10
 lifetime = 1.5
 one_shot = true
-explosiveness = 0.85
-randomness = 0.35
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_spark")
-draw_pass_1 = SubResource("SphereMesh_spark")
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_heart")
+draw_pass_1 = SubResource("SphereMesh_heart")

@@ -32,14 +32,6 @@
         "holderCount":  2
     },
     {
-        "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\SimpleVision3D.gd",
-        "ext":  ".gd",
-        "rel":  "res://addons/3dEnemyToolkit/SimpleVision3D.gd",
-        "relCount":  2,
-        "baseCount":  3,
-        "holderCount":  3
-    },
-    {
         "path":  "H:\\Personal\\GodotProjects\\litenguttleverinorge\\addons\\3dEnemyToolkit\\Example\\ExamplePlayer.tscn",
         "ext":  ".tscn",
         "rel":  "res://addons/3dEnemyToolkit/Example/ExamplePlayer.tscn",

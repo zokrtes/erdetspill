@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var required_scraps: int = 3
+@export var required_scraps: int = 5
 @export var lemonade_stand_scene: PackedScene = preload("res://scenes/props/lemonade_stand.tscn")
 @export var stand_spawn_offset: Vector3 = Vector3(0, 0, 0)
 @export var debug_status_text: bool = true

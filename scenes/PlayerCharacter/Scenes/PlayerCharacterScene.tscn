@@ -1357,7 +1357,7 @@ floor_snap_length = 0.0
 platform_floor_layers = 4278190081
 script = ExtResource("1_834nb")
 desiredMoveSpeedCurve = SubResource("Curve_b3kaq")
-maxSpeed = 20.0
+maxSpeed = 30.0
 inAirMoveSpeedCurve = SubResource("Curve_8ryj3")
 baseHitboxHeight = 2.0
 baseModelHeight = 1.0
@@ -1368,10 +1368,10 @@ crouchDeccel = 8.0
 continiousCrouch = true
 crouchHitboxHeight = 1.2
 crouchModelHeight = 0.6
-walkSpeed = 8.0
+walkSpeed = 9.0
 walkAccel = 10.0
 walkDeccel = 9.0
-runSpeed = 11.0
+runSpeed = 12.5
 runAccel = 8.0
 runDeccel = 7.0
 jumpHeight = 1.6
@@ -1416,6 +1416,18 @@ metadata/_custom_type_script = "uid://dvu58wf01wils"
 script = ExtResource("7_g2qap")
 metadata/_custom_type_script = "uid://bh3rdvokmrar1"
 
+[node name="DamageFlashLayer" type="CanvasLayer" parent="."]
+layer = 15
+
+[node name="DamageOverlay" type="ColorRect" parent="DamageFlashLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0)
+
 [node name="HealthComponent" type="Node" parent="." unique_id=1872962429]
 script = ExtResource("36_ioayp")
 
@@ -1434,8 +1446,8 @@ maxDownAngleView = 90.0
 baseCameraLerpSpeed = 8.0
 crouchCameraLerpSpeed = 8.0
 crouchCameraDepth = -0.4
-bobFrequency = 0.9
-bobAmplitude = 0.1
+bobFrequency = 1.8
+bobAmplitude = 0.11
 tiltRotationValue = 0.4
 tiltRotationSpeed = 2.0
 inAirTiltValDivider = 1.9
@@ -1453,11 +1465,22 @@ fov = 90.0
 near = 0.01
 far = 1000.0
 
+[node name="Flashlight" type="SpotLight3D" parent="CameraHolder/CameraRecoilHolder/Camera" unique_id=1992042401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.15, -0.3)
+visible = false
+light_color = Color(0.95, 0.95, 1, 1)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 20.0
+spot_attenuation = 1.2
+spot_angle = 28.0
+spot_angle_attenuation = 0.4
+
 [node name="WeaponManager" type="Node3D" parent="CameraHolder/CameraRecoilHolder/Camera" unique_id=135883468 node_paths=PackedStringArray("startWeapons")]
 unique_name_in_owner = true
 script = ExtResource("13_834nb")
 weaponResources = Array[ExtResource("14_ca0qr")]([ExtResource("15_1lhsp"), ExtResource("16_tyw5b"), ExtResource("17_bj161"), ExtResource("18_bky4p"), ExtResource("19_m6yr4"), ExtResource("19_mdlbe")])
-startWeapons = [NodePath("WeaponContainer/GrusSkive")]
+startWeapons = []
 shoot_action = "shoot"
 reload_action = "reload"
 weapon_wheel_up_action = "weaponWheelUp"
@@ -1912,23 +1935,9 @@ offset_right = 1897.0
 offset_bottom = 307.0
 script = ExtResource("36_g7u6e")
 
-[node name="QuestDisplay" type="VBoxContainer" parent="HUD/UIStats" unique_id=1523793198]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="Stats" type="VBoxContainer" parent="HUD/UIStats" unique_id=1390714559]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="XPLabel" type="Label" parent="HUD/UIStats/Stats" unique_id=603667612]
-layout_mode = 2
-text = "LVL 1"
-
-[node name="XPBar" type="ProgressBar" parent="HUD/UIStats/Stats" unique_id=1869075512]
-custom_minimum_size = Vector2(120, 8)
-layout_mode = 2
-max_value = 1.0
-show_percentage = false
 
 [node name="Currency" type="TextureRect" parent="HUD/UIStats/Stats" unique_id=808673539]
 layout_mode = 2
@@ -1946,13 +1955,36 @@ layout_mode = 2
 text = "100"
 horizontal_alignment = 1
 
-[node name="HealthLabel" type="Label" parent="HUD/UIStats/Stats" unique_id=2076151166]
-layout_mode = 2
-text = "HP: 100/100"
-horizontal_alignment = 1
-
 [node name="HealthBar" type="ProgressBar" parent="HUD/UIStats/Stats" unique_id=1453467412]
 custom_minimum_size = Vector2(240, 20)
 layout_mode = 2
 value = 100.0
 show_percentage = false
+
+[node name="QuestHud" type="CanvasLayer" parent="." unique_id=920001000]
+layer = 6
+process_mode = 3
+
+[node name="QuestPanel" type="Control" parent="QuestHud" unique_id=920001001]
+layout_mode = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 276.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="QuestDisplay" type="VBoxContainer" parent="QuestHud/QuestPanel" unique_id=1523793198]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3

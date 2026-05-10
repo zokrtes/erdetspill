@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://b2p8y4voxdelx"]
+
+[ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="1_quest"]
+[ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="2_objective"]
+
+[sub_resource type="Resource" id="Resource_n0f5l"]
+script = ExtResource("2_objective")
+objective_id = "collect_fugleskinn"
+description = "Samle 3 kråkefjær på Elgveien"
+type = 0
+target_id = "fugleskinn"
+target_amount = 3
+
+[sub_resource type="Resource" id="Resource_b7ymj"]
+script = ExtResource("2_objective")
+objective_id = "collect_elgskinn"
+description = "Skyt en elg på Elgveien"
+type = 0
+target_id = "elgskinn"
+target_amount = 1
+
+[sub_resource type="Resource" id="Resource_deliver"]
+script = ExtResource("2_objective")
+objective_id = "deliver_skins_to_iver"
+description = "Lever skinnene til Iver"
+type = 1
+target_id = "iver"
+target_amount = 1
+
+[resource]
+script = ExtResource("1_quest")
+quest_id = "IVER_BEVIS"
+name = "Ivers ære"
+description = "Bevis noe for Iver."
+brief_description = "Skaff 3 kråkefjær og 1 elgskinn, og lever til Iver."
+objectives = Array[ExtResource("2_objective")]([SubResource("Resource_n0f5l"), SubResource("Resource_b7ymj"), SubResource("Resource_deliver")])
+reward_items = Array[String](["grus"])
+unlock_quests = Array[String](["STEINAR_GRUS"])
+offer_dialogue = Array[String](["Du vil ha grus?", "Jeg selger ikke til hvem som helst.", "Steinar og Stein sa at jeg ikke kunne benke 120 kg.", "Det er løgn, men det er ikke poenget.", "Poenget er at du må bevise at du er seriøs.", "Kjøp deg en hagle.", "Gå til Elgveien og skyt fugler og elg.", "Kom tilbake med 3 kråkefjær og 1 elgskinn.", "Da selger jeg grus.", "Ta pistolen min. Du trenger den."])
+completion_dialogue = Array[String](["Ikke verst.", "Her er gruset."])

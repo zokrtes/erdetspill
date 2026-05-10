@@ -1,28 +1,39 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://csawawioik55n"]
 
-[ext_resource type="Script" path="res://scenes/props/shop/shop_item.gd" id="1"]
+[ext_resource type="Script" uid="uid://d4ng2bnd70tbl" path="res://scenes/props/shop/shop_item.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://8rode3436amq" path="res://assets/weapons/models/rpg7_rocket.glb" id="2_7qpdu"]
 
 [sub_resource type="StandardMaterial3D" id="mat"]
 albedo_color = Color(0.85, 0.35, 0.2, 1)
 
 [sub_resource type="BoxMesh" id="mesh"]
 material = SubResource("mat")
-size = Vector3(0.24, 0.16, 0.16)
+size = Vector3(0.275, 0.16, 0.305)
 
 [sub_resource type="BoxShape3D" id="shape"]
-size = Vector3(0.24, 0.16, 0.16)
+size = Vector3(0.2680078, 0.16, 0.2961035)
 
-[node name="RocketAmmoShopItem" type="RigidBody3D"]
+[node name="RocketAmmoShopItem" type="RigidBody3D" unique_id=542330547]
 mass = 0.5
 script = ExtResource("1")
 item_id = "rocket_ammo"
 display_name = "Rakettammunisjon"
-price = 140
+price = 200
 ammo_type = "RocketAmmo"
-ammo_amount = 2
+ammo_amount = 1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="rpg7_rocket" parent="." unique_id=300405975 instance=ExtResource("2_7qpdu")]
+transform = Transform3D(-1.1802075e-08, 0.27, 0, -0.27, -1.1802075e-08, 0, 0, 0, 0.27, -0.011096023, 0, 0)
+
+[node name="rpg7_rocket2" parent="." unique_id=1819393261 instance=ExtResource("2_7qpdu")]
+transform = Transform3D(-1.1802075e-08, 0.27, 0, -0.27, -1.1802075e-08, 0, 0, 0, 0.27, -0.011096023, 0, 0.1)
+
+[node name="rpg7_rocket3" parent="." unique_id=1752056270 instance=ExtResource("2_7qpdu")]
+transform = Transform3D(-1.1802075e-08, 0.27, 0, -0.27, -1.1802075e-08, 0, 0, 0, 0.27, -0.011096023, 0, -0.1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1627478134]
 mesh = SubResource("mesh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1692697538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0017382838, 0, -0.0020556636)
 shape = SubResource("shape")

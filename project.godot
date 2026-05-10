@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="erdetetspill"
-run/main_scene="uid://c2wutqmije2tt"
+run/main_scene="res://scenes/ui/title_screen.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=144
 config/icon="res://icon.svg"
@@ -34,7 +34,7 @@ window/size/viewport_height=1080
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/3dEnemyToolkit/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/3dEnemyToolkit/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [file_customization]
 
@@ -132,5 +132,6 @@ carry_object={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+textures/default_filters/use_nearest_mipmap_filter=true
 textures/decals/filter=0
 textures/light_projectors/filter=0

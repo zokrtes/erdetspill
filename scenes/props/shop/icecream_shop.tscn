@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://d4ng2bnd70tbl" path="res://scenes/props/shop/shop_item.gd" id="1_shopitem"]
 [ext_resource type="PackedScene" uid="uid://bqa56c3freguk" path="res://assets/props/glb/is.glb" id="2_qmxsb"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_re6fy"]
-height = 0.42089844
-radius = 0.09667969
+[sub_resource type="BoxShape3D" id="BoxShape3D_qmxsb"]
+size = Vector3(0.245, 0.41707033, 0.215)
 
 [node name="IcecreamShopItem" type="RigidBody3D" unique_id=1653986461]
 mass = 0.3
@@ -18,4 +17,5 @@ price = 100
 transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2071365009]
-shape = SubResource("CylinderShape3D_re6fy")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.006464839, 0)
+shape = SubResource("BoxShape3D_qmxsb")
