@@ -65,7 +65,9 @@ func initialize():
 				forceAttackPointTransformValues(cW.weaponSlot.attackPoint)
 				
 				cW.bobPos = cW.position
-				
+
+	_sync_starting_ammo_for_demo()
+
 	if weaponStack.size() > 0:
 		#enable (equip and set up) the first weapon on the weapon stack
 		enterWeapon(weaponStack[0])
@@ -78,6 +80,9 @@ func initialize():
 func exitWeapon(nextWeapon : int):
 	#this function manage the first part of the weapon switching mechanic
 	#in this part, the current weapon is disabled (unequiped and taked down)
+	if cW == null or not is_instance_valid(cW):
+		enterWeapon(nextWeapon)
+		return
 	if nextWeapon != cW.weaponId:
 		canChangeWeapons = false
 		canUseWeapon = false
@@ -91,6 +96,9 @@ func exitWeapon(nextWeapon : int):
 			animManager.playAnimation("UnequipAnim%s" % cW.weaponName, cW.unequipAnimSpeed, false)
 		await get_tree().create_timer(cW.unequipTime).timeout
 		
+		if not is_instance_valid(cW) or cWModel == null:
+			enterWeapon(nextWeapon)
+			return
 		cWModel.visible = false
 		
 		enterWeapon(nextWeapon)
@@ -116,6 +124,8 @@ func enterWeapon(nextWeapon : int):
 		animManager.playAnimation("EquipAnim%s" % cW.weaponName, cW.equipAnimSpeed, false)
 	await get_tree().create_timer(cW.equipTime).timeout
 	
+	if not is_instance_valid(cW):
+		return
 	if cW.isShooting: cW.isShooting = false
 	if cW.isReloading: cW.isReloading = false
 	canUseWeapon = true
@@ -131,9 +141,13 @@ func _process(_delta : float):
 	_refresh_reserve_dependent_weapon_meshes()
 	
 func weaponInputs():
-	if cW == null:
+	if cW == null or not is_instance_valid(cW):
 		return
-	if Input.is_action_pressed(shoot_action): shootManager.shoot()
+	if Input.is_action_pressed(shoot_action):
+		if cW == null or weaponStack.is_empty():
+			pass
+		else:
+			shootManager.shoot()
 			
 	if Input.is_action_just_pressed(reload_action): reloadManager.reload()
 	
@@ -151,7 +165,7 @@ func displayStats():
 	if hud == null:
 		return
 	hud.displayWeaponStack(weaponStack.size())
-	if cW == null or ammoManager == null:
+	if cW == null or not is_instance_valid(cW) or ammoManager == null:
 		return
 	hud.displayWeaponName(cW.weaponName)
 	hud.displayTotalAmmoInMag(cW.totalAmmoInMag, cW.nbProjShotsAtSameTime)
@@ -164,10 +178,41 @@ func acquire_weapon_by_id(weapon_id: int) -> void:
 		return
 	if weapon_id in weaponStack:
 		return
+	var was_empty := weaponStack.is_empty()
 	weaponStack.append(weapon_id)
 	weaponIndex = weaponStack.size() - 1
+	if was_empty:
+		canUseWeapon = true
+		canChangeWeapons = true
 	changeWeapon(weapon_id)
 	_refresh_reserve_dependent_weapon_meshes()
+
+
+func _sync_starting_ammo_for_demo() -> void:
+	if ammoManager == null:
+		return
+	for k in ammoManager.ammoDict.keys():
+		ammoManager.ammoDict[k] = 0
+	var pistol_res = weaponList.get(1)
+	if pistol_res:
+		var pm := int(pistol_res.totalAmmoInMagRef)
+		pistol_res.totalAmmoInMag = pm
+		if ammoManager.ammoDict.has("pistol_ammo"):
+			ammoManager.ammoDict["pistol_ammo"] = pm * 2
+	var rpg_res = weaponList.get(5)
+	if rpg_res:
+		rpg_res.totalAmmoInMag = 0
+	if ammoManager.ammoDict.has("rocket_ammo"):
+		ammoManager.ammoDict["rocket_ammo"] = 0
+	var grus_res = weaponList.get(6)
+	if grus_res:
+		grus_res.totalAmmoInMag = 0
+	for wid in weaponList.keys():
+		if wid == 1 or wid == 5 or wid == 6:
+			continue
+		var w = weaponList[wid]
+		if w:
+			w.totalAmmoInMag = int(w.totalAmmoInMagRef)
 
 
 func _refresh_reserve_dependent_weapon_meshes() -> void:
@@ -175,19 +220,25 @@ func _refresh_reserve_dependent_weapon_meshes() -> void:
 		return
 	var rocket_node := get_node_or_null("WeaponContainer/RocketLauncher/RocketMesh") as MeshInstance3D
 	if rocket_node != null:
-		var rocket_left: int = int(ammoManager.ammoDict.get("RocketAmmo", 0))
+		var rocket_left: int = int(ammoManager.ammoDict.get("rocket_ammo", 0))
 		rocket_node.visible = rocket_left > 0
-	var grus_slot := get_node_or_null("WeaponContainer/GrusSkive") as Node3D
-	if grus_slot != null:
-		var grus_model := grus_slot.get_node_or_null("GrusSkiveModel") as Node3D
-		if grus_model != null:
-			var grus_left: int = int(ammoManager.ammoDict.get("GrusSkiveAmmo", 0))
-			var show_grus: bool = grus_left > 0 and (6 in weaponStack)
-			grus_model.visible = show_grus
+	_update_grusskive_visibility()
+
+
+func _update_grusskive_visibility() -> void:
+	var mesh := get_node_or_null("WeaponContainer/GrusSkive/GrusSkiveModel/CSGBox3D2/Mesh") as GeometryInstance3D
+	if mesh == null or ammoManager == null:
+		return
+	var is_current := cW != null and is_instance_valid(cW) and str(cW.weaponName) == "GrusSkive"
+	var grus_reserve: int = int(ammoManager.ammoDict.get("grus_ammo", 0))
+	var has_ammo := grus_reserve > 0
+	if is_current:
+		has_ammo = has_ammo or int(cW.totalAmmoInMag) > 0
+	mesh.visible = not (is_current and not has_ammo)
 
 
 func changeWeapon(nextWeapon : int):
-	if cW == null:
+	if cW == null or not is_instance_valid(cW):
 		enterWeapon(nextWeapon)
 		return
 	if canChangeWeapons and !cW.isShooting and !cW.isReloading:
@@ -197,6 +248,8 @@ func changeWeapon(nextWeapon : int):
 		return 
 	
 func displayMuzzleFlash():
+	if cW == null or not is_instance_valid(cW):
+		return
 	#create a muzzle flash instance, and display it at the indicated point
 	if cW.muzzleFlashRef != null:
 		var muzzleFlashInstance = cW.muzzleFlashRef.instantiate()
@@ -224,6 +277,8 @@ func displayBulletHole(colliderPoint: Vector3, colliderNormal: Vector3, hit_coll
 	bulletDecalInstance.rotate_object_local(Vector3(1.0, 0.0, 0.0), 90)
 	
 func weaponSoundManagement(soundName : AudioStream, soundSpeed : float):
+	if cW == null or not is_instance_valid(cW) or cW.weaponSlot == null:
+		return
 	var audioIns : AudioStreamPlayer3D = audioManager.instantiate()
 	get_tree().get_root().add_child.call_deferred(audioIns)
 	#makes sure the node is in the scene tree
@@ -244,7 +299,7 @@ func forceAttackPointTransformValues(attackPoint : Marker3D):
 func set_weapon_controls_enabled(enabled: bool):
 	canUseWeapon = enabled
 	canChangeWeapons = enabled
-	if cW != null:
+	if cW != null and is_instance_valid(cW):
 		if cW.isShooting:
 			cW.isShooting = false
 		if cW.isReloading:

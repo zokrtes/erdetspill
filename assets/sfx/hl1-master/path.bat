@@ -1,1 +1,0 @@
-@echo off & (for /f "tokens=* delims=%cd%" %%a in ('dir sound /b /s /a-d') do echo %%a) > path.txt

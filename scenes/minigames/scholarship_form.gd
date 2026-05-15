@@ -133,7 +133,9 @@ func _apply_visual_style():
 		"FormPanel/Margin/RootVBox/QuestionsVBox/Q3Box",
 		"FormPanel/Margin/RootVBox/QuestionsVBox/Q4Box"
 	]:
-		var box: PanelContainer = get_node(path)
+		var box: PanelContainer = get_node_or_null(path) as PanelContainer
+		if box == null:
+			continue
 		box.add_theme_stylebox_override("panel", _default_box_style)
 	signature_frame.add_theme_stylebox_override("panel", _default_box_style)
 	$FormPanel/RejectionOverlay/Dialog.add_theme_stylebox_override("panel", _rejection_style)
@@ -198,41 +200,37 @@ func _update_timer_label():
 	timer_label.text = "Tid igjen: %d:%02d" % [minutes, seconds]
 	timer_label.add_theme_color_override("font_color", Color(0.85, 0.1, 0.1, 1.0) if _time_remaining <= TIMER_WARNING_SECONDS else Color.BLACK)
 
-func _validate_and_submit(from_timeout: bool = false):
+func _validate_and_submit(from_timeout: bool = false) -> void:
 	if _is_resolved:
 		return
-	if signature_out_of_bounds:
+	if from_timeout:
 		await _show_result_and_close(false, "SØKNAD AVVIST ✗")
 		return
+	if signature_out_of_bounds:
+		_show_field_error("Signaturen er utenfor feltet.")
+		submit_button.disabled = false
+		submit_button.text = "Send inn"
+		_is_submitting = false
+		return
 	if not signature_has_content:
-		if from_timeout:
-			await _show_result_and_close(false, "SØKNAD AVVIST ✗")
-			return
 		signature_frame.add_theme_stylebox_override("panel", _signature_error_style)
-		status_label.text = "Du må signere søknaden."
+		_show_field_error("Du må signere søknaden.")
 		submit_button.disabled = false
 		submit_button.text = "Send inn"
 		_is_submitting = false
 		return
-
-	var empty_fields: Array[LineEdit] = []
-	for field in input_fields:
-		var empty := field.text.strip_edges() == ""
-		field.add_theme_stylebox_override("normal", _empty_field_style if empty else _default_line_edit_style)
-		if empty:
-			empty_fields.append(field)
-
-	if not empty_fields.is_empty():
-		if from_timeout:
-			await _show_result_and_close(false, "SØKNAD AVVIST ✗")
-			return
-		status_label.text = "Søknaden er ufullstendig."
-		submit_button.disabled = false
-		submit_button.text = "Send inn"
-		_is_submitting = false
+	signature_frame.add_theme_stylebox_override("panel", _default_box_style)
+	var error := _validate_all_fields()
+	if error != "":
+		if error.begins_with("HARD_FAIL:"):
+			await _show_result_and_close(false, error.replace("HARD_FAIL:", ""))
+		else:
+			_show_field_error(error)
+			submit_button.disabled = false
+			submit_button.text = "Send inn"
+			_is_submitting = false
 		return
-
-	status_label.text = ""
+	_show_field_error("")
 	await _show_result_and_close(true, "SØKNAD GODKJENT ✓")
 
 func _finish_success():
@@ -317,35 +315,7 @@ func _on_submit_pressed() -> void:
 	submit_button.disabled = true
 	submit_button.text = "Behandler..."
 	await get_tree().process_frame
-	if signature_out_of_bounds:
-		_show_field_error("Signaturen er utenfor feltet.")
-		submit_button.disabled = false
-		submit_button.text = "Send inn"
-		_is_submitting = false
-		return
-	if not signature_has_content:
-		signature_frame.add_theme_stylebox_override("panel", _signature_error_style)
-		_show_field_error("Du må signere søknaden.")
-		submit_button.disabled = false
-		submit_button.text = "Send inn"
-		_is_submitting = false
-		return
-	signature_frame.add_theme_stylebox_override("panel", _default_box_style)
-
-	var error := _validate_all_fields()
-	if error != "":
-		submit_button.disabled = false
-		submit_button.text = "Send inn"
-		_is_submitting = false
-		if error.begins_with("HARD_FAIL:"):
-			var msg := error.trim_prefix("HARD_FAIL:")
-			await _show_result_and_close(false, msg)
-		else:
-			_show_field_error(error)
-		return
-
-	_show_field_error("")
-	await _show_result_and_close(true, "SØKNAD GODKJENT ✓")
+	await _validate_and_submit(false)
 
 func _on_clear_button_pressed():
 	signature_points.clear()

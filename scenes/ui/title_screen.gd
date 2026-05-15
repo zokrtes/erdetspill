@@ -71,6 +71,8 @@ func _process(delta: float) -> void:
 	title_text.position.y = _title_rest_pos.y + sin(_hover_time) * HOVER_DISTANCE
 
 func _on_play() -> void:
+	if GameManager and GameManager.has_method("reset_game"):
+		GameManager.reset_game()
 	var canvas := CanvasLayer.new()
 	canvas.layer = 99
 	add_child(canvas)

@@ -83,6 +83,9 @@ func applyDamage(body: Node, damage_scale: float = 1.0) -> void:
 		if hc and hc.has_method("take_damage"):
 			hc.take_damage(dmg)
 		dealt = true
+	elif GameManager != null and GameManager.apply_weapon_damage_to_npc_collider(body, dmg):
+		bodiesList.append(body)
+		dealt = true
 	if not dealt:
 		return
 

@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://c216c443ybfda"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://gy7iwprohuvv"]
 
 [ext_resource type="Script" uid="uid://cbwqdlinedlg1" path="res://components/dialogue/dialogue_line.gd" id="1_8hmxa"]
 [ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
 [ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
 
-[sub_resource type="Resource" id="Resource_hawpm"]
+[sub_resource type="Resource" id="Resource_8hmxa"]
 script = ExtResource("1_obj")
 objective_id = "talk_to_bank_teller_again"
 description = "Snakk med bankansatt"
@@ -15,9 +15,9 @@ target_id = "bank_teller"
 script = ExtResource("2_quest")
 quest_id = "BANK_DEPOSIT"
 name = "Tilbake til banken"
-description = "Gå til banken."
+description = "Løs stipendet inn hos banken"
 brief_description = "Gå til banken."
 required_quest_ids = Array[String](["SCHOLARSHIP_APPLICATION"])
-objectives = Array[ExtResource("1_obj")]([SubResource("Resource_hawpm")])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_8hmxa")])
 unlock_quests = Array[String](["SECOND_ICECREAM"])
 offer_dialogue = Array[String](["Tilbake igjen.", "Stipend. Greit.", "Ha en fin dag."])

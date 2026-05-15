@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://cke0k61ipdory"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://c4wgfb8f3bsna"]
 
 [ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
 [ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
@@ -7,17 +7,17 @@
 [ext_resource type="AudioStream" uid="uid://bpi583faoa433" path="res://assets/sfx/erdetlyd/vox/bestefar/q08_02.ogg" id="5_q82"]
 [ext_resource type="AudioStream" uid="uid://bovqcu8lpqs1e" path="res://assets/sfx/erdetlyd/vox/bestefar/q08_03.ogg" id="6_q83"]
 
-[sub_resource type="Resource" id="Resource_fc1"]
+[sub_resource type="Resource" id="Resource_yras0"]
 script = ExtResource("3_dline")
 text = "To is. Endelig."
 sound = ExtResource("5_q82")
 
-[sub_resource type="Resource" id="Resource_fc2"]
+[sub_resource type="Resource" id="Resource_i218x"]
 script = ExtResource("3_dline")
 text = "Bra gjort. Jeg er stolt av deg."
 sound = ExtResource("6_q83")
 
-[sub_resource type="Resource" id="Resource_gsdap"]
+[sub_resource type="Resource" id="Resource_uvm5p"]
 script = ExtResource("1_obj")
 objective_id = "deliver_icecreams"
 description = "Snakk med bestefar etter at fryseren har 2 is"
@@ -25,7 +25,7 @@ type = 1
 target_id = "grandpa"
 progress_flavor = "Snakk med bestefar når fryseren er klar"
 
-[sub_resource type="Resource" id="Resource_fo1"]
+[sub_resource type="Resource" id="Resource_2jllm"]
 script = ExtResource("3_dline")
 text = "Er det is?"
 sound = ExtResource("4_q81")
@@ -37,9 +37,9 @@ name = "Lever isen"
 description = "Bestefar venter."
 brief_description = "Du vet hva du må gjøre."
 required_quest_ids = Array[String](["SECOND_ICECREAM"])
-objectives = Array[ExtResource("1_obj")]([SubResource("Resource_gsdap")])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_uvm5p")])
 reward_title = "Isens Utvalgte"
 offer_dialogue = Array[String](["Er det is?"])
 completion_dialogue = Array[String](["To is. Endelig.", "Bra gjort. Jeg er stolt av deg."])
-offer_lines = Array[ExtResource("3_dline")]([SubResource("Resource_fo1")])
-completion_lines = Array[ExtResource("3_dline")]([SubResource("Resource_fc1"), SubResource("Resource_fc2")])
+offer_lines = Array[ExtResource("3_dline")]([SubResource("Resource_2jllm")])
+completion_lines = Array[ExtResource("3_dline")]([SubResource("Resource_yras0"), SubResource("Resource_i218x")])

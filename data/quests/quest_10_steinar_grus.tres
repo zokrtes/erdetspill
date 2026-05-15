@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://duqv3n6jncx57"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://camdlw4k1ho4h"]
 
+[ext_resource type="Script" uid="uid://cbwqdlinedlg1" path="res://components/dialogue/dialogue_line.gd" id="1_lguo7"]
 [ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="1_quest"]
 [ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="2_objective"]
 
-[sub_resource type="Resource" id="Resource_l27r2"]
+[sub_resource type="Resource" id="Resource_lguo7"]
 script = ExtResource("2_objective")
 objective_id = "deliver_grus_to_steinar"
 description = "Lever grus til Steinar"
@@ -18,6 +19,6 @@ description = "Steinar og Stein vil ha grus."
 brief_description = "Lever en pose grus til Steinar."
 quest_type = 6
 required_quest_ids = Array[String](["IVER_BEVIS"])
-objectives = Array[ExtResource("2_objective")]([SubResource("Resource_l27r2")])
-offer_dialogue = Array[String](["Vi vil ha grus i bytte mot capsen.", "Gå til Iver på Kratergata.", "Få han til å selge grus til deg.", "Kom tilbake med grus, så får du capsen."])
-completion_dialogue = Array[String](["Der."])
+objectives = Array[ExtResource("2_objective")]([SubResource("Resource_lguo7")])
+offer_dialogue = Array[String](["Vi vil gRUSE oss men Iver vil ikke selge grus til oss fordi vi såret følelsene hans.", "Hvis du skaffer oss grus fra Iver får du capsen."])
+completion_dialogue = Array[String](["Ah du fikk kjøpt grus!", "her har du capsen den ligger bak sofaen"])

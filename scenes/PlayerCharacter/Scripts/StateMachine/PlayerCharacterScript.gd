@@ -424,9 +424,9 @@ func _can_show_weapon() -> bool:
 	if is_sitting or movement_frozen or camera_frozen:
 		return false
 	var current_scene: Node = get_tree().current_scene
-	if current_scene and current_scene.has_node("InventoryPanel"):
-		var inventory_panel: Node = current_scene.get_node("InventoryPanel")
-		if inventory_panel and inventory_panel.has_method("get"):
+	if current_scene != null:
+		var inventory_panel: Node = current_scene.get_node_or_null("InventoryPanel")
+		if inventory_panel != null and inventory_panel.has_method("get"):
 			if bool(inventory_panel.get("is_open")):
 				return false
 	return true

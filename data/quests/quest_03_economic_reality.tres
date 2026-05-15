@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="Quest" format=3]
 
 [ext_resource type="Script" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" path="res://components/dialogue/dialogue_line.gd" id="1_x3q0d"]
 [ext_resource type="Script" path="res://components/quest/quest.gd" id="2_quest"]
 
-[sub_resource type="Resource" id="Resource_7jfvu"]
+[sub_resource type="Resource" id="Resource_0naf4"]
 script = ExtResource("1_obj")
 objective_id = "buy_icecream"
 description = "Kjøp iskrem"
@@ -17,5 +18,5 @@ name = "Kjøp is"
 description = "Gå til butikken."
 brief_description = "Gå til butikken."
 required_quest_ids = Array[String](["BANK_INHERITANCE"])
-objectives = Array[ExtResource("1_obj")]([SubResource("Resource_7jfvu")])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_0naf4")])
 unlock_quests = Array[String](["GRANDPA_DISAPPOINTMENT"])

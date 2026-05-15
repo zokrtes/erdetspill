@@ -57,7 +57,7 @@ func _ready():
 	var q8 = _create_quest_8()
 	_save_quest(q8, quests_dir + "quest_08_final_delivery.tres")
 
-	# Sidequest: Kris og caps
+	# Sidequest: Kristoffer og caps (npc_id kris)
 	var q9 = _create_quest_kris_lua()
 	_save_quest(q9, quests_dir + "quest_kris_lua.tres")
 
@@ -187,7 +187,7 @@ func _create_quest_5() -> Quest:
 	var quest = Quest.new()
 	quest.quest_id = "SCHOLARSHIP_APPLICATION"
 	quest.name = "Stipend"
-	quest.description = "Gå til Lånekassa"
+	quest.description = "Søk stipend hos Lånekassa"
 	quest.brief_description = "Det finnes kanskje måter å skaffe mer penger på."
 	quest.required_quest_ids.append("GRANDPA_DISAPPOINTMENT")
 	
@@ -224,7 +224,7 @@ func _create_quest_6() -> Quest:
 	var quest = Quest.new()
 	quest.quest_id = "BANK_DEPOSIT"
 	quest.name = "Tilbake til banken"
-	quest.description = "Gå til banken."
+	quest.description = "Løs stipendet inn hos banken"
 	quest.brief_description = "Gå til banken."
 	quest.required_quest_ids.append("SCHOLARSHIP_APPLICATION")
 	
@@ -247,13 +247,13 @@ func _create_quest_7() -> Quest:
 	var quest = Quest.new()
 	quest.quest_id = "SECOND_ICECREAM"
 	quest.name = "Én is til"
-	quest.description = "Kjøp enda en is. Du trenger mer penger."
+	quest.description = "Kjøp den siste isen til bestefar"
 	quest.brief_description = "Du vet hva du må gjøre."
 	quest.required_quest_ids.append("BANK_DEPOSIT")
 	
 	var obj = QuestObjective.new()
 	obj.objective_id = "buy_second_icecream"
-	obj.description = "Kjøp enda en is. Du trenger mer penger."
+	obj.description = "Kjøp en is til"
 	obj.type = QuestObjective.ObjectiveType.PURCHASE_ITEM
 	obj.target_id = "icecream"
 	obj.target_amount = 1
@@ -297,9 +297,9 @@ func _create_quest_8() -> Quest:
 func _create_quest_kris_lua() -> Quest:
 	var quest := Quest.new()
 	quest.quest_id = "KRIS_LUA"
-	quest.name = "Capsen til Kris"
-	quest.description = "Kris savner capsene sine."
-	quest.brief_description = "Finn Kris sine caps."
+	quest.name = "Capsen til Kristoffer"
+	quest.description = "Kristoffer savner capsen sin."
+	quest.brief_description = "Finn Kristoffer sin caps."
 	quest.quest_type = Quest.QuestType.GATHER
 	quest.required_quest_ids = []
 
@@ -313,19 +313,19 @@ func _create_quest_kris_lua() -> Quest:
 
 	var talk_kris := QuestObjective.new()
 	talk_kris.objective_id = "return_lua_to_kris"
-	talk_kris.description = "Lever capsen til Kris"
+	talk_kris.description = "Lever capsen til Kristoffer"
 	talk_kris.type = QuestObjective.ObjectiveType.TALK_TO_NPC
 	talk_kris.target_id = "kris"
 	talk_kris.target_amount = 1
 	quest.objectives.append(talk_kris)
 
 	quest.reward_money = 150
-	quest.offer_dialogue.append("Har du sett capsene mine?")
-	quest.offer_dialogue.append("Peak Performance-caps.")
-	quest.offer_dialogue.append("Grusbrødrene tok den.")
-	quest.offer_dialogue.append("De sitter i garasjen sin der nede.")
-	quest.completion_dialogue.append("Liker du rimming?")
-	quest.completion_dialogue.append("Takk.")
+	quest.offer_dialogue.append("Har du sett capsen min?")
+	quest.offer_dialogue.append("Peak Performance-capsen min.")
+	quest.offer_dialogue.append("Stein og Steinar tok den.")
+	quest.offer_dialogue.append("De sitter i garasjen sin i enden av gata.")
+	quest.completion_dialogue.append("Tusen takk for at du fant den.")
+	quest.completion_dialogue.append("Nå ble jeg kram i buksa.")
 	return quest
 
 func _create_quest_iver() -> Quest:
@@ -361,19 +361,16 @@ func _create_quest_iver() -> Quest:
 	deliver_iver.target_amount = 1
 	quest.objectives.append(deliver_iver)
 
-	quest.offer_dialogue.append("Du vil ha grus?")
-	quest.offer_dialogue.append("Jeg selger ikke til hvem som helst.")
-	quest.offer_dialogue.append("Steinar og Stein sa at jeg ikke kunne benke 120 kg.")
-	quest.offer_dialogue.append("Det er løgn, men det er ikke poenget.")
-	quest.offer_dialogue.append("Poenget er at du må bevise at du er seriøs.")
-	quest.offer_dialogue.append("Kjøp deg en hagle.")
-	quest.offer_dialogue.append("Gå til Elgveien og skyt fugler og elg.")
-	quest.offer_dialogue.append("Kom tilbake med 3 kråkefjær og 1 elgskinn.")
-	quest.offer_dialogue.append("Da selger jeg grus.")
-	quest.offer_dialogue.append("Ta pistolen min. Du trenger den.")
+	quest.offer_dialogue.append("Jeg har ikke sett deg før?")
+	quest.offer_dialogue.append("Du vil kjøpe grus?")
+	quest.offer_dialogue.append("Er du kompis av Stein og Steinar? Ja det er du. Jeg ser det på det livløse trynet ditt.")
+	quest.offer_dialogue.append("Jeg selger ikke til Stein og Steinar. De sa jeg ikke kunne benke 120 kg. Noe som jeg klarer btw.")
+	quest.offer_dialogue.append("Uansett. Jeg er en rimelig fyr.")
+	quest.offer_dialogue.append("Hvis du lover å ikke gi det til grusbrødrene og signerer petisjonen min")
+	quest.offer_dialogue.append("OG henter meg 3 kråkefjær og 1 elgskinn så skal jeg selge deg grus.")
 
-	quest.completion_dialogue.append("Ikke verst.")
-	quest.completion_dialogue.append("Her er gruset.")
+	quest.completion_dialogue.append("Takk for fjær og skinn, nå blir det suppe!")
+	quest.completion_dialogue.append("Her har du grus som takk, men ikke gi det til Stein og Steinar!")
 	quest.reward_money = 0
 	quest.reward_items.append("grus")
 	return quest
@@ -395,11 +392,10 @@ func _create_quest_steinar() -> Quest:
 	obj.target_amount = 1
 	quest.objectives.append(obj)
 
-	quest.offer_dialogue.append("Vi vil ha grus i bytte mot capsen.")
-	quest.offer_dialogue.append("Gå til Iver på Kratergata.")
-	quest.offer_dialogue.append("Få han til å selge grus til deg.")
-	quest.offer_dialogue.append("Kom tilbake med grus, så får du capsen.")
-	quest.completion_dialogue.append("Der.")
+	quest.offer_dialogue.append("Vi vil gRUSE oss men Iver vil ikke selge grus til oss fordi vi såret følelsene hans.")
+	quest.offer_dialogue.append("Hvis du skaffer oss grus fra Iver får du capsen.")
+	quest.completion_dialogue.append("Ah du fikk kjøpt grus!")
+	quest.completion_dialogue.append("her har du capsen den ligger bak sofaen")
 	return quest
 
 func _save_quest(quest: Quest, path: String):

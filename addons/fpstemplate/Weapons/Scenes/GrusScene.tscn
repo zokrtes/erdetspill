@@ -27,7 +27,7 @@ texture_filter = 0
 
 [node name="Grus" type="RigidBody3D" unique_id=584839194]
 collision_layer = 8
-collision_mask = 53
+collision_mask = 61
 physics_material_override = SubResource("PhysicsMaterial_jevsj")
 continuous_cd = true
 contact_monitor = true

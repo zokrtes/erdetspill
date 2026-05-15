@@ -18,7 +18,7 @@ script = ExtResource("1")
 item_id = "light_ammo"
 display_name = "Lett ammunisjon"
 price = 40
-ammo_type = "LightAmmo"
+ammo_type = "pistol_ammo"
 ammo_amount = 30
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1162925869]

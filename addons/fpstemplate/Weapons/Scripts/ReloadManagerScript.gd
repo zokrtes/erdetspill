@@ -12,20 +12,32 @@ var cW #current weapon
 func getCurrentWeapon(currentWeapon):
 	cW = currentWeapon
 	
-func _process(delta : float):
+func _process(delta : float) -> void:
+	if cW == null:
+		return
+	if not is_instance_valid(cW):
+		return
 	if cW.isReloading and startReloadTimer and !forceReloadStop:
 		reloadFollow(delta)
 	elif forceReloadStop:
+		if not is_instance_valid(cW):
+			return
 		cW.isReloading = false
 		startReloadTimer = false
 		if weaponManager != null and weaponManager.has_method("reset_current_weapon_mesh_visibility"):
 			weaponManager.reset_current_weapon_mesh_visibility()
 		return
 		
-func reload():
+func reload() -> void:
+	if cW == null or not is_instance_valid(cW):
+		return
 	reloadStart()
 	
-func reloadStart():
+func reloadStart() -> void:
+	if cW == null or not is_instance_valid(cW):
+		return
+	if weaponManager == null or weaponManager.ammoManager == null:
+		return
 	if cW.hasToReload:
 		if (!cW.isReloading and \
 		#the type of ammunition the weapon is using still as reserve
@@ -51,7 +63,10 @@ func reloadStart():
 	else:
 		print("No need to reload")
 		
-func reloadFollow(delta : float):
+func reloadFollow(delta : float) -> void:
+	if cW == null or not is_instance_valid(cW):
+		startReloadTimer = false
+		return
 	if not cW.isReloading:
 		startReloadTimer = false
 		if weaponManager != null and weaponManager.has_method("reset_current_weapon_mesh_visibility"):
@@ -61,12 +76,14 @@ func reloadFollow(delta : float):
 		playSoundAndAnim = false
 		if not cW.isReloading:
 			return
-		weaponManager.weaponSoundManagement(cW.reloadSound, cW.reloadSoundSpeed)
+		if weaponManager != null:
+			weaponManager.weaponSoundManagement(cW.reloadSound, cW.reloadSoundSpeed)
 		
 		if cW.shootAnimName != "":
 			if not cW.isReloading:
 				return
-			weaponManager.animManager.playAnimation("ReloadAnim%s" % cW.weaponName, cW.reloadAnimSpeed, true)
+			if weaponManager != null and weaponManager.animManager != null:
+				weaponManager.animManager.playAnimation("ReloadAnim%s" % cW.weaponName, cW.reloadAnimSpeed, true)
 		else:
 			print("%s doesn't have a reload animation" % cW.weaponName)
 			
@@ -95,6 +112,10 @@ func reloadFollow(delta : float):
 				weaponManager.reset_current_weapon_mesh_visibility()
 			
 func onePartReloadCalculus():
+	if cW == null or not is_instance_valid(cW):
+		return
+	if weaponManager == null or weaponManager.ammoManager == null:
+		return
 	#explanation of the use of the min function here
 	#case 1: if there's enough ammo to completely refill the magazine
 	#case 2: if there's not enough ammo left, we refill the magazine with the remaining ammo.
@@ -106,6 +127,10 @@ func onePartReloadCalculus():
 		weaponManager.ammoManager.ammoDict[cW.ammoType] -= nbnbAmmoToRefill
 		
 func multiPartReloadCalculus():
+	if cW == null or not is_instance_valid(cW):
+		return
+	if weaponManager == null or weaponManager.ammoManager == null:
+		return
 	var nbAmmoToRefill = cW.totalAmmoInMagRef / cW.nbPartsNeeded
 	if weaponManager.ammoManager.ammoDict[cW.ammoType] >= nbAmmoToRefill and \
 	cW.totalAmmoInMag <= cW.totalAmmoInMagRef - nbAmmoToRefill:
@@ -116,7 +141,11 @@ func multiPartReloadCalculus():
 		print("Not enough ammunition in bag, or magazine complete")
 		forceReloadStop = true
 		
-func autoReload():
+func autoReload() -> void:
+	if cW == null or not is_instance_valid(cW):
+		return
+	if weaponManager == null or weaponManager.ammoManager == null:
+		return
 	#auto reload the weapon if he can reload, has to reload, has auto reload enabled, has enought ammo in the ammo manager, and the magazine is empty
 	if cW.autoReload and !cW.isReloading and \
 	weaponManager.ammoManager.ammoDict[cW.ammoType] > 0 and \

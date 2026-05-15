@@ -14,12 +14,13 @@ size = Vector3(0.275, 0.16, 0.305)
 size = Vector3(0.2680078, 0.16, 0.2961035)
 
 [node name="RocketAmmoShopItem" type="RigidBody3D" unique_id=542330547]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 mass = 0.5
 script = ExtResource("1")
 item_id = "rocket_ammo"
 display_name = "Rakettammunisjon"
 price = 200
-ammo_type = "RocketAmmo"
+ammo_type = "rocket_ammo"
 ammo_amount = 1
 
 [node name="rpg7_rocket" parent="." unique_id=300405975 instance=ExtResource("2_7qpdu")]

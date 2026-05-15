@@ -10,7 +10,13 @@ func getCurrentWeapon(currWeap):
 	#get current weapon resources
 	cW = currWeap
 	
-func shoot():
+func shoot() -> void:
+	if cW == null:
+		return
+	if not is_instance_valid(cW):
+		return
+	if weaponManager == null or weaponManager.ammoManager == null:
+		return
 	if !cW.isShooting and (
 	#magazine isn't empty, and has >= ammo than the number of projectiles required for a shot
 	(cW.totalAmmoInMag > 0 and cW.totalAmmoInMag >= cW.nbProjShotsAtSameTime)
@@ -19,7 +25,7 @@ func shoot():
 	(cW.allAmmoInMag and weaponManager.ammoManager.ammoDict[cW.ammoType] > 0 and
 	#has >= ammo than the number of projectiles required for a shot
 	weaponManager.ammoManager.ammoDict[cW.ammoType] >= cW.nbProjShotsAtSameTime)
-	) and !cW.isReloading:
+	) and not (cW != null and cW.isReloading):
 		cW.isShooting = true
 		
 		#number of successive shots (for example if 3, the weapon will shot 3 times in a row)
@@ -67,9 +73,12 @@ func shoot():
 			else:
 				print("Not enought ammunitions to shoot")
 				
-		cW.isShooting = false
+		if is_instance_valid(cW):
+			cW.isShooting = false
 		
 func getCameraPOV():
+	if cW == null or not is_instance_valid(cW):
+		return Vector3.ZERO
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	if camera == null:
 		return Vector3.ZERO
@@ -107,6 +116,8 @@ func getCameraPOV():
 		return raycastEnd 
 		
 func hitscanShot(pointOfCollisionHitscan : Vector3):
+	if cW == null or not is_instance_valid(cW):
+		return
 	rng = RandomNumberGenerator.new()
 	
 	#set up weapon shot sprad 
@@ -164,6 +175,8 @@ func _spawn_blood_at(pos: Vector3, normal: Vector3) -> void:
 		blood.call("play", pos, normal)
 
 func projectileShot(pointOfCollisionProjectile : Vector3):
+	if cW == null or not is_instance_valid(cW):
+		return
 	rng = RandomNumberGenerator.new()
 	
 	#set up weapon shot spread 

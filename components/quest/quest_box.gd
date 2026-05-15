@@ -30,7 +30,8 @@ func _refresh():
 		return
 	
 	title_label.text = quest.name
-	description_label.text = quest.brief_description
+	var desc := quest.description.strip_edges()
+	description_label.text = desc if desc != "" else quest.brief_description
 	
 	# Styling based on state
 	match quest.state:

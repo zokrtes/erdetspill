@@ -342,12 +342,13 @@ func _get_checkout_zone() -> Node:
 	return get_node_or_null(checkout_zone)
 
 func _get_quest_system() -> Node:
-	var root = get_tree().root
-	if root.has_node("QuestSystem"):
-		return root.get_node("QuestSystem")
-	var current_scene = get_tree().current_scene
-	if current_scene and current_scene.has_node("QuestManager"):
-		return current_scene.get_node("QuestManager")
+	var root := get_tree().root
+	var qs := root.get_node_or_null("QuestSystem")
+	if qs != null:
+		return qs
+	var current_scene := get_tree().current_scene
+	if current_scene != null:
+		return current_scene.get_node_or_null("QuestManager")
 	return null
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

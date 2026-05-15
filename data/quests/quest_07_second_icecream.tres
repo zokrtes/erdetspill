@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Quest" format=3]
 
 [ext_resource type="Script" path="res://components/quest/quest_objective.gd" id="1_obj"]
+[ext_resource type="Script" path="res://components/dialogue/dialogue_line.gd" id="1_v448f"]
 [ext_resource type="Script" path="res://components/quest/quest.gd" id="2_quest"]
 
-[sub_resource type="Resource" id="Resource_014mc"]
+[sub_resource type="Resource" id="Resource_yyiyr"]
 script = ExtResource("1_obj")
 objective_id = "buy_second_icecream"
-description = "Kjøp enda en is. Du trenger mer penger."
+description = "Kjøp en is til"
 type = 7
 target_id = "icecream"
 
@@ -14,8 +15,8 @@ target_id = "icecream"
 script = ExtResource("2_quest")
 quest_id = "SECOND_ICECREAM"
 name = "Én is til"
-description = "Kjøp enda en is. Du trenger mer penger."
+description = "Kjøp den siste isen til bestefar"
 brief_description = "Du vet hva du må gjøre."
 required_quest_ids = Array[String](["BANK_DEPOSIT"])
-objectives = Array[ExtResource("1_obj")]([SubResource("Resource_014mc")])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_yyiyr")])
 unlock_quests = Array[String](["FINAL_DELIVERY"])

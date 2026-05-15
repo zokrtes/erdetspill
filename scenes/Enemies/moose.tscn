@@ -7,14 +7,8 @@
 [ext_resource type="Script" uid="uid://cen74ogojn8ue" path="res://components/health_component.gd" id="5_health"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kvrsn"]
-radius = 0.16699219
-height = 2.9680176
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_suid6"]
-size = Vector3(4.746618, 1.7481475, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ingq2"]
-size = Vector3(3.0907187, 1.7943907, 0.1)
+radius = 0.7602539
+height = 4.0
 
 [sub_resource type="Animation" id="Animation_fall"]
 resource_name = "fall"
@@ -30,6 +24,8 @@ collision_mask = 31
 floor_stop_on_slope = false
 floor_max_angle = 1.0471976
 floor_snap_length = 0.4
+motion_mode = 0
+max_slides = 6
 script = ExtResource("1_enemy")
 runSpeed = 6.5
 attack_cooldown = 2.0
@@ -45,21 +41,13 @@ ragdoll_lifetime = 4.0
 drop_item_id = "elgskinn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1706067954]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7423302, 0)
 shape = SubResource("CapsuleShape3D_kvrsn")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=990989086]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03989911, 0.711354, 0)
-shape = SubResource("BoxShape3D_suid6")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1416144631]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9677031, -0.9882134, 0)
-shape = SubResource("BoxShape3D_ingq2")
-
 [node name="Geometry" type="Node3D" parent="." unique_id=741072133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7944932, 0.13153905, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="Geometry" unique_id=207645927]
-transform = Transform3D(1, 0, 0, 0, 0.9111252, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9111252, 0, 0, 0, 1, 0, 0.11234499, 0)
 texture = ExtResource("2_ipyvw")
 
 [node name="FollowTarget3D" type="NavigationAgent3D" parent="." unique_id=1613618656]

@@ -18,6 +18,7 @@ signal minigame_started(minigame_id: String)
 signal minigame_ended(minigame_id: String, score: int)
 signal gunshot_fired(position: Vector3, range: float)
 signal day_changed(new_day: int)
+signal game_reset
 
 # ============================================
 # PLAYER VARIABLES
@@ -29,6 +30,7 @@ var day_duration_seconds: float = 600.0
 var player_name: String = "Sokrates"
 var player_title: String = ""
 var player_money: int = 0
+var player_xp: int = 0
 
 # ============================================
 # COLLECTIONS
@@ -372,7 +374,7 @@ func _check_quest_requirements(quest: Quest) -> bool:
 # ============================================
 # QUEST SYSTEM - MAIN METHODS
 # ============================================
-func add_quest(quest: Quest, auto_start: bool = true):
+func add_quest(quest: Quest, auto_start: bool = true) -> bool:
 	# Check if quest already completed
 	if completed_quests.has(quest.quest_id):
 		print("Quest already completed: ", quest.quest_id)
@@ -625,12 +627,13 @@ func has_active_quest(quest_id: String) -> bool:
 	return active_quests.has(quest_id)
 
 func _get_quest_system_node() -> Node:
-	var root = get_tree().root
-	if root.has_node("QuestSystem"):
-		return root.get_node("QuestSystem")
-	var current_scene = get_tree().current_scene
-	if current_scene and current_scene.has_node("QuestManager"):
-		return current_scene.get_node("QuestManager")
+	var root := get_tree().root
+	var qs := root.get_node_or_null("QuestSystem")
+	if qs != null:
+		return qs
+	var current_scene := get_tree().current_scene
+	if current_scene != null:
+		return current_scene.get_node_or_null("QuestManager")
 	return null
 
 func _has_document_reward(quest: Quest) -> bool:
@@ -691,6 +694,7 @@ func _validate_resources():
 func reset_game():
 	current_day = 1
 	player_money = 0
+	player_xp = 0
 	player_title = ""
 	inventory.clear()
 	active_quests.clear()
@@ -708,6 +712,7 @@ func reset_game():
 	# Emit reset signals
 	money_changed.emit(0)
 	title_changed.emit("")
+	game_reset.emit()
 	
 	print("🔄 Game reset complete")
 

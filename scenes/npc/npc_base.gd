@@ -28,6 +28,8 @@ const ENDING_OVERLAY: PackedScene = preload("res://scenes/ui/ending_overlay.tscn
 @export var greeting_sound: AudioStream = null
 ## Grandpa: VO for the hardcoded inheritance-misuse dialogue line.
 @export var inheritance_misuse_sound: AudioStream = null
+## Key = quest_id (offer) or quest_id + "_COMPLETE" (completion). Value = Array[AudioStream] aligned to dialogue lines; use null entries for silent lines.
+@export var quest_dialogue_sounds: Dictionary = {}
 
 var model_mesh: MeshInstance3D
 var model_root: Node3D
@@ -81,6 +83,8 @@ func _ready() -> void:
 
 	if not DialogueUI.dialogue_finished.is_connected(_on_dialogue_ui_finished):
 		DialogueUI.dialogue_finished.connect(_on_dialogue_ui_finished)
+	if GameManager and GameManager.has_signal("game_reset") and not GameManager.game_reset.is_connected(_on_game_reset):
+		GameManager.game_reset.connect(_on_game_reset)
 
 	print("✓ NPC ready: ", npc_name, " [", npc_id, "] quests: ", quests.size())
 
@@ -175,6 +179,26 @@ func _make_line(line_text: String, sound: AudioStream) -> DialogueLine:
 	dl.text = line_text
 	dl.sound = sound
 	return dl
+
+
+func _set_dialogue_sounds_for_quest(sound_key: String, line_objs: Array) -> void:
+	if sound_key.is_empty() or line_objs.is_empty():
+		return
+	if not quest_dialogue_sounds.has(sound_key):
+		return
+	var streams_val: Variant = quest_dialogue_sounds[sound_key]
+	if not (streams_val is Array):
+		return
+	var streams: Array = streams_val
+	for i in range(line_objs.size()):
+		if i >= streams.size():
+			break
+		var st: Variant = streams[i]
+		if st == null or not (st is AudioStream):
+			continue
+		var item: Variant = line_objs[i]
+		if item is DialogueLine:
+			(item as DialogueLine).sound = st as AudioStream
 
 
 func _get_lines_for_quest(quest: Quest, use_completion: bool) -> Array:
@@ -321,6 +345,12 @@ func _interact() -> void:
 	if DialogueUI.is_open():
 		return
 
+	var _gated_npc_ids: Array[String] = ["kris", "iver", "steinar", "stein"]
+	if npc_id in _gated_npc_ids:
+		if GameManager and GameManager.has_method("is_quest_completed") and not GameManager.is_quest_completed("BANK_DEPOSIT"):
+			DialogueUI.show_dialogue(["Jeg orker ikke snakke."], npc_name, Callable())
+			return
+
 	print("=== INTERACT with ", npc_name, " ===")
 	if GameManager and GameManager.has_method("register_npc_talked"):
 		GameManager.register_npc_talked(npc_id)
@@ -366,11 +396,18 @@ func _interact() -> void:
 						bt_objs.append(_make_line(s, null))
 					_show_npc_dialogue(blocked_turn, bt_objs, Callable())
 				return
+		for quest in npc_active_quests:
+			if quest.quest_id == "FINAL_DELIVERY":
+				if _can_turn_in_quest(quest):
+					_update_talk_objective_if_needed(quest)
+					_show_completion_and_turn_in(quest)
+					return
 		var first_quest = npc_active_quests[0]
 		var replay_objs := _ensure_line_objects_from_quest_offer(
 			first_quest,
 			["*du snakker med " + npc_name + "*"]
 		)
+		_set_dialogue_sounds_for_quest(first_quest.quest_id, replay_objs)
 		var replay_texts := _dialogue_line_texts(replay_objs)
 		_show_npc_dialogue(
 			replay_texts,
@@ -379,9 +416,13 @@ func _interact() -> void:
 				var changed = _update_talk_objective_if_needed(first_quest)
 				if changed and first_quest.is_complete():
 					if _can_turn_in_quest(first_quest):
-						_prepare_turn_in_rewards(first_quest)
-						GameManager.complete_quest(first_quest)
-						quests.erase(first_quest)
+						# FINAL_DELIVERY: show completion_lines / completion_dialogue before rewards (was skipping straight to complete).
+						if first_quest.quest_id == "FINAL_DELIVERY":
+							_show_completion_and_turn_in(first_quest)
+						else:
+							_prepare_turn_in_rewards(first_quest)
+							GameManager.complete_quest(first_quest)
+							quests.erase(first_quest)
 					else:
 						push_warning("Quest %s complete but turn-in requirements not met." % first_quest.quest_id)
 		)
@@ -400,6 +441,18 @@ func _interact() -> void:
 			for s in blocked:
 				bl_objs.append(_make_line(s, null))
 			_show_npc_dialogue(blocked, bl_objs, Callable())
+			return
+		if (npc_id == "steinar" or npc_id == "stein") and GameManager.has_active_quest("KRIS_LUA"):
+			DialogueUI.show_dialogue(
+				[
+					"Ja vi har capsen til Kristoffer.",
+					"Men du får den ikke gratis.",
+					"Vi vil gRUSE oss men Iver vil ikke selge grus til oss fordi vi såret følelsene hans.",
+					"Hvis du skaffer oss grus fra Iver får du capsen.",
+				],
+				npc_name,
+				Callable()
+			)
 			return
 		var lines := idle_dialogue
 		if lines.is_empty():
@@ -463,25 +516,65 @@ func _offer_quest(quest: Quest) -> void:
 		quest,
 		["Vil du akseptere oppdraget: " + quest.name + "?"]
 	)
+	_set_dialogue_sounds_for_quest(quest.quest_id, line_objs)
 	var quest_dialogue := _dialogue_line_texts(line_objs)
 
 	_show_npc_dialogue(
 		quest_dialogue,
 		line_objs,
 		func():
-			print("Adding quest: ", current_quest.name)
-			var offered_quest_id = current_quest.quest_id
-			var accepted = GameManager.add_quest(current_quest)
-			if accepted:
-				if offered_quest_id == "IVER_BEVIS":
-					_give_iver_pistol()
-				var active_quest: Quest = GameManager.active_quests.get(offered_quest_id)
-				if active_quest != null and _update_talk_objective_if_needed(active_quest) and active_quest.is_complete() and _can_turn_in_quest(active_quest):
-					_prepare_turn_in_rewards(active_quest)
-					GameManager.complete_quest(active_quest)
-					quests.erase(current_quest)
+			if current_quest == null:
+				return
+			print("Quest offer closed: ", current_quest.name)
+			var offered_quest_id := current_quest.quest_id
+			var quest_snapshot: Quest = current_quest
 			current_quest = null
+			if offered_quest_id == "IVER_BEVIS":
+				_start_iver_petisjon_minigame(quest_snapshot)
+			else:
+				_finalize_quest_offer_accept(quest_snapshot, offered_quest_id)
 	)
+
+
+func _start_iver_petisjon_minigame(quest: Quest) -> void:
+	var scene: PackedScene = load("res://scenes/minigames/iver_petisjon.tscn") as PackedScene
+	if scene == null:
+		push_error("Missing iver_petisjon.tscn")
+		_finalize_quest_offer_accept(quest, quest.quest_id)
+		return
+	var pet: Node = scene.instantiate()
+	var root := get_tree().current_scene
+	if root == null:
+		root = get_tree().root
+	root.add_child(pet)
+	if pet.has_signal("signed"):
+		pet.signed.connect(func():
+			var thanks_lines: Array[String] = [
+				"Takk for signaturen.",
+				"Her er pistolen min.",
+				"Gå å slakt no dyr for meg nå :)",
+				"Du finner dem på Elgveien.",
+			]
+			var thanks_objs: Array = []
+			for s in thanks_lines:
+				thanks_objs.append(_make_line(s, null))
+			_show_npc_dialogue(thanks_lines, thanks_objs, func():
+				_finalize_quest_offer_accept(quest, quest.quest_id)
+			)
+		)
+
+
+func _finalize_quest_offer_accept(quest: Quest, offered_quest_id: String) -> void:
+	var accepted: bool = GameManager.add_quest(quest)
+	if accepted:
+		if offered_quest_id == "IVER_BEVIS":
+			_set_player_frozen(false)
+			_give_iver_pistol()
+		var active_quest: Quest = GameManager.active_quests.get(offered_quest_id)
+		if active_quest != null and _update_talk_objective_if_needed(active_quest) and active_quest.is_complete() and _can_turn_in_quest(active_quest):
+			_prepare_turn_in_rewards(active_quest)
+			GameManager.complete_quest(active_quest)
+			quests.erase(quest)
 
 
 func _get_active_quests_for_npc() -> Array[Quest]:
@@ -581,6 +674,7 @@ func _get_turn_in_blocked_dialogue(quest: Quest) -> Array[String]:
 
 func _show_completion_and_turn_in(quest: Quest) -> void:
 	var line_objs := _ensure_line_objects_from_quest_completion(quest, ["Oppdrag fullført!"])
+	_set_dialogue_sounds_for_quest(quest.quest_id + "_COMPLETE", line_objs)
 	var completion_dialogue := _dialogue_line_texts(line_objs)
 	if quest.quest_id == "FINAL_DELIVERY":
 		_show_npc_dialogue(
@@ -738,7 +832,9 @@ func _setup_default_weapon_reserve(weapon_manager: Node, weapon_int_id: int) -> 
 	var max_mag := int(weapon_resource.totalAmmoInMagRef) if int(weapon_resource.totalAmmoInMagRef) > 0 else int(weapon_resource.totalAmmoInMag)
 	if max_mag <= 0:
 		return
-	if not bool(weapon_resource.allAmmoInMag):
+	if weapon_int_id == 1:
+		weapon_resource.totalAmmoInMag = max_mag
+	elif not bool(weapon_resource.allAmmoInMag):
 		weapon_resource.totalAmmoInMag = max_mag / 2
 	var ammo_type: String = str(weapon_resource.ammoType)
 	var ammo_manager: Node = weapon_manager.get_node_or_null("AmmunitionManager")
@@ -747,6 +843,9 @@ func _setup_default_weapon_reserve(weapon_manager: Node, weapon_int_id: int) -> 
 	if ammo_manager == null or ammo_type == "":
 		return
 	if not "ammoDict" in ammo_manager or not "maxNbPerAmmoDict" in ammo_manager:
+		return
+	if ammo_type == "pistol_ammo":
+		ammo_manager.ammoDict["pistol_ammo"] = max_mag * 2
 		return
 	var max_reserve := int(ammo_manager.maxNbPerAmmoDict.get(ammo_type, 0))
 	if max_reserve > 0:
@@ -769,7 +868,7 @@ func _spawn_peak_performance_lua() -> void:
 		root = get_tree().root
 	root.add_child(lua)
 	if lua is Node3D:
-		(lua as Node3D).global_position = global_position + Vector3(0.0, 0.15, 0.8)
+		(lua as Node3D).global_position = global_position + Vector3(0.0, 1.2, 0.8)
 
 
 func transform_to_grus() -> void:
@@ -795,8 +894,8 @@ func transform_to_grus() -> void:
 	var grus_tex_path := "res://assets/textures/grus_2d.png"
 	if ResourceLoader.exists(grus_tex_path):
 		sprite.texture = load(grus_tex_path) as Texture2D
-	sprite.pixel_size = 0.008
-	sprite.position = Vector3(0, 1.0, 0)
+	sprite.pixel_size = 0.0022
+	sprite.position = Vector3(0, 0.4, 0)
 	add_child(sprite)
 
 	var area := get_node_or_null("InteractionArea") as Area3D
@@ -847,12 +946,13 @@ func _get_all_meshes(node: Node) -> Array:
 
 
 func _get_quest_system() -> Node:
-	var root = get_tree().root
-	if root.has_node("QuestSystem"):
-		return root.get_node("QuestSystem")
-	var current_scene = get_tree().current_scene
-	if current_scene and current_scene.has_node("QuestManager"):
-		return current_scene.get_node("QuestManager")
+	var root := get_tree().root
+	var qs := root.get_node_or_null("QuestSystem")
+	if qs != null:
+		return qs
+	var current_scene := get_tree().current_scene
+	if current_scene != null:
+		return current_scene.get_node_or_null("QuestManager")
 	return null
 
 
@@ -968,3 +1068,36 @@ func _break_world() -> void:
 	in_range = false
 	if name_label:
 		name_label.visible = false
+
+
+func _set_player_frozen(locked: bool) -> void:
+	var player := get_tree().get_first_node_in_group("PlayerCharacter")
+	if player and player.has_method("freeze_for_dialogue"):
+		player.freeze_for_dialogue(locked)
+	if player and player.has_method("set_weapon_active"):
+		player.set_weapon_active(not locked)
+	if locked:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif player and player.has_method("should_use_fps_mouse_capture") and player.should_use_fps_mouse_capture():
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func reset_npc() -> void:
+	is_dead = false
+	in_range = false
+	current_quest = null
+	_is_flat_grus = false
+	_grus_transform_done = false
+	if name_label:
+		name_label.visible = false
+	var area := get_node_or_null("InteractionArea") as Area3D
+	if area:
+		area.monitoring = true
+		area.monitorable = true
+	var model := get_node_or_null("Model") as Node3D
+	if model:
+		model.visible = true
+
+
+func _on_game_reset() -> void:
+	reset_npc()

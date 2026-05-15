@@ -32,6 +32,7 @@ func _open_inventory():
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_set_player_weapon_active(false)
+	_set_control_hints_visibility(true)
 	_refresh_list()
 
 func _close_inventory():
@@ -51,6 +52,7 @@ func _close_inventory():
 		if player and player.has_method("should_use_fps_mouse_capture") and player.should_use_fps_mouse_capture():
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_set_player_weapon_active(true)
+	_set_control_hints_visibility(false)
 
 func _refresh_list():
 	for child in list_container.get_children():
@@ -163,3 +165,15 @@ func _set_player_weapon_active(enabled: bool):
 	var player = get_tree().get_first_node_in_group("PlayerCharacter")
 	if player and player.has_method("set_weapon_active"):
 		player.set_weapon_active(enabled)
+
+
+func _set_control_hints_visibility(inventory_open: bool) -> void:
+	var flash := get_tree().current_scene.get_node_or_null("FlashlightHint")
+	if flash:
+		flash.visible = not inventory_open
+	var inv_once := get_tree().current_scene.get_node_or_null("InventoryHintOnce")
+	if inv_once:
+		inv_once.visible = not inventory_open
+	var tab := get_tree().current_scene.get_node_or_null("TabHint")
+	if tab:
+		tab.visible = true

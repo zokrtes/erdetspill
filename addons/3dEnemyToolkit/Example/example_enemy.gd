@@ -74,6 +74,8 @@ var attack_timer : float = 0.0
 
 var _is_flashing: bool = false
 var _flash_originals: Array = []
+var _zigzag_timer: float = 0.0
+var _zigzag_offset: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("Enemies")
@@ -121,6 +123,17 @@ func _physics_process(delta: float) -> void:
 		if look_dir.length() > 0.1:
 			var desired_y := atan2(-look_dir.x, -look_dir.z)
 			rotation.y = lerp_angle(rotation.y, desired_y, 0.1)
+		_zigzag_timer -= delta
+		if _zigzag_timer <= 0.0:
+			_zigzag_timer = randf_range(0.3, 0.8)
+			var rand_angle := randf_range(-0.6, 0.6)
+			var forward := Vector3(sin(rand_angle), 0.0, cos(rand_angle)).normalized()
+			_zigzag_offset = forward * runSpeed * 0.4
+		var lateral := Vector3(-look_dir.z, 0.0, look_dir.x).normalized()
+		velocity += lateral * _zigzag_offset.x
+	else:
+		_zigzag_timer = 0.0
+		_zigzag_offset = Vector3.ZERO
 	
 	if target and state != States.Attacking:
 		var distance_to_target = global_position.distance_to(target.global_position)

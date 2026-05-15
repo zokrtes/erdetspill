@@ -39,15 +39,17 @@ func _should_block_pause_toggle() -> bool:
 	var cur_scene: Node = get_tree().current_scene
 	if cur_scene and cur_scene.scene_file_path != "res://levels/main_demo.tscn":
 		return true
+	if cur_scene and cur_scene.has_node("EndingSequence"):
+		return true
 	var dui: Node = get_node_or_null("/root/DialogueUI")
 	if dui and dui.has_method("is_open") and dui.is_open():
 		return true
 	if GameManager and GameManager.has_method("is_minigame_active") and GameManager.is_minigame_active():
 		return true
 	var cur: Node = get_tree().current_scene
-	if cur and cur.has_node("InventoryPanel"):
-		var inv: Node = cur.get_node("InventoryPanel")
-		if inv.get("is_open") == true:
+	if cur != null:
+		var inv: Node = cur.get_node_or_null("InventoryPanel")
+		if inv != null and inv.get("is_open") == true:
 			return true
 	# Another system paused the tree (e.g. death screen) — do not stack pause menu.
 	if get_tree().paused and not _paused:

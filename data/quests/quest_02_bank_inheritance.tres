@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://fmtukxt7r2ak"]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://cxuowp8by615q"]
 
 [ext_resource type="Script" uid="uid://dhsffwqcwgjrm" path="res://components/quest/quest_objective.gd" id="1_obj"]
 [ext_resource type="Script" uid="uid://cbwqdlinedlg1" path="res://components/dialogue/dialogue_line.gd" id="1_wqudg"]
 [ext_resource type="Script" uid="uid://btn7n7rvethxf" path="res://components/quest/quest.gd" id="2_quest"]
 
-[sub_resource type="Resource" id="Resource_162rf"]
+[sub_resource type="Resource" id="Resource_wqudg"]
 script = ExtResource("1_obj")
 objective_id = "talk_to_bank_teller"
 description = "Snakk med bankansatt"
@@ -18,6 +18,6 @@ name = "Arvedokumentet"
 description = "Løs inn dokumentet i banken."
 brief_description = "Snakk med bankansatt"
 required_quest_ids = Array[String](["GRANDPA_REQUEST"])
-objectives = Array[ExtResource("1_obj")]([SubResource("Resource_162rf")])
+objectives = Array[ExtResource("1_obj")]([SubResource("Resource_wqudg")])
 unlock_quests = Array[String](["ECONOMIC_REALITY"])
 offer_dialogue = Array[String](["Hei.", "Mormors arv. 100 kroner.", "Ha en fin dag."])

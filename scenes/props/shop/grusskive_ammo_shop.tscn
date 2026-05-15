@@ -27,7 +27,7 @@ script = ExtResource("1")
 item_id = "grusskive_ammo"
 display_name = "Grusskive-ammunisjon"
 price = 120
-ammo_type = "GrusSkiveAmmo"
+ammo_type = "grus_ammo"
 ammo_amount = 24
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=479653533]

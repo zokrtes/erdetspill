@@ -210,9 +210,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.644, 0.842735, -39.5318)
 ammoToRefill = {
 "GrenadeAmmo": 12,
 "HeavyAmmo": 9,
-"LightAmmo": 34,
+"pistol_ammo": 34,
 "MediumAmmo": 60,
-"RocketAmmo": 3,
+"rocket_ammo": 3,
 "ShellAmmo": 128
 }
 
@@ -221,9 +221,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.644, 0.842735, -34.9519)
 ammoToRefill = {
 "GrenadeAmmo": 12,
 "HeavyAmmo": 9,
-"LightAmmo": 34,
+"pistol_ammo": 34,
 "MediumAmmo": 60,
-"RocketAmmo": 3,
+"rocket_ammo": 3,
 "ShellAmmo": 128
 }
 
@@ -232,9 +232,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0862, 0.842735, -39.5318)
 ammoToRefill = {
 "GrenadeAmmo": 12,
 "HeavyAmmo": 9,
-"LightAmmo": 34,
+"pistol_ammo": 34,
 "MediumAmmo": 60,
-"RocketAmmo": 3,
+"rocket_ammo": 3,
 "ShellAmmo": 128
 }
 
@@ -243,9 +243,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0862, 0.842735, -34.9519)
 ammoToRefill = {
 "GrenadeAmmo": 12,
 "HeavyAmmo": 9,
-"LightAmmo": 34,
+"pistol_ammo": 34,
 "MediumAmmo": 60,
-"RocketAmmo": 3,
+"rocket_ammo": 3,
 "ShellAmmo": 128
 }
 
