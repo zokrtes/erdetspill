@@ -349,16 +349,19 @@ func _projectile_attack():
 	if projInstance is RigidBody3D:
 		projInstance.linear_velocity = direction * enemy_weapon.projMoveSpeed
 
-func _on_follow_target_3d_navigation_finished() -> void:
+func _on_follow_target_3d_navigation_finished(
+		) -> void:
 	if state == States.Dead:
 		return
 	if state == States.Attacking:
 		return
 	if state == States.Pursuit:
-		if target != null and is_instance_valid(target):
+		if target != null and \
+				is_instance_valid(target):
 			follow_target_3d.SetTarget(target)
 		return
-	follow_target_3d.SetFixedTarget(random_target_3d.GetNextPoint())
+	follow_target_3d.SetFixedTarget(
+		random_target_3d.GetNextPoint())
 
 func hitscanHit(damageVal : float, _hitscanDir : Vector3, _hitscanPos : Vector3):
 	if health_component and state != States.Dead:
