@@ -134,7 +134,6 @@ func _grant_instant_weapon_to_player() -> void:
 		wm.weaponStack.append(wid)
 	if skip_reserve_ammo_on_pickup and wm.has_method("_refresh_reserve_dependent_weapon_meshes"):
 		wm._refresh_reserve_dependent_weapon_meshes()
-	print("🔫 Instant pickup weapon id: ", wid)
 	mark_as_sold()
 
 

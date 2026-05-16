@@ -109,13 +109,12 @@ func _process(delta: float) -> void:
 		attack_timer -= delta
 		if attack_timer <= 0:
 			can_attack = true
-	
-	if not is_on_floor():
-		velocity += get_gravity() * delta
 
 func _physics_process(delta: float) -> void:
 	if state == States.Dead:
 		return
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	_update_target_tracking()
 	if state == States.Pursuit and target != null:
 		var look_dir := target.global_position - global_position
@@ -304,8 +303,6 @@ func _melee_attack():
 	
 	var distance = global_position.distance_to(target.global_position)
 	if distance <= melee_range:
-		print("Melee attack! Damage: ", melee_damage)
-		
 		var health = target.get_node_or_null("HealthComponent")
 		if health:
 			health.take_damage(melee_damage)
@@ -327,7 +324,6 @@ func _hitscan_attack():
 	var result = space.intersect_ray(query)
 	
 	if result and result.collider == target:
-		print("Hitscan attack! Damage: ", enemy_weapon.damagePerProj)
 		var health = target.get_node_or_null("HealthComponent")
 		if health:
 			health.take_damage(enemy_weapon.damagePerProj)
@@ -335,9 +331,7 @@ func _hitscan_attack():
 func _projectile_attack():
 	if not target or not enemy_weapon or not enemy_weapon.projRef:
 		return
-	
-	print("Projectile attack!")
-	
+
 	var projInstance = enemy_weapon.projRef.instantiate()
 	var direction = (target.global_position - weapon_slot.global_position).normalized()
 	
@@ -356,8 +350,15 @@ func _projectile_attack():
 		projInstance.linear_velocity = direction * enemy_weapon.projMoveSpeed
 
 func _on_follow_target_3d_navigation_finished() -> void:
-	if state != States.Dead and state != States.Attacking:
-		follow_target_3d.SetFixedTarget(random_target_3d.GetNextPoint())
+	if state == States.Dead:
+		return
+	if state == States.Attacking:
+		return
+	if state == States.Pursuit:
+		if target != null and is_instance_valid(target):
+			follow_target_3d.SetTarget(target)
+		return
+	follow_target_3d.SetFixedTarget(random_target_3d.GetNextPoint())
 
 func hitscanHit(damageVal : float, _hitscanDir : Vector3, _hitscanPos : Vector3):
 	if health_component and state != States.Dead:
@@ -373,7 +374,6 @@ func projectileHit(damageVal : float, _projectileDir : Vector3):
 
 func _on_enemy_death():
 	_play_sfx(death_sound)
-	print("Enemy died!")
 	state = States.Dead
 	_drop_hunt_item()
 	
@@ -396,10 +396,6 @@ func _drop_hunt_item() -> void:
 		return
 	var amount := max(1, drop_item_amount)
 	GameManager.add_item(drop_item_id, amount)
-	if drop_item_id == "fugleskinn":
-		print("🐦 Fugleskinn dropped")
-	elif drop_item_id == "elgskinn":
-		print("🦌 Elgskinn dropped")
 
 func _convert_to_rigidbody():
 	var rigid_body = RigidBody3D.new()

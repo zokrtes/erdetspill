@@ -22,9 +22,6 @@ func _ready() -> void:
 		world_env = get_tree().get_first_node_in_group("WorldEnvironment") as WorldEnvironment
 	if world_env == null:
 		world_env = _find_node_by_class(get_tree().root, "WorldEnvironment") as WorldEnvironment
-	print("LightingCycle Sun: ", sun)
-	print("LightingCycle WorldEnv: ", world_env)
-	print("LightingCycle day_duration_seconds: ", GameManager.day_duration_seconds)
 	if GameManager.has_signal("day_changed"):
 		GameManager.day_changed.connect(_on_day_changed)
 	_apply_lighting(time_of_day)

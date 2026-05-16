@@ -31,14 +31,13 @@ InventoryHintOnce="*res://scenes/ui/inventory_hint_once.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=4
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/3dEnemyToolkit/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/road-generator/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/3dEnemyToolkit/plugin.cfg", "res://addons/house_generator/plugin.cfg")
 
 [file_customization]
 
@@ -130,6 +129,7 @@ carry_object={
 
 [physics]
 
+3d/run_on_separate_thread=true
 3d/physics_engine="Jolt Physics"
 
 [rendering]
@@ -138,6 +138,10 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
+lights_and_shadows/directional_shadow/size=2048
 textures/default_filters/use_nearest_mipmap_filter=true
 textures/decals/filter=0
 textures/light_projectors/filter=0
+occlusion_culling/use_occlusion_culling=true
+lights_and_shadows/positional_shadow/atlas_size=2048
+limits/per_object_max_lights=4

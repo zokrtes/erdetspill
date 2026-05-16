@@ -78,18 +78,18 @@ func _ready() -> void:
 	_validate_resources()
 	if not item_added.is_connected(_on_item_added_quest_check):
 		item_added.connect(_on_item_added_quest_check)
+	if not gunshot_fired.is_connected(_on_gunshot_fired):
+		gunshot_fired.connect(_on_gunshot_fired)
 
 
 func _advance_day() -> void:
 	current_day += 1
 	day_changed.emit(current_day)
-	print("DEBUG: Advanced to dag ", current_day)
 
 
 func register_dead_npc(npc_id: String) -> void:
 	if not dead_npcs.has(npc_id):
 		dead_npcs.append(npc_id)
-		print("💀 NPC dead: ", npc_id)
 
 func register_npc_talked(npc_id: String) -> void:
 	if npc_id == "":
@@ -200,7 +200,6 @@ func on_icecream_purchased() -> void:
 func set_title(title: String):
 	player_title = title
 	title_changed.emit(player_title)
-	print("🏆 Title set: ", title)
 
 func add_title(title: String):
 	if player_title == "":
@@ -210,7 +209,6 @@ func add_title(title: String):
 		if not player_title.contains(title):
 			player_title += " | " + title
 	title_changed.emit(player_title)
-	print("🏆 Title awarded: ", title)
 
 func has_title(title: String) -> bool:
 	return player_title.contains(title)
@@ -405,7 +403,6 @@ func add_quest(quest: Quest, auto_start: bool = true) -> bool:
 	active_quests[quest_instance.quest_id] = quest_instance
 	quest_changed.emit(quest_instance.quest_id, quest_instance.state)
 	_backfill_gather_objectives(quest_instance)
-	print("📜 Quest added: ", quest_instance.name)
 	return true
 
 func update_quest_progress(quest_id: String, amount: int = 1):
@@ -421,8 +418,7 @@ func update_quest_progress(quest_id: String, amount: int = 1):
 	if quest.objectives.is_empty():
 		quest.current_progress += amount
 		quest_progress_updated.emit(quest_id, quest.current_progress)
-		print("📈 Quest progress: ", quest.name, " - ", quest.current_progress, "/", quest.target_amount)
-		
+
 		if quest.current_progress >= quest.target_amount:
 			complete_quest(quest)
 	else:
@@ -464,7 +460,6 @@ func _backfill_gather_objectives(quest: Quest) -> void:
 		var to_add: int = mini(have, objective.target_amount - current)
 		if to_add > 0:
 			quest.update_objective(objective.objective_id, to_add)
-			print("🔄 Backfilled objective: ", objective.objective_id, " +", to_add)
 	if quest.is_complete():
 		complete_quest(quest)
 
@@ -474,8 +469,6 @@ func complete_quest(quest: Quest):
 	if is_quest_completed(quest.quest_id):
 		push_warning("Quest already completed: " + quest.quest_id)
 		return
-	print("Completing quest: ", quest.name)
-	print("Reward items: ", quest.reward_items)
 	print("✅ Quest completed: ", quest.name)
 	
 	quest.state = Quest.QuestState.COMPLETED
@@ -498,7 +491,6 @@ func complete_quest(quest: Quest):
 	
 	# AUTO-START unlocked quests
 	for next_quest_id in quest.unlock_quests:
-		print("🔓 Auto-starting unlocked quest: ", next_quest_id)
 		var next_quest = _load_quest_by_id(next_quest_id)
 		if next_quest:
 			add_quest(next_quest, true)
@@ -526,8 +518,6 @@ func _start_ending_sequence() -> void:
 	current.add_child(ending)
 
 func _play_quest_complete_sound() -> void:
-	print("=== PLAYING QUEST COMPLETE SOUND ===")
-	print("quest_complete_sound: ", quest_complete_sound)
 	var player = get_tree().get_first_node_in_group("PlayerCharacter")
 	if player == null:
 		print("Quest complete sound aborted: no PlayerCharacter found")
@@ -644,8 +634,13 @@ func _has_document_reward(quest: Quest) -> bool:
 			return true
 	return false
 
-func _on_item_used(item_id: String):
-	print("Used item: %s" % item_id)
+func _on_item_used(_item_id: String) -> void:
+	pass
+
+func _on_gunshot_fired(_position: Vector3, _range: float) -> void:
+	# Hook for NPCs / wildlife reacting to gunfire (emitted from ShootManagerScript).
+	pass
+
 
 func _on_item_added_quest_check(item_id: String, amount: int) -> void:
 	match item_id:
@@ -669,11 +664,6 @@ func _load_item_data(item_id: String) -> ItemData:
 	return null
 
 func _validate_resources():
-	print("=== RESOURCE VALIDATION ===")
-	print("Quests loaded: ", quest_registry.size())
-	for quest_id in quest_registry:
-		print("  ✓ ", quest_id)
-
 	var item_ids = [
 		"icecream", "inheritance_document",
 		"approved_application", "god_morgen_yoghurt", "painkillers",
@@ -684,9 +674,6 @@ func _validate_resources():
 		var item = ResourceLoader.load(path)
 		if item == null:
 			push_warning("  ✗ MISSING ITEM: " + item_id)
-		else:
-			print("  ✓ item: ", item_id)
-	print("===========================")
 
 # ============================================
 # HELPER FUNCTIONS
@@ -713,8 +700,6 @@ func reset_game():
 	money_changed.emit(0)
 	title_changed.emit("")
 	game_reset.emit()
-	
-	print("🔄 Game reset complete")
 
 func get_stats() -> Dictionary:
 	return {
@@ -726,22 +711,5 @@ func get_stats() -> Dictionary:
 		"inventory_size": inventory.size()
 	}
 
-func print_status():
-	print("\n=== PLAYER STATUS ===")
-	print("Name: ", player_name)
-	print("Title: ", player_title if player_title != "" else "None")
-	print("Money: ", player_money, " NOK")
-	print("Active quests: ", active_quests.size())
-	print("Completed quests: ", completed_quests.size())
-	print("Inventory items: ", inventory.size())
-	
-	if active_quests.size() > 0:
-		print("\n--- Active Quests ---")
-		for quest in active_quests.values():
-			print("  - ", quest.name, ": ", quest.current_progress, "/", quest.target_amount)
-	
-	if inventory.size() > 0:
-		print("\n--- Inventory ---")
-		for item_id in inventory:
-			print("  - ", item_id, ": ", int(inventory[item_id].get("amount", 0)))
-	print("=====================\n")
+func print_status() -> void:
+	pass

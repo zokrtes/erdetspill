@@ -44,7 +44,7 @@ func _refresh_quest_list():
 		quest_box.setup(quest)
 		quest_container.add_child(quest_box)
 
-func _on_quest_changed(quest_id: String, state: int):
+func _on_quest_changed(_quest_id: String, _state: int) -> void:
 	_refresh_quest_list()
 
 func _on_quest_progress_updated(quest_id: String, _progress: int):

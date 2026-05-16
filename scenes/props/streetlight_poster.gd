@@ -37,4 +37,3 @@ func _take_poster() -> void:
 	if poster_sprite:
 		poster_sprite.visible = false
 	GameManager.add_item("gard_plakat", 1)
-	print("📋 Gard-plakat picked up")

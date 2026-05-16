@@ -64,7 +64,6 @@ func _pickup() -> void:
 	var cap: int = int(am.maxNbPerAmmoDict.get("grus_ammo", cur + ammo_amount))
 	am.ammoDict["grus_ammo"] = mini(cap, cur + ammo_amount)
 	_pickup_count += 1
-	print("⚙️ Grus ammo: ", am.ammoDict["grus_ammo"])
 	if wm.has_method("_refresh_reserve_dependent_weapon_meshes"):
 		wm._refresh_reserve_dependent_weapon_meshes()
 	if _pickup_count >= max_pickups:

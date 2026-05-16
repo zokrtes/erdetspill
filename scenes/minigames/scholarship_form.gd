@@ -189,13 +189,10 @@ func _assign_random_questions():
 		question_labels[i].text = selected[i]
 		question_labels[i].visible = true
 		question_labels[i].add_theme_color_override("font_color", Color.BLACK)
-	print("Questions selected: ", selected.size())
-	print("Questions parent: ", questions_container.get_path())
-	print("Questions container children: ", questions_container.get_child_count())
 
 func _update_timer_label():
 	var secs := int(ceil(_time_remaining))
-	var minutes := int(secs / 60)
+	var minutes: int = int(secs / 60)
 	var seconds := secs % 60
 	timer_label.text = "Tid igjen: %d:%02d" % [minutes, seconds]
 	timer_label.add_theme_color_override("font_color", Color(0.85, 0.1, 0.1, 1.0) if _time_remaining <= TIMER_WARNING_SECONDS else Color.BLACK)
@@ -404,9 +401,13 @@ func _signature_valid() -> bool:
 func _validate_all_fields() -> String:
 	if question_labels.size() != input_fields.size():
 		return "Skjemafeil: antall spørsmål stemmer ikke."
+	for field in input_fields:
+		field.add_theme_stylebox_override("normal", _default_line_edit_style)
 	for i in range(question_labels.size()):
 		var question := question_labels[i].text.strip_edges()
 		var value := input_fields[i].text.strip_edges()
+		if value.is_empty():
+			input_fields[i].add_theme_stylebox_override("normal", _empty_field_style)
 		var error := _validate_field_by_question(question, value)
 		if error != "":
 			return error

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bysswu6cmi0t4" path="res://addons/fpstemplate/Weapons/Scripts/ProjectileScript.gd" id="1_8y6e4"]
 [ext_resource type="Texture2D" uid="uid://cm8240c4lqdpl" path="res://assets/weapons/models/rpg7_rocket_rockets rpg.jpg" id="2_jv2hh"]
 [ext_resource type="AudioStream" uid="uid://bw5s3ut8kc7o7" path="res://assets/sfx/hl1-master/sound/weapons/explode4.wav" id="2_r213f"]
-[ext_resource type="ArrayMesh" path="res://assets/weapons/models/rpg7_rocket_Cylinder_002.res" id="3_n1ch3"]
+[ext_resource type="ArrayMesh" uid="uid://cltmdbtfsuw0y" path="res://assets/weapons/models/rpg7_rocket_Cylinder_002.res" id="3_n1ch3"]
 [ext_resource type="Texture2D" uid="uid://cappn4er68jtu" path="res://assets/weapons/models/rpg7_metal2.jpg" id="4_t8c6y"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jevsj"]

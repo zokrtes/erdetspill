@@ -86,8 +86,6 @@ func _ready() -> void:
 	if GameManager and GameManager.has_signal("game_reset") and not GameManager.game_reset.is_connected(_on_game_reset):
 		GameManager.game_reset.connect(_on_game_reset)
 
-	print("✓ NPC ready: ", npc_name, " [", npc_id, "] quests: ", quests.size())
-
 
 func _process(delta: float) -> void:
 	if _is_flat_grus:
@@ -351,7 +349,6 @@ func _interact() -> void:
 			DialogueUI.show_dialogue(["Jeg orker ikke snakke."], npc_name, Callable())
 			return
 
-	print("=== INTERACT with ", npc_name, " ===")
 	if GameManager and GameManager.has_method("register_npc_talked"):
 		GameManager.register_npc_talked(npc_id)
 
@@ -430,7 +427,6 @@ func _interact() -> void:
 
 	var available_quests = _get_available_quests()
 	if available_quests.is_empty():
-		print("No available quests")
 		if bank_teller_mode:
 			_begin_dialogue_line_audio([])
 			_show_bank_menu()
@@ -462,7 +458,6 @@ func _interact() -> void:
 			idle_objs.append(_make_line(s, null))
 		_show_npc_dialogue(lines, idle_objs, Callable())
 	else:
-		print("Offering new quest: ", available_quests[0].name)
 		_offer_quest(available_quests[0])
 
 
@@ -471,19 +466,15 @@ func _is_quest_available(quest: Quest) -> bool:
 		return false
 
 	if GameManager.is_quest_completed(quest.quest_id):
-		print("  ", quest.name, " - already completed")
 		return false
 
 	if GameManager.has_active_quest(quest.quest_id):
-		print("  ", quest.name, " - already active")
 		return false
 
 	for required_id in quest.required_quest_ids:
 		if not GameManager.is_quest_completed(required_id):
-			print("  ", quest.name, " - missing required quest: ", required_id)
 			return false
 
-	print("  ", quest.name, " - AVAILABLE")
 	return true
 
 
@@ -525,7 +516,6 @@ func _offer_quest(quest: Quest) -> void:
 		func():
 			if current_quest == null:
 				return
-			print("Quest offer closed: ", current_quest.name)
 			var offered_quest_id := current_quest.quest_id
 			var quest_snapshot: Quest = current_quest
 			current_quest = null
@@ -835,7 +825,7 @@ func _setup_default_weapon_reserve(weapon_manager: Node, weapon_int_id: int) -> 
 	if weapon_int_id == 1:
 		weapon_resource.totalAmmoInMag = max_mag
 	elif not bool(weapon_resource.allAmmoInMag):
-		weapon_resource.totalAmmoInMag = max_mag / 2
+		weapon_resource.totalAmmoInMag = int(max_mag / 2)
 	var ammo_type: String = str(weapon_resource.ammoType)
 	var ammo_manager: Node = weapon_manager.get_node_or_null("AmmunitionManager")
 	if ammo_manager == null and "ammoManager" in weapon_manager:

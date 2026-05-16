@@ -204,7 +204,6 @@ func _give_weapon_to_player(weapon_int_id: int, skip_reserve_ammo: bool = false)
 	else:
 		if weapon_manager.has_method("_refresh_reserve_dependent_weapon_meshes"):
 			weapon_manager._refresh_reserve_dependent_weapon_meshes()
-	print("🔫 Weapon added to stack: ", weapon_int_id)
 
 
 func _setup_weapon_ammo(weapon_int_id: int, weapon_manager: Node) -> void:
@@ -220,7 +219,7 @@ func _setup_weapon_ammo(weapon_int_id: int, weapon_manager: Node) -> void:
 	if max_mag <= 0:
 		return
 	if not bool(weapon_resource.allAmmoInMag):
-		weapon_resource.totalAmmoInMag = max_mag / 2
+		weapon_resource.totalAmmoInMag = int(max_mag / 2)
 	var ammo_type: String = str(weapon_resource.ammoType)
 	var ammo_manager: Node = weapon_manager.get_node_or_null("AmmunitionManager")
 	if ammo_manager == null and "ammoManager" in weapon_manager:

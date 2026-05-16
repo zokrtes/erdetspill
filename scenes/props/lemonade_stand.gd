@@ -220,7 +220,6 @@ func _spawn_customer() -> void:
 		customer.call("set_model", model_scene)
 	customer.call("setup", counter_pos, self)
 	_active_customer = customer
-	print("🍋 Customer spawned at: ", spawn_pos, " counter: ", counter_pos)
 
 func on_customer_arrived(customer: CharacterBody3D) -> void:
 	if not is_open:
@@ -250,18 +249,15 @@ func _sell(price: int, customer: Node) -> void:
 		return
 	var customer_name := str(customer.get("customer_name"))
 	var customer_response := ""
-	var paid := false
 	if price == 0:
 		customer_response = _pick_random(["Takk skal du ha!", "Gratis? Wow.", "Du er snill."])
 	elif price <= 20:
 		customer_response = _pick_random(["Fair nok.", "Greit.", "Her har du."])
 		GameManager.add_flat_money_reward(price)
-		paid = true
 	elif price == 50:
 		if randf() < 0.6:
 			customer_response = "Jaja..."
 			GameManager.add_flat_money_reward(price)
-			paid = true
 		else:
 			customer_response = _pick_random(["50 kr?! For lemonade?", "Det er for dyrt.", "Nei takk."])
 

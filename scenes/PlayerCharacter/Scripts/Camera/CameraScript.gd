@@ -95,7 +95,8 @@ func cameraBob(delta):
 	if playChar and playChar.camera_frozen:
 		return
 	if enableBob:
-		headBobValue += delta * playChar.velocity.length() * float(playChar.is_on_floor())
+		# wasOnFloor is updated in PlayerCharacter._physics_process (safe with Jolt thread).
+		headBobValue += delta * playChar.velocity.length() * float(not playChar.wasOnFloor)
 		camera.transform.origin = headbob(headBobValue, bobFrequency, bobAmplitude)
 		
 func headbob(time, bobFreq, bobAmpli): 
@@ -113,7 +114,8 @@ func cameraTilt(delta):
 		if playChar.moveDirection != Vector3.ZERO and playChar.inputDirection != Vector2.ZERO:
 			playCharInputDir = playChar.inputDirection #get input direction to know where the character is heading to
 			#apply smooth tilt movement
-			if !playChar.is_on_floor(): rotation.z = lerp(rotation.z, -playCharInputDir.x * tiltRotationValue/inAirTiltValDivider, tiltRotationSpeed * delta)
+			if playChar.wasOnFloor:
+				rotation.z = lerp(rotation.z, -playCharInputDir.x * tiltRotationValue/inAirTiltValDivider, tiltRotationSpeed * delta)
 			else: rotation.z = lerp(rotation.z, -playCharInputDir.x * tiltRotationValue, tiltRotationSpeed * delta)
 
 func mouseMode():

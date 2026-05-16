@@ -51,7 +51,7 @@ func reloadStart() -> void:
 			#for example, for a shotgun that can contain 8 shells, the number of parts to reload possible are : 1, 2, 4, 8
 			#if you choose a number like 3, or 5, it will reload 3/8, or 5/8 at once, which is not possible, so be sure to enter a number of part allowing the weapon to reload ammunition units
 			if (cW.totalAmmoInMagRef % cW.nbPartsNeeded) != 0:
-				push_error("The number of parts set is not correct, cannot insert %d of ammunition" % (cW.nbPartsNeeded / cW.totalAmmoInMagRef))
+				push_error("The number of parts set is not correct, cannot insert %d of ammunition" % int(cW.nbPartsNeeded / cW.totalAmmoInMagRef))
 				cW.isReloading = false
 			else:
 				currentPartIndex = 0
@@ -60,9 +60,7 @@ func reloadStart() -> void:
 				playSoundAndAnim = true
 				startReloadTimer = true
 				#the rest is been processed is reloadTimeProcess, then reloadFollow
-	else:
-		print("No need to reload")
-		
+
 func reloadFollow(delta : float) -> void:
 	if cW == null or not is_instance_valid(cW):
 		startReloadTimer = false
@@ -101,12 +99,10 @@ func reloadFollow(delta : float) -> void:
 				reloadTime = cW.reloadTimePerPart
 				playSoundAndAnim = true
 			else:
-				print("Reload complete")
 				cW.isReloading = false
 				if weaponManager != null and weaponManager.has_method("reset_current_weapon_mesh_visibility"):
 					weaponManager.reset_current_weapon_mesh_visibility()
 		else:
-			print("Reload complete")
 			cW.isReloading = false
 			if weaponManager != null and weaponManager.has_method("reset_current_weapon_mesh_visibility"):
 				weaponManager.reset_current_weapon_mesh_visibility()
@@ -131,7 +127,7 @@ func multiPartReloadCalculus():
 		return
 	if weaponManager == null or weaponManager.ammoManager == null:
 		return
-	var nbAmmoToRefill = cW.totalAmmoInMagRef / cW.nbPartsNeeded
+	var nbAmmoToRefill: int = int(cW.totalAmmoInMagRef / cW.nbPartsNeeded)
 	if weaponManager.ammoManager.ammoDict[cW.ammoType] >= nbAmmoToRefill and \
 	cW.totalAmmoInMag <= cW.totalAmmoInMagRef - nbAmmoToRefill:
 		#add number of ammo to the magazine, and substract it from the ammo manager

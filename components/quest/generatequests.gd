@@ -19,8 +19,7 @@ func _ready():
 	if not OS.has_feature("editor"):
 		queue_free()
 		return
-	print("=== Generating Quest Chain: Bestefars Is ===")
-	
+
 	var quests_dir = "res://data/quests/"
 	_ensure_directory_exists(quests_dir)
 	_clear_old_quests(quests_dir)
@@ -66,8 +65,7 @@ func _ready():
 	_save_quest(q10, quests_dir + "quest_09_iver_bevis.tres")
 	var q11 = _create_quest_steinar()
 	_save_quest(q11, quests_dir + "quest_10_steinar_grus.tres")
-	
-	print("\n✅ Main + side quests created successfully!")
+
 	_verify_quests(quests_dir)
 
 func _create_quest_1() -> Quest:
@@ -400,15 +398,12 @@ func _create_quest_steinar() -> Quest:
 
 func _save_quest(quest: Quest, path: String):
 	var result = ResourceSaver.save(quest, path)
-	if result == OK:
-		print("  ✓ Created: ", path.get_file())
-	else:
+	if result != OK:
 		print("  ✗ FAILED: ", path.get_file(), " Error: ", result)
 
 func _ensure_directory_exists(path: String):
 	if not DirAccess.dir_exists_absolute(path):
 		DirAccess.make_dir_absolute(path)
-		print("Created quests directory")
 
 func _clear_old_quests(quests_dir: String):
 	var generated_files = [
@@ -428,7 +423,6 @@ func _clear_old_quests(quests_dir: String):
 		var path = quests_dir + file
 		if ResourceLoader.exists(path):
 			DirAccess.remove_absolute(path)
-			print("Deleted old generated quest: ", file)
 
 func _verify_quests(quests_dir: String):
 	var expected = [
@@ -445,18 +439,13 @@ func _verify_quests(quests_dir: String):
 		"quest_10_steinar_grus.tres"
 	]
 	
-	print("\n=== Verification ===")
 	var all_good = true
 	for file in expected:
 		var path = quests_dir + file
 		var loaded = ResourceLoader.load(path)
-		if loaded != null:
-			print("  ✓ ", file, " - ", loaded.name)
-		else:
+		if loaded == null:
 			print("  ✗ MISSING: ", file)
 			all_good = false
-	
-	if all_good:
-		print("\n🎉 All quests verified and ready to use!")
-	else:
+
+	if not all_good:
 		print("\n⚠️ Some quests are missing. Check errors above.")

@@ -23,7 +23,6 @@ func _on_confirm() -> void:
 	if player_name == "":
 		player_name = "Spilleren"
 	GameManager.player_name = player_name
-	print("Player name set: ", player_name)
 
 	var tween := create_tween()
 	var overlay := ColorRect.new()

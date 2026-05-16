@@ -208,8 +208,7 @@ func gravityApply(delta : float):
 		elif velocity.y < 0.0: velocity.y += fallGravity * delta
 
 
-func _on_damage_taken(current_health: float, damage_taken: float):
-	print("Player took ", damage_taken, " damage! Health: ", current_health)
+func _on_damage_taken(_current_health: float, _damage_taken: float):
 	_refresh_health_ui()
 	var overlay := get_node_or_null("DamageFlashLayer/DamageOverlay") as ColorRect
 	if overlay == null:
